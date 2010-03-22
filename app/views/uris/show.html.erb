@@ -1,0 +1,20 @@
+<p>
+<strong>OpenID</strong> <%= link_to h(uri.uri), h(uri.uri) %>
+</p>
+
+<p>
+<strong>hCard</strong> <%= uri.uri_property.hcard? %>
+</p>
+
+<p>
+<strong>FoaF</strong> <%=h uri.uri_property.foaf? %>
+</p>
+
+<p>
+<strong>Atom/RSS feeds</strong> <%=h uri.uri_property.feeds? %>
+</p>
+
+<p>
+<strong>Microformats</strong> <%=h uri.uri_property.microformats %>
+</p>
+

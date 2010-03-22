@@ -1,0 +1,25 @@
+hCard.find uri:
+real    6m18.450s
+user    0m30.214s
+sys     0m4.012s
+
+real    6m6.444s
+user    0m30.910s
+sys     0m3.712s
+
+html
+
+real    7m44.799s
+user    0m33.054s
+sys     0m3.480s
+
+open-uri
+
+real    8m51.494s
+user    0m31.678s
+sys     0m3.744s
+
+real    8m17.659s
+user    0m35.146s
+sys     0m4.228s
+

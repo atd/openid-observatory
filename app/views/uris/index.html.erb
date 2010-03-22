@@ -1,0 +1,108 @@
+<h1>Check yours</h1>
+
+<%= notification_area %>
+
+<p>
+<% form_for @uri || Uri.new do |f| %>
+  <%= f.error_messages %>
+  <%= f.text_field :uri %>
+  <%= f.submit 'Go! >>' %>
+<% end -%>
+</p>
+
+<h1>Results</h1>
+
+<p>
+<strong>Total</strong>
+<%= Uri.count %>
+</p>
+
+<p>
+<strong>FoaF</strong>
+Yes <%= "%0.2f" % (Uri.foaf(true).count * 100.0 / Uri.count) %>%
+No <%= "%0.2f" % (Uri.foaf(false).count * 100.0 / Uri.count) %>%
+N/A <%= "%0.2f" % (Uri.foaf(nil).count * 100.0 / Uri.count) %>%
+</p>
+
+<p>
+<strong>Atom/RSS feeds</strong>
+Yes <%= "%0.2f" % (Uri.feeds(true).count * 100.0 / Uri.count) %>%
+No <%= "%0.2f" % (Uri.feeds(false).count * 100.0 / Uri.count) %>%
+N/A <%= "%0.2f" % (Uri.feeds(nil).count * 100.0 / Uri.count) %>%
+</p>
+
+<p>
+<strong>AtomPub Service Document</strong>
+Yes <%= "%0.2f" % (Uri.atompub(true).count * 100.0 / Uri.count) %>%
+No <%= "%0.2f" % (Uri.atompub(false).count * 100.0 / Uri.count) %>%
+N/A <%= "%0.2f" % (Uri.atompub(nil).count * 100.0 / Uri.count) %>%
+</p>
+
+<p>
+<strong>Really Simple Discovery</strong>
+Yes <%= "%0.2f" % (Uri.rsd(true).count * 100.0 / Uri.count) %>%
+No <%= "%0.2f" % (Uri.rsd(false).count * 100.0 / Uri.count) %>%
+N/A <%= "%0.2f" % (Uri.rsd(nil).count * 100.0 / Uri.count) %>%
+</p>
+
+
+
+<p>
+<strong>Microformats</strong>
+Yes <%= "%0.2f" % (Uri.microformats("_").count * 100.0 / Uri.count) %>%
+No <%= "%0.2f" % (Uri.microformats("").count * 100.0 / Uri.count) %>%
+N/A <%= "%0.2f" % (Uri.microformats(nil).count * 100.0 / Uri.count) %>%
+</p>
+
+
+<% Uri::Microformats.each do |m| %>
+<p>
+<strong><%= m %></strong>: <%= "%0.2f" % (Uri.microformats(m).count * 100.0 / Uri.count) %>%
+</p>
+<% end %>
+
+
+<div class="span-22 last">
+  <div class="span-8">
+    OpenID
+  </div>
+  <div class="span-2">
+    FoaF?
+  </div>
+  <div class="span-2">
+    RSS/Atom feeds?
+  </div>
+  <div class="span-2">
+    AtomPub Service?
+  </div>
+  <div class="span-2">
+    RSD?
+  </div>
+  <div class="span-2">
+    Microformats?
+  </div>
+</div>
+
+
+<% Uri.all(:include => :uri_property).each do |uri| %>
+<% div_for uri, :class => 'span-22 last' do %>
+<div class="span-8">
+<%= link_to uri.to_s, uri.to_s %>
+</div>
+<div class="span-2">
+  <%= uri.uri_property.foaf.nil? ? "N/A" : uri.uri_property.foaf %>
+</div>
+<div class="span-2">
+  <%= uri.uri_property.feeds.nil? ? "N/A" : uri.uri_property.feeds %>
+</div>
+<div class="span-2">
+  <%= uri.uri_property.atompub.nil? ? "N/A" : uri.uri_property.atompub %>
+</div>
+<div class="span-2">
+  <%= uri.uri_property.rsd.nil? ? "N/A" : uri.uri_property.rsd %>
+</div>
+<div class="span-2">
+  <%= uri.uri_property.microformats %>
+</div>
+<% end %>
+<% end %>

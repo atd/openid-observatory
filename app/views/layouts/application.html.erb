@@ -1,0 +1,19 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+  "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+  <head>
+  <%= stylesheet_link_tag "screen", :media => "screen, projection" %>
+  <%= stylesheet_link_tag "style", :media => "screen, projection" %>
+  <%= stylesheet_link_tag "print", :media => "print" %>
+  <!--[if IE]>
+    <%= stylesheet_link_tag "ie", :media => "screen, projection" %>
+  <![endif]-->
+
+  </head>
+  <body>
+    <div id="content" class="prepend-1 span-22 append-1 last">
+    <%= yield %>
+    </div>
+  </body>
+</html>
