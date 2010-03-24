@@ -18,7 +18,7 @@ class Microformat
 
       extract_base_url! target
       
-      @doc = target.kind_of?(Hpricot::Elem) ? target : build_doc(@options[:text] ? @options : target)
+      @doc = build_doc(@options[:text] ? @options : target)
 
       microformats = find_occurences(@doc)
       raise MicroformatNotFound if @options[:strict] && microformats.empty?
@@ -143,7 +143,7 @@ class Microformat
       when Hpricot, Hpricot::Elements 
         source
       when Hash                       
-        Hpricot(source.delete(:text)) if source[:text]
+        Hpricot(source[:text]) if source[:text]
       end
     end
 
