@@ -1,5 +1,5 @@
-set :application, "openid-inspector"
-set :repository,  "http://git-isabel.dit.upm.es/openid-inspector.git""
+set :application, "openid-observatory"
+set :repository,  "http://git-isabel.dit.upm.es/openid-observatory.git""
 
 set :scm, :subversion
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`

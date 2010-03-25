@@ -5,7 +5,7 @@
 # Make sure the secret is at least 30 characters and all random, 
 # no regular words or you'll be exposed to dictionary attacks.
 ActionController::Base.session = {
-  :key         => '_openid-inspector',
+  :key         => '_openid-observatory',
   :secret      => '663ae2e097412da24b2e255443c9ba32abf09abb1474621ad53b9ffac2b7d3b29c0cf60501b15e2989e01fc14b997d57379d491c8debaaf58df0276837295fec'
 }
 
