@@ -36,15 +36,23 @@ if defined?(ActiveRecord::Resource)
       }
     }
 
+    named_scope :xrds_service_type, lambda { |m|
+      { :joins => :uri_property,
+        :conditions => [ "uri_properties.xrds_service_types LIKE ?", "%#{ m }%" ]
+      }
+    }
+
     # Rails Station REST magic
     acts_as_resource
 
-    def refresh
-      uri_property.update_attribute :foaf, foaf?
-      uri_property.update_attribute :feeds, html.feeds.any?
-      uri_property.update_attribute :atompub, html.atom_service_links.any?
-      uri_property.update_attribute :rsd, html.rsd_links.any?
-      uri_property.update_attribute :microformats, html.microformats.map(&:class).map(&:name).join(",")
+    def refresh!
+      uri_property.foaf = foaf?
+      uri_property.feeds = html.feeds.any?
+      uri_property.atompub = html.atom_service_links.any?
+      uri_property.rsd = html.rsd_links.any?
+      uri_property.microformats = html.microformats.map(&:class).map(&:name).join(",")
+      uri_property.xrds_service_types = xrds_service_types
+      uri_property.save!
     end
 
 

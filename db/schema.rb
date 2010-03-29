@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100308141020) do
+ActiveRecord::Schema.define(:version => 20100329103807) do
 
   create_table "admissions", :force => true do |t|
     t.string   "type"
@@ -181,6 +181,7 @@ ActiveRecord::Schema.define(:version => 20100308141020) do
     t.boolean "atompub"
     t.boolean "rsd"
     t.text    "microformats"
+    t.text    "xrds_service_types"
   end
 
   create_table "uris", :force => true do |t|

@@ -4,7 +4,7 @@ namespace :uris do
     Uri.all.each do |u|
       puts "Refreshing: #{ u.to_s }"
       begin
-        u.refresh
+        u.refresh!
       rescue Timeout::Error, Exception => e
         puts e.inspect
         next

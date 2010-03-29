@@ -104,5 +104,8 @@ N/A <%= "%0.2f" % (Uri.microformats(nil).count * 100.0 / Uri.count) %>%
 <div class="span-2">
   <%= uri.uri_property.microformats %>
 </div>
+<div class="clear">
+  <%= uri.uri_property.xrds_service_types.try(:join, ", ") %>
+</div>
 <% end %>
 <% end %>
