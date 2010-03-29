@@ -12,6 +12,12 @@
 
 <h1>Results</h1>
 
+<p>
+<strong>Total</strong>
+<%= Uri.count %>
+</p>
+
+
 <% 
 results = {
   "FoaF" => Uri.foaf(true).count * 100.0 / Uri.count,
@@ -19,12 +25,13 @@ results = {
   "RSS" => Uri.rss(true).count * 100.0 / Uri.count,
   "RSD" => Uri.rsd(true).count * 100.0 / Uri.count,
   "Microformats" => Uri.microformats("_").count * 100.0 / Uri.count,
-  "AtomPub" => Uri.atompub(true).count * 100.0 / Uri.count
+  "AtomPub" => Uri.atompub(true).count * 100.0 / Uri.count,
+  "XRDS" => Uri.xrds_service_type("http").count * 100.0 / Uri.count
 }
 %>
 
 
-<%= image_tag Gchart.bar(:title => "Technologies",
+<%= image_tag Gchart.bar(:title => "Meta Technologies",
                          :data => results.values,
                          :axis_with_labels => "x,y",
                          :axis_labels => [ results.keys, (0..4).map{ |n| n * 25 } ],
@@ -32,6 +39,55 @@ results = {
                          :bar_width_and_spacing => { :width => 50, :spacing => 30 },
                          :size => '600x200')
 %>
+
+<p>
+<strong>FoaF</strong>
+Yes <%= "%0.2f" % (Uri.foaf(true).count * 100.0 / Uri.count) %>%
+No <%= "%0.2f" % (Uri.foaf(false).count * 100.0 / Uri.count) %>%
+N/A <%= "%0.2f" % (Uri.foaf(nil).count * 100.0 / Uri.count) %>%
+</p>
+
+<p>
+<strong>RSS</strong>
+Yes <%= "%0.2f" % (Uri.rss(true).count * 100.0 / Uri.count) %>%
+No <%= "%0.2f" % (Uri.rss(false).count * 100.0 / Uri.count) %>%
+N/A <%= "%0.2f" % (Uri.rss(nil).count * 100.0 / Uri.count) %>%
+</p>
+
+<p>
+<strong>Atom</strong>
+Yes <%= "%0.2f" % (Uri.atom(true).count * 100.0 / Uri.count) %>%
+No <%= "%0.2f" % (Uri.atom(false).count * 100.0 / Uri.count) %>%
+N/A <%= "%0.2f" % (Uri.atom(nil).count * 100.0 / Uri.count) %>%
+</p>
+
+
+<p>
+<strong>AtomPub Service Document</strong>
+Yes <%= "%0.2f" % (Uri.atompub(true).count * 100.0 / Uri.count) %>%
+No <%= "%0.2f" % (Uri.atompub(false).count * 100.0 / Uri.count) %>%
+N/A <%= "%0.2f" % (Uri.atompub(nil).count * 100.0 / Uri.count) %>%
+</p>
+
+<p>
+<strong>Really Simple Discovery (RSD)</strong>
+Yes <%= "%0.2f" % (Uri.rsd(true).count * 100.0 / Uri.count) %>%
+No <%= "%0.2f" % (Uri.rsd(false).count * 100.0 / Uri.count) %>%
+N/A <%= "%0.2f" % (Uri.rsd(nil).count * 100.0 / Uri.count) %>%
+</p>
+
+<p>
+<strong>eXtensible Resource Descriptor Sequence (XRDS)</strong>
+Yes <%= "%0.2f" % (Uri.xrds_service_type("http").count * 100.0 / Uri.count) %>%
+No <%= "%0.2f" % (Uri.xrds_service_type("[]").count * 100.0 / Uri.count) %>%
+</p>
+
+<p>
+<strong>Microformats</strong>
+Yes <%= "%0.2f" % (Uri.microformats("_").count * 100.0 / Uri.count) %>%
+No <%= "%0.2f" % (Uri.microformats("").count * 100.0 / Uri.count) %>%
+N/A <%= "%0.2f" % (Uri.microformats(nil).count * 100.0 / Uri.count) %>%
+</p>
 
 <% 
 microformats = Uri::Microformats.inject({}) do |hash, m| 
@@ -50,55 +106,6 @@ microformats = Uri::Microformats.inject({}) do |hash, m|
                          :size => '700x200')
 %>
 
-<p>
-<strong>Total</strong>
-<%= Uri.count %>
-</p>
-
-<p>
-<strong>FoaF</strong>
-Yes <%= "%0.2f" % (Uri.foaf(true).count * 100.0 / Uri.count) %>%
-No <%= "%0.2f" % (Uri.foaf(false).count * 100.0 / Uri.count) %>%
-N/A <%= "%0.2f" % (Uri.foaf(nil).count * 100.0 / Uri.count) %>%
-</p>
-
-<p>
-<strong>RSS feeds</strong>
-Yes <%= "%0.2f" % (Uri.rss(true).count * 100.0 / Uri.count) %>%
-No <%= "%0.2f" % (Uri.rss(false).count * 100.0 / Uri.count) %>%
-N/A <%= "%0.2f" % (Uri.rss(nil).count * 100.0 / Uri.count) %>%
-</p>
-
-<p>
-<strong>Atom feeds</strong>
-Yes <%= "%0.2f" % (Uri.atom(true).count * 100.0 / Uri.count) %>%
-No <%= "%0.2f" % (Uri.atom(false).count * 100.0 / Uri.count) %>%
-N/A <%= "%0.2f" % (Uri.atom(nil).count * 100.0 / Uri.count) %>%
-</p>
-
-
-<p>
-<strong>AtomPub Service Document</strong>
-Yes <%= "%0.2f" % (Uri.atompub(true).count * 100.0 / Uri.count) %>%
-No <%= "%0.2f" % (Uri.atompub(false).count * 100.0 / Uri.count) %>%
-N/A <%= "%0.2f" % (Uri.atompub(nil).count * 100.0 / Uri.count) %>%
-</p>
-
-<p>
-<strong>Really Simple Discovery</strong>
-Yes <%= "%0.2f" % (Uri.rsd(true).count * 100.0 / Uri.count) %>%
-No <%= "%0.2f" % (Uri.rsd(false).count * 100.0 / Uri.count) %>%
-N/A <%= "%0.2f" % (Uri.rsd(nil).count * 100.0 / Uri.count) %>%
-</p>
-
-
-
-<p>
-<strong>Microformats</strong>
-Yes <%= "%0.2f" % (Uri.microformats("_").count * 100.0 / Uri.count) %>%
-No <%= "%0.2f" % (Uri.microformats("").count * 100.0 / Uri.count) %>%
-N/A <%= "%0.2f" % (Uri.microformats(nil).count * 100.0 / Uri.count) %>%
-</p>
 
 
 <% Uri::Microformats.each do |m| %>
