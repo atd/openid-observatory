@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100329103807) do
+ActiveRecord::Schema.define(:version => 20100329144209) do
 
   create_table "admissions", :force => true do |t|
     t.string   "type"
@@ -177,11 +177,12 @@ ActiveRecord::Schema.define(:version => 20100329103807) do
   create_table "uri_properties", :force => true do |t|
     t.integer "uri_id"
     t.boolean "foaf"
-    t.boolean "feeds"
     t.boolean "atompub"
     t.boolean "rsd"
     t.text    "microformats"
     t.text    "xrds_service_types"
+    t.boolean "atom"
+    t.boolean "rss"
   end
 
   create_table "uris", :force => true do |t|

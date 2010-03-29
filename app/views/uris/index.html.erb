@@ -12,6 +12,44 @@
 
 <h1>Results</h1>
 
+<% 
+results = {
+  "FoaF" => Uri.foaf(true).count * 100.0 / Uri.count,
+  "Atom" => Uri.atom(true).count * 100.0 / Uri.count,
+  "RSS" => Uri.rss(true).count * 100.0 / Uri.count,
+  "RSD" => Uri.rsd(true).count * 100.0 / Uri.count,
+  "Microformats" => Uri.microformats("_").count * 100.0 / Uri.count,
+  "AtomPub" => Uri.atompub(true).count * 100.0 / Uri.count
+}
+%>
+
+
+<%= image_tag Gchart.bar(:title => "Technologies",
+                         :data => results.values,
+                         :axis_with_labels => "x,y",
+                         :axis_labels => [ results.keys, (0..4).map{ |n| n * 25 } ],
+                         :max_value => 100,
+                         :bar_width_and_spacing => { :width => 50, :spacing => 30 },
+                         :size => '600x200')
+%>
+
+<% 
+microformats = Uri::Microformats.inject({}) do |hash, m| 
+                 hash[m] = (Uri.microformats(m).count * 100.0 / Uri.count)
+                 hash
+               end
+%>
+
+
+<%= image_tag Gchart.bar(:title => "Microformats",
+                         :data => microformats.values,
+                         :axis_with_labels => "x,y",
+                         :axis_labels => [ microformats.keys, (0..4).map{ |n| n * 25 } ],
+                         :max_value => 100,
+                         :bar_width_and_spacing => { :width => 50, :spacing => 20 },
+                         :size => '700x200')
+%>
+
 <p>
 <strong>Total</strong>
 <%= Uri.count %>
@@ -25,11 +63,19 @@ N/A <%= "%0.2f" % (Uri.foaf(nil).count * 100.0 / Uri.count) %>%
 </p>
 
 <p>
-<strong>Atom/RSS feeds</strong>
-Yes <%= "%0.2f" % (Uri.feeds(true).count * 100.0 / Uri.count) %>%
-No <%= "%0.2f" % (Uri.feeds(false).count * 100.0 / Uri.count) %>%
-N/A <%= "%0.2f" % (Uri.feeds(nil).count * 100.0 / Uri.count) %>%
+<strong>RSS feeds</strong>
+Yes <%= "%0.2f" % (Uri.rss(true).count * 100.0 / Uri.count) %>%
+No <%= "%0.2f" % (Uri.rss(false).count * 100.0 / Uri.count) %>%
+N/A <%= "%0.2f" % (Uri.rss(nil).count * 100.0 / Uri.count) %>%
 </p>
+
+<p>
+<strong>Atom feeds</strong>
+Yes <%= "%0.2f" % (Uri.atom(true).count * 100.0 / Uri.count) %>%
+No <%= "%0.2f" % (Uri.atom(false).count * 100.0 / Uri.count) %>%
+N/A <%= "%0.2f" % (Uri.atom(nil).count * 100.0 / Uri.count) %>%
+</p>
+
 
 <p>
 <strong>AtomPub Service Document</strong>
@@ -70,7 +116,10 @@ N/A <%= "%0.2f" % (Uri.microformats(nil).count * 100.0 / Uri.count) %>%
     FoaF?
   </div>
   <div class="span-2">
-    RSS/Atom feeds?
+    RSS feeds?
+  </div>
+  <div class="span-2">
+    Atom feeds?
   </div>
   <div class="span-2">
     AtomPub Service?
@@ -93,7 +142,10 @@ N/A <%= "%0.2f" % (Uri.microformats(nil).count * 100.0 / Uri.count) %>%
   <%= uri.uri_property.foaf.nil? ? "N/A" : uri.uri_property.foaf %>
 </div>
 <div class="span-2">
-  <%= uri.uri_property.feeds.nil? ? "N/A" : uri.uri_property.feeds %>
+  <%= uri.uri_property.rss.nil? ? "N/A" : uri.uri_property.rss %>
+</div>
+<div class="span-2">
+  <%= uri.uri_property.atom.nil? ? "N/A" : uri.uri_property.atom %>
 </div>
 <div class="span-2">
   <%= uri.uri_property.atompub.nil? ? "N/A" : uri.uri_property.atompub %>

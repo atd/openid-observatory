@@ -9,7 +9,7 @@ if defined?(ActiveRecord::Resource)
 
     has_one :uri_property, :dependent => :destroy
 
-    %w( foaf feeds atompub rsd ).each do |p|
+    %w( foaf rss atom atompub rsd ).each do |p|
       eval <<-EOS
         named_scope :#{ p }, lambda { |#{ p }|
           { :joins => :uri_property,
@@ -47,7 +47,8 @@ if defined?(ActiveRecord::Resource)
 
     def refresh!
       uri_property.foaf = foaf?
-      uri_property.feeds = html.feeds.any?
+      uri_property.rss = html.rss_links.any?
+      uri_property.atom = html.atom_links.any?
       uri_property.atompub = html.atom_service_links.any?
       uri_property.rsd = html.rsd_links.any?
       uri_property.microformats = html.microformats.map(&:class).map(&:name).join(",")
