@@ -1,5 +1,5 @@
 require 'open-uri'
-require 'hpricot'
+require 'nokogiri'
 
 class Robot
   def initialize(base)
@@ -16,41 +16,48 @@ class Robot
     puts "Parsing: #{ uri }"
     @visited_uris << uri
 
-    doc = open(uri) { |f| Hpricot(f) }
+    begin
+      doc = Nokogiri::HTML(open(uri))
+    rescue
+      return
+    end
 
-    uris = doc.search("//a")
+    uris = doc.xpath("//a")
     
     # Wordpress OpenID plugin
-    openid_uris = uris.select{ |u|
-      c = u.attributes['class']
-      c.present? && c.include?('openid_link')
-    }
-
-    openids = openid_uris.map{ |e| e.attributes['href'] }
+    openids =
+      # Select <a class="openid_link">
+      uris.select{ |u|
+        c = u.attributes['class']
+        c.present? && c.value.include?('openid_link')
+      }.map{ |e|
+        e.attributes['href'].try(:value)
+      }
 
     # LiveJournal
     openids |= 
       # Select <span class="ljuser">..<img src="..openid">..<a rel="nofollow"></span>
-      doc.search("span.ljuser").select{ |s|
-        s.search("img").select{ |i|
+      doc.css("span.ljuser").select{ |s|
+        s.xpath("//img").select{ |i|
           src = i.attributes['src']
-          src.present? && src.include?('openid')
+          src.present? && src.value.include?('openid')
         }.any?
       }.map{ |s|
         # Select nofollow href
-        s.search("a").select{ |a|
+        s.xpath("//a").select{ |a|
           rel = a.attributes['rel']
-          rel.present? && rel.include?('nofollow')
-        }.first.attributes['href']
+          rel.present? && rel.value.include?('nofollow')
+        }.first.attributes['href'].try(:value)
       }
 
+    # Save found OpenIDs
     openids.each do |id|
       puts "OpenID found: #{ id } "
       Uri.find_or_create_by_uri(id)
     end
 
 
-    (uris - openid_uris).map{ |u| u.attributes['href'] }.each do |u|
+    uris.map{ |u| u.attributes['href'].try(:value) }.compact.each do |u|
       begin
         u = uri + URI.parse(u)
       rescue

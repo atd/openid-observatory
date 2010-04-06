@@ -2,10 +2,9 @@ require '/usr/lib/ruby/1.8/uri'
 
 if defined?(ActiveRecord::Resource)
   require_dependency "#{ RAILS_ROOT }/vendor/plugins/station/app/models/uri"
-  require 'mofo'
 
   class Uri
-    Microformats = ["HCard", "Adr", "XFN", "RelTag", "RelBookmark", "HFeed", "HEntry", "HResume", "HCalendar"]
+    Microformats = ["Adr", "HCard", "XFN", "RelLicense", "RelTag", "XOXO", "Geo", "VoteLinks"]
 
     has_one :uri_property, :dependent => :destroy
 
@@ -51,7 +50,7 @@ if defined?(ActiveRecord::Resource)
       uri_property.atom = html.atom_links.any?
       uri_property.atompub = html.atom_service_links.any?
       uri_property.rsd = html.rsd_links.any?
-      uri_property.microformats = html.microformats.map(&:class).map(&:name).join(",")
+      uri_property.microformats = html.microformats.map{ |m| m.class.to_s.demodulize }.join(",")
       uri_property.xrds_service_types = xrds_service_types
       uri_property.save!
     end
