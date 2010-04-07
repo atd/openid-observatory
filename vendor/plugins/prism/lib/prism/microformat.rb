@@ -9,7 +9,6 @@ module Prism
 
     def self.microformats
       { :hcard      => Prism::Microformat::HCard,
-        :hcalendar  => Prism::Microformat::HCalendar,
         :geo        => Prism::Microformat::Geo,
         :adr        => Prism::Microformat::Adr,
         :rellicense => Prism::Microformat::RelLicense,
@@ -47,5 +46,4 @@ require 'prism/microformat/xmdp'
 require 'prism/microformat/xfn'
 require 'prism/microformat/geo'
 require 'prism/microformat/adr'
-require 'prism/microformat/hcalendar'
 require 'prism/microformat/hcard'
