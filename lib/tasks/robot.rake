@@ -7,9 +7,8 @@ namespace :robot do
   desc "Search in sources.yml"
   task :seed => :environment do
     YAML.load_file(File.join("#{ RAILS_ROOT }", "sources.yml")).each do |uri|
-      ENV['URI'] = uri
       puts "Seeding with #{ uri }"
-      Rake::Task["robot:search"].invoke
+      Robot.new uri
     end
   end
 end

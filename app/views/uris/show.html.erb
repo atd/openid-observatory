@@ -7,7 +7,10 @@
 </p>
 
 <p>
-<strong>Atom/RSS feeds</strong> <%=h uri.uri_property.feeds? %>
+<strong>Atom/RSS feeds</strong>
+<%= "Atom" if uri.uri_property.atom? %>
+<%= "RSS" if uri.uri_property.rss? %>
+<%= "None" unless uri.uri_property.atom? || uri.uri_property.rss? %>
 </p>
 
 <p>
