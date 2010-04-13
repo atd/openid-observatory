@@ -1,1 +1,32 @@
+/*Typography*/
+h1.type{font-family:Georgia;color:#996600;padding-left:20px;}/*special class added*/
 
+
+/*Custom grid*/
+body{}
+#header_wrapper,#content{background:#fff;}
+#header_wrapper{padding-bottom:38px;}
+#header_wrapper .black_bar{background:#2c2a25;}
+#header{position:relative;}
+#header span#header_logo{position:absolute;padding:65px 62px;left:20px;top:10px;background:transparent url("../images/search128.png") no-repeat}
+#header .web_title{padding-top:25px;padding-bottom:10px;}
+.web_title a{
+  width:304px;
+  height:46px;
+  background:transparent url("../images/big_title.png") no-repeat top center;
+  display:block;
+  text-indent:-9999px;}
+.web_title a:hover{background-position:3px -51px;}
+#content_wrapper{background:#fff;}
+#content{min-height:500px;}
+#content #left{padding-top:18px;}
+#footer_wrapper{background:#2c2a25;padding:15px 0;}
+#footer ul{color:#99cc33;margin:0;list-style-type:none;}
+#footer ul li{float:left;padding:0 3px;}
+#footer ul li.share{font-size:1.5em;line-height:1;padding: 6px 10px 0 0;}
+
+/*Right box*/
+.total_checked{margin-left:230px;background:#f7931e;text-align:right;padding-right:10px;}
+.charts_wrapper{background:#2c2a25;padding:5px 5px;}
+#down div.fancy_input{background:transparent url("../images/file_input_bar.png") no-repeat right center;height:66px;}
+#down div.fancy_input form{float:right;margin-right:60px;margin-top:20px;}

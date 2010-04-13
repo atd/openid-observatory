@@ -1,4 +1,53 @@
-<h1>Check yours</h1>
+<% 
+results = {
+  "FoaF" => Uri.foaf(true).count * 100.0 / Uri.count,
+  "Atom" => Uri.atom(true).count * 100.0 / Uri.count,
+  "RSS" => Uri.rss(true).count * 100.0 / Uri.count,
+  "RSD" => Uri.rsd(true).count * 100.0 / Uri.count,
+  "Microformats" => Uri.microformats("_").count * 100.0 / Uri.count,
+  "AtomPub" => Uri.atompub(true).count * 100.0 / Uri.count,
+  "XRDS" => Uri.xrds_service_type("http").count * 100.0 / Uri.count
+}
+%>
+
+
+      <div id="left" class="span-10">
+        <h1 class="type">Explore now all</h1>
+        <h1 class="type">the information</h1>
+        <h1 class="type">associated to your</h1>
+        <h1 class="type"><img src="../images/openid_logo.png" alt="OpenID"/></h1>
+      </div>
+  
+      <div id="right" class="span-14 last">
+        <div class="total_checked"><span><%= Uri.count %> OpenID's already checked</span></div>
+        <div class="charts_wrapper">
+          <%= image_tag Gchart.bar(:title => "Meta Technologies",
+                         :data => results.values,
+                         :axis_with_labels => "x,y",
+                         :axis_labels => [ results.keys, (0..4).map{ |n| n * 25 } ],
+                         :max_value => 100,
+                         :bar_width_and_spacing => { :width => 50, :spacing => 23 },
+                         :size => '540x200')
+          %>
+        </div>
+      </div>
+      
+      <div id="down" class="span-24 last">
+				<%= notification_area %>
+				<div class="fancy_input">
+
+						<% form_for @uri || Uri.new do |f| %>
+						  <%= f.error_messages %>
+						  <%= f.text_field :uri %>
+						  <%= f.submit 'Go! >>' %>
+						<% end -%>
+
+				</div>
+      </div>
+
+
+
+<!--<h1>Check yours</h1>
 
 <%= notification_area %>
 
@@ -15,9 +64,9 @@
 <p>
 <strong>Total</strong>
 <%= Uri.count %>
-</p>
+</p>-->
 
-
+<!--
 <% 
 results = {
   "FoaF" => Uri.foaf(true).count * 100.0 / Uri.count,
@@ -29,7 +78,7 @@ results = {
   "XRDS" => Uri.xrds_service_type("http").count * 100.0 / Uri.count
 }
 %>
-
+-->
 
 <%= image_tag Gchart.bar(:title => "Meta Technologies",
                          :data => results.values,

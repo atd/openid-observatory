@@ -3,8 +3,8 @@
 
 <html>
   <head>
-  <%= stylesheet_link_tag "screen", :media => "screen, projection" %>
   <%= stylesheet_link_tag "style", :media => "screen, projection" %>
+  <%= stylesheet_link_tag "screen", :media => "screen, projection" %>
   <%= stylesheet_link_tag "print", :media => "print" %>
   <!--[if IE]>
     <%= stylesheet_link_tag "ie", :media => "screen, projection" %>
@@ -14,8 +14,39 @@
 
   </head>
   <body>
-    <div id="content" class="prepend-1 span-22 append-1 last">
-    <%= yield %>
-    </div>
+  	
+		<div id="header_wrapper" class="clear clearfix">
+	    <div class="black_bar">
+	      <div id="header" class="container">
+	        <span id="header_logo"></span>
+	        <div class="web_title prepend-4">
+	          <a href="#">OpenID Observatory</a>
+	        </div>
+	      </div>    
+	    </div>
+	  </div>
+		
+	  <!--<div id="content" class="prepend-1 span-22 append-1 last">-->
+		<div id="content_wrapper" class="showgrid">
+	    <div id="content" class="container">
+	      <%= yield %>
+	    </div>
+		</div>
+
+	  <div id="footer_wrapper"> 
+	    <div id="footer" class="container">
+	      <ul>
+	        <li class="share">Share:</li>
+	        <li><a href=""><img src="../images/delicious.png"/></a></li>
+	        <li><a href=""><img src="../images/blogger.png"/></a></li>
+	        <li><a href=""><img src="../images/google.png"/></a></li>
+	        <li><a href=""><img src="../images/facebook.png"/></a></li>
+	        <li><a href=""><img src="../images/rss.png"/></a></li>
+	        <li><a href=""><img src="../images/linkedin.png"/></a></li>
+	        <li><a href=""><img src="../images/digg.png"/></a></li>
+	      </ul>
+	    </div>
+	  </div>	
+		
   </body>
 </html>
