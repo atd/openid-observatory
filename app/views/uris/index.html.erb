@@ -17,6 +17,86 @@
 <%= Uri.count %>
 </p>
 
+<h2>OpenID</h2>
+
+<h3>Distribution of OpenID versions</h3>
+
+<% results = { "only v1, v1.1" => Uri.openid_version(:only_1).count,
+                "only v2" => Uri.openid_version(:only_2).count,
+                "both" => Uri.openid_version(:both).count } %>
+
+<%= image_tag Gchart.pie(:title => "Distribution of OpenID versions.",
+                         :data => results.values,
+                         :legend => results.keys,
+                         :size => '600x200') %>
+
+<% results.each_pair do |key, value| %>
+<p>
+  <strong><%= key %></strong>: <%= value * 100.0 / Uri.openid_version(:any).count %>
+</p>
+<% end %>
+
+<h3>Discovery technologies</h3>
+<% 
+results = {
+  "HTML" => Uri.html_discovery(:any).count * 100.0 / Uri.count,
+  "XRDS" => Uri.xrds_discovery(:any).count * 100.0 / Uri.count
+}
+%>
+
+
+<%= image_tag Gchart.bar(:title => "OpenID Discovery Technologies",
+                         :data => results.values,
+                         :axis_with_labels => "x,y",
+                         :axis_labels => [ results.keys, (0..4).map{ |n| n * 25 } ],
+                         :max_value => 100,
+                         :bar_width_and_spacing => { :width => 50, :spacing => 30 },
+                         :size => '600x200')
+%>
+
+<% results.each_pair do |key, value| %>
+<p>
+<strong><%= key %></strong>: <%= value %>%
+</p>
+<% end %>
+
+
+<h3>Distribution of OpenID versions, HTML discovery</h3>
+
+<% results = { "only v1, v1.1" => Uri.html_discovery(:only_1).count,
+                "only v2" => Uri.html_discovery(:only_2).count,
+                "both" => Uri.html_discovery(:both).count } %>
+
+<%= image_tag Gchart.pie(:title => "Distribution of OpenID versions. HTML discovery",
+                         :data => results.values,
+                         :legend => results.keys,
+                         :size => '600x200') %>
+
+<% results.each_pair do |key, value| %>
+<p>
+  <strong><%= key %></strong>: <%= value * 100.0 / Uri.html_discovery(:any).count %>
+</p>
+<% end %>
+
+<h3>Distribution of OpenID versions, XRDS discovery</h3>
+
+<% results = { "only v1, v1.1" => Uri.xrds_discovery(:only_1).count,
+                "only v2" => Uri.xrds_discovery(:only_2).count,
+                "both" => Uri.xrds_discovery(:both).count } %>
+
+<%= image_tag Gchart.pie(:title => "Distribution of OpenID versions. XRDS discovery",
+                         :data => results.values,
+                         :legend => results.keys,
+                         :size => '600x200') %>
+
+<% results.each_pair do |key, value| %>
+<p>
+  <strong><%= key %></strong>: <%= value * 100.0 / Uri.xrds_discovery(:any).count %>
+</p>
+<% end %>
+
+
+<h2>Technologies</h2>
 
 <% 
 results = {
@@ -89,8 +169,10 @@ No <%= "%0.2f" % (Uri.microformats("").count * 100.0 / Uri.count) %>%
 N/A <%= "%0.2f" % (Uri.microformats(nil).count * 100.0 / Uri.count) %>%
 </p>
 
+<h2>Microformats</h2>
+
 <% 
-microformats = Uri::Microformats.inject({}) do |hash, m| 
+microformats = UriProperty::Microformats.inject({}) do |hash, m| 
                  hash[m] = (Uri.microformats(m).count * 100.0 / Uri.count)
                  hash
                end
@@ -108,12 +190,48 @@ microformats = Uri::Microformats.inject({}) do |hash, m|
 
 
 
-<% Uri::Microformats.each do |m| %>
+<% UriProperty::Microformats.each do |m| %>
 <p>
 <strong><%= m %></strong>: <%= "%0.2f" % (Uri.microformats(m).count * 100.0 / Uri.count) %>%
 </p>
 <% end %>
 
+<h2>eXtensible Resource Descriptor Sequence</h2>
+<%= image_tag Gchart.bar(:title => "XRDS",
+                         :data => UriProperty::XrdsServiceTypes.keys.map{ |k|
+                                    Uri.xrds_service_type(k).count},
+                         :axis_with_labels => "x,y",
+                         :axis_labels => [ UriProperty::XrdsServiceTypes.values.map{ |v| v[0..10] }, [0, Uri.xrds_service_type('http').count] ],
+                         :max_value => Uri.xrds_service_type('http').count,
+                         :bar_width_and_spacing => { :width => 50, :spacing => 20 },
+                         :size => '1000x200')
+%>
+
+<% UriProperty::XrdsServiceTypes.each_pair do |uri, description| %>
+<p>
+<strong><%= description %></strong> <%= Uri.xrds_service_type(uri).count %>
+</p>
+<% end %>
+
+<h2>Providers</h2>
+
+<% results = Uri::Providers.inject({}) do |r, p|
+               r[p] = Uri.provider(p).count; r
+             end
+   results["other"] = results.values.inject(0){ |sum, value| sum + value } %>
+               
+<%= image_tag Gchart.bar(:title => "OpenID Providers",
+                         :data => results.values,
+                         :axis_with_labels => "x,y",
+                         :axis_labels => [ results.keys, [0, results['other'] ]],
+                         :bar_width_and_spacing => { :width => 50, :spacing => 30 },
+                         :size => '600x200')
+%>
+
+
+
+
+<h2>URIs detailed information</h2>
 
 <div class="span-22 last">
   <div class="span-8">
