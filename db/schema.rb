@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100329144209) do
+ActiveRecord::Schema.define(:version => 20100407142216) do
 
   create_table "admissions", :force => true do |t|
     t.string   "type"
@@ -183,6 +183,8 @@ ActiveRecord::Schema.define(:version => 20100329144209) do
     t.text    "xrds_service_types"
     t.boolean "atom"
     t.boolean "rss"
+    t.boolean "link_openid_server"
+    t.boolean "link_openid2_provider"
   end
 
   create_table "uris", :force => true do |t|

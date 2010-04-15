@@ -53,7 +53,9 @@ class Robot
     # Save found OpenIDs
     openids.each do |id|
       puts "OpenID found: #{ id } "
-      Uri.find_or_create_by_uri(id)
+      u = Uri.find_or_create_by_uri(id)
+      next if u.new_record?
+      u.refresh!
     end
 
 
