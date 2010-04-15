@@ -4,7 +4,7 @@ if defined?(ActiveRecord::Resource)
   require_dependency "#{ RAILS_ROOT }/vendor/plugins/station/app/models/uri"
 
   class Uri
-    Providers = [ "myopenid.com", "pip.verisignlabs.com", "google.com", "aol.com", "wordpress.com", "livejournal.com", "claimid.com" ]
+    Providers = [ "myopenid.com", "pip.verisignlabs.com", "google.com", "aol.com", "wordpress.com", "livejournal.com", "claimid.com", "yahoo.com", "blogspot.com", "myspace.com" ]
 
     has_one :uri_property, :dependent => :destroy
 

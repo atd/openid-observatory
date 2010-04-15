@@ -54,10 +54,6 @@ results = {
                          :size => '600x200')
 %>
 
-
-
-<!--<h1>Check yours</h1>
-
 <% results.each_pair do |key, value| %>
 <p>
 <strong><%= key %></strong>: <%= value %>%
@@ -220,14 +216,18 @@ microformats = UriProperty::Microformats.inject({}) do |hash, m|
 <h2>Providers</h2>
 
 <% results = Uri::Providers.inject({}) do |r, p|
-               r[p] = Uri.provider(p).count; r
+               c = Uri.provider(p).count
+               r[p] = Uri.provider(p).count if c > Uri.count * 0.01
+               r
              end
-   results["other"] = results.values.inject(0){ |sum, value| sum + value } %>
+   results["other"] = Uri.count - results.values.inject(0){ |sum, value| sum + value }
+   ordered_results = results.sort{ |a, b| b.last <=> a.last }
+%>
                
 <%= image_tag Gchart.bar(:title => "OpenID Providers",
-                         :data => results.values,
+                         :data => ordered_results.map(&:last).flatten,
                          :axis_with_labels => "x,y",
-                         :axis_labels => [ results.keys, [0, results['other'] ]],
+                         :axis_labels => [ ordered_results.map(&:first).flatten, [0, results['other'] ]],
                          :bar_width_and_spacing => { :width => 50, :spacing => 30 },
                          :size => '600x200')
 %>
