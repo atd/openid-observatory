@@ -47,8 +47,10 @@ class Robot
         s.xpath("//a").select{ |a|
           rel = a.attributes['rel']
           rel.present? && rel.value.include?('nofollow')
-        }.first.attributes['href'].try(:value)
-      }
+        }.map{ |l|
+          l.attributes['href'].try(:value)
+        }
+      }.flatten.compact
 
     # Save found OpenIDs
     openids.each do |id|
