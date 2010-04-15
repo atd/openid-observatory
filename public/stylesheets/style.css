@@ -28,7 +28,7 @@ body{}
 /*Right box*/
 .total_checked{margin-left:230px;background:#f7931e;text-align:right;padding-right:10px;}
 
-.charts_wrapper{background:#2c2a25;padding:5px 5px;}
+.charts_wrapper{/*background:#2c2a25;*/padding:5px 5px;}
 
 #down div.fancy_input{background:transparent url("../images/file_input_bar.png") no-repeat center right;height:66px;}
 
@@ -39,17 +39,17 @@ body{}
 	line-height:18px;
 	}
 	
-.fancy_input .input_text{
-	background:transparent url("../images/input_file.png") no-repeat top center;
-	border:medium none;
+.fancy_input input.input_text{
+	/*background:transparent url("../images/input_file.png") no-repeat top center;*/
+	border:1px solid #99cc33;
 	height:24px;
 	width:370px;
-	padding:8px 0 0 10px;
+	padding:6px 0 0 10px;
 	color:#777;
 	font-size:16px;
   }
 	
-.fancy_input .input_text:focus{background-position:bottom center;}
+.fancy_input input.input_text:focus{/*background-position:bottom center;border:none;*/border-color:#F7931E;}
 
 .fancy_input .input_text_button{
 	background:transparent url("../images/input_file_button.png") no-repeat right center;
@@ -59,7 +59,7 @@ body{}
 	font-size:16px;
 	height:32px;
 	width:77px;
-	margin-left:-8px;
+	margin-left:-2px;
 	border:none;
 	cursor:pointer;}
 	

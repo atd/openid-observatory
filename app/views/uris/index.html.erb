@@ -37,7 +37,7 @@ results = {
 				<div class="fancy_input">
 						<% form_for @uri || Uri.new do |f| %>
 						  <%= f.error_messages %>
-						  <%= f.text_field :uri, :class=>"input_text" %>
+						  <%= f.text_field :uri, :type=>"text",:class=>"input_text" %>
 						  <%= f.submit 'Go!',:class=>"input_text_button" %>
 						<% end -%>
             <span>Check yours!</span>
