@@ -14,7 +14,7 @@ class Robot
   end
 
   def parse(uri)
-    puts "Parsing: #{ uri }"
+    puts "#{ "Parsing".pur } #{ uri }"
     @visited_uris << uri
 
     begin
@@ -63,28 +63,28 @@ class Robot
       
     # Save found OpenIDs
     openids.each do |id|
-      puts "OpenID: #{ id }"
+      print "#{ "OpenID".dark_blue } #{ id } "
 
       if @visited_openids.include?(id)
-        puts "        repeated."
+        puts "repeated.".yellow
         next
       end
 
       @visited_openids << id
 
       if Uri.find_by_uri(id)
-        puts "        already saved."
+        puts "already saved.".yellow
         next
       end
 
       u = Uri.create(:uri => id)
 
       if u.new_record?
-        puts "        invalid."
+        puts "invalid.".red
         next
       end
 
-      puts "        added."
+      puts "added.".green
       u.refresh!
     end
 
