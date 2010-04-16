@@ -8,6 +8,7 @@ class Robot
 
     @base = URI.parse(base)
     @visited_uris = Array.new
+    @visited_openids = Array.new
 
     parse(@base)
   end
@@ -35,6 +36,7 @@ class Robot
       }
 
     # LiveJournal
+    # livejournal.com
     openids |= 
       # Select <span class="ljuser">..<img src="..openid">..<a rel="nofollow"></span>
       doc.css("span.ljuser").select{ |s|
@@ -52,11 +54,37 @@ class Robot
         }
       }.flatten.compact
 
+    # StackOverflow Blog
+    # http://blog.stackoverflow.com/
+    openids |=
+      doc.css("ol.commentlist a.url").map{ |a|
+        a.attributes['href'].try(:value)
+      }
+      
     # Save found OpenIDs
     openids.each do |id|
-      puts "OpenID found: #{ id } "
-      u = Uri.find_or_create_by_uri(id)
-      next if u.new_record?
+      puts "OpenID: #{ id }"
+
+      if @visited_openids.include?(id)
+        puts "        repeated."
+        next
+      end
+
+      @visited_openids << id
+
+      if Uri.find_by_uri(id)
+        puts "        already saved."
+        next
+      end
+
+      u = Uri.create(:uri => id)
+
+      if u.new_record?
+        puts "        invalid."
+        next
+      end
+
+      puts "        added."
       u.refresh!
     end
 
