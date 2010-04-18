@@ -4,12 +4,17 @@ if defined?(ActiveRecord::Resource)
   require_dependency "#{ RAILS_ROOT }/vendor/plugins/station/app/models/uri"
 
   class Uri
-    Providers = [ "myopenid.com", "pip.verisignlabs.com", "google.com", "aol.com", "wordpress.com", "livejournal.com", "claimid.com", "yahoo.com", "blogspot.com", "myspace.com" ]
+    Domains = [ "myopenid.com", "pip.verisignlabs.com", "google.com", "aol.com", "wordpress.com", "livejournal.com", "claimid.com", "yahoo.com", "blogspot.com", "myspace.com" ]
 
     has_one :uri_property, :dependent => :destroy
 
-    named_scope :provider, lambda { |p|
-      { :conditions => [ "uri LIKE ?", "%#{ p }%" ] }
+    named_scope :domain, lambda { |d|
+      { :conditions => [ "uri LIKE ?", "%#{ d }%" ] }
+    }
+
+    named_scope :openid_provider, lambda { |p|
+      { :conditions => [ "uri_properties.openid_providers LIKE ?", "%#{ p }%" ],
+        :joins => :uri_property }
     }
 
     %w( foaf rss atom atompub rsd ).each do |p|
@@ -126,6 +131,7 @@ if defined?(ActiveRecord::Resource)
       uri_property.xrds_service_types = xrds_service_types
       uri_property.link_openid_server = html.openid_server_links?
       uri_property.link_openid2_provider = html.openid2_provider_links?
+      uri_property.openid_providers = openid_providers
       uri_property.save!
     end
 
@@ -148,5 +154,10 @@ if defined?(ActiveRecord::Resource)
     end
 
     after_create :create_uri_property
+
+    def openid_providers
+      ( openid_discover.last.map{ |s| s.server_url } |
+        html.openid_providers ).flatten.compact.uniq
+    end
   end
 end

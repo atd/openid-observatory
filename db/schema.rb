@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100416094740) do
+ActiveRecord::Schema.define(:version => 20100418214215) do
 
   create_table "admissions", :force => true do |t|
     t.string   "type"
@@ -192,6 +192,7 @@ ActiveRecord::Schema.define(:version => 20100416094740) do
     t.boolean "rss"
     t.boolean "link_openid_server"
     t.boolean "link_openid2_provider"
+    t.text    "openid_providers"
   end
 
   create_table "uris", :force => true do |t|

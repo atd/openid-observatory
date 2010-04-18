@@ -15,6 +15,8 @@ namespace :uris do
       end
     end
 
+    UriProperty.reset
+
     puts time_ago_in_words(init)
   end
 
