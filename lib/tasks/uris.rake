@@ -1,6 +1,10 @@
 namespace :uris do
   desc "Update URIs"
   task :refresh => :environment do
+    include ActionView::Helpers::DateHelper
+
+    init = Time.now
+
     Uri.all.each do |u|
       puts "Refreshing: #{ u.to_s }"
       begin
@@ -10,6 +14,10 @@ namespace :uris do
         next
       end
     end
+
+    UriProperty.reset
+
+    puts time_ago_in_words(init)
   end
 
   desc "Purge URIs that are not OpenID"

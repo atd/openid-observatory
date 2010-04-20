@@ -1,6 +1,4 @@
 class UriProperty < ActiveRecord::Base
-  Microformats = ["Adr", "HCard", "XFN", "RelLicense", "RelTag", "XOXO", "Geo", "VoteLinks"]
-
   XrdsOpenIdUris = {
     :v1_0 => "http://openid.net/signon/1.0",
     :v1_1 => "http://openid.net/signon/1.1",
@@ -31,4 +29,22 @@ class UriProperty < ActiveRecord::Base
   belongs_to :uri
 
   serialize :xrds_service_types, Array
+  serialize :openid_providers, Array
+
+  class << self
+    def reset
+      @openid_providers = nil
+      @microformats = nil
+    end
+
+    def openid_providers
+      @openid_providers ||=
+        all.map{ |u| Array(u.openid_providers) }.flatten.compact.uniq
+    end
+
+    def microformats
+      @microformats ||=
+        all.map{ |u| u.microformats.split(",") }.flatten.compact.uniq
+    end
+  end
 end

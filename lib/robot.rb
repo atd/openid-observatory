@@ -8,12 +8,13 @@ class Robot
 
     @base = URI.parse(base)
     @visited_uris = Array.new
+    @visited_openids = Array.new
 
     parse(@base)
   end
 
   def parse(uri)
-    puts "Parsing: #{ uri }"
+    puts "#{ "Parsing".pur } #{ uri }"
     @visited_uris << uri
 
     begin
@@ -35,6 +36,7 @@ class Robot
       }
 
     # LiveJournal
+    # livejournal.com
     openids |= 
       # Select <span class="ljuser">..<img src="..openid">..<a rel="nofollow"></span>
       doc.css("span.ljuser").select{ |s|
@@ -47,14 +49,42 @@ class Robot
         s.xpath("//a").select{ |a|
           rel = a.attributes['rel']
           rel.present? && rel.value.include?('nofollow')
-        }.first.attributes['href'].try(:value)
-      }
+        }.map{ |l|
+          l.attributes['href'].try(:value)
+        }
+      }.flatten.compact
 
+    # StackOverflow Blog
+    # http://blog.stackoverflow.com/
+    openids |=
+      doc.css("ol.commentlist a.url").map{ |a|
+        a.attributes['href'].try(:value)
+      }
+      
     # Save found OpenIDs
     openids.each do |id|
-      puts "OpenID found: #{ id } "
-      u = Uri.find_or_create_by_uri(id)
-      next if u.new_record?
+      print "#{ "OpenID".dark_blue } #{ id } "
+
+      if @visited_openids.include?(id)
+        puts "repeated.".yellow
+        next
+      end
+
+      @visited_openids << id
+
+      if Uri.find_by_uri(id)
+        puts "already saved.".yellow
+        next
+      end
+
+      u = Uri.create(:uri => id)
+
+      if u.new_record?
+        puts "invalid.".red
+        next
+      end
+
+      puts "added.".green
       u.refresh!
     end
 
