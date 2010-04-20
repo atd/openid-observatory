@@ -5,11 +5,18 @@
   <head>
   <%= stylesheet_link_tag "style", :media => "screen, projection" %>
   <%= stylesheet_link_tag "screen", :media => "screen, projection" %>
+	<%= stylesheet_link_tag "galleryview", :media => "screen, projection" %>
   <%= stylesheet_link_tag "print", :media => "print" %>
   <!--[if IE]>
     <%= stylesheet_link_tag "ie", :media => "screen, projection" %>
   <![endif]-->
-
+  <%= javascript_include_tag 'jquery','jquery.easing','jquery.timers','jquery.galleryview' %>
+	<script type="text/javascript">
+		$(document).ready(function() {
+		<%= yield :javascript %>		
+		});
+  </script>
+	
   <title>OpenID Observatory</title>
 
   </head>

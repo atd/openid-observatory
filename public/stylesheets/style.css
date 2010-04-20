@@ -28,7 +28,9 @@ body{}
 /*Right box*/
 .total_checked{margin-left:230px;background:#f7931e;text-align:right;padding-right:10px;}
 
-.charts_wrapper{/*background:#2c2a25;*/padding:5px 5px;}
+.charts_wrapper{}
+
+#down{margin-top:18px;}
 
 #down div.fancy_input{background:transparent url("../images/file_input_bar.png") no-repeat center right;height:66px;}
 
