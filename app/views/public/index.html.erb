@@ -1,6 +1,6 @@
 <% content_for :javascript do %>
   $('#gallery').galleryView({
-  panel_width: 548,
+  panel_width: 546,
   panel_height: 260,
 	frame_width: 80,          //INT - width of filmstrip frames (in pixels)
   frame_height: 60,         //INT - width of filmstrip frames (in pixels)
@@ -44,12 +44,11 @@
                          :bg_color => "ffffff,0,ffffff,1",
                          :chart_color => "fefefe",
                          :new_markers => "N,000000,0,-1,11",
-                         :size => '550x260'
+                         :size => '548x260'
                           )+ "&chma=30,30,30,90",:title=>"uno"%>
 							 <div class="panel-overlay">
 							    <h2>Meta Technologies (%)</h2>
-							    <p>Photo by <a href="http://www.sxc.hu/profile/emsago" target="_blank">emsago</a>.
-							    View full-size photo <a href="http://www.sxc.hu/photo/152865" target="_blank">here</a>.</p>
+							    <p>See all the statistics <a href="http://www.sxc.hu/profile/emsago" target="_blank">here</a>.</p>
 							 </div>
           	</li>
             <li>
@@ -60,11 +59,10 @@
 							<%= image_tag Gchart.pie(
 							                         :data => results.values,
 							                         :legend => results.keys,
-							                         :size => '550x260')+ "&chma=30,30,30,90" %>
+							                         :size => '548x260')+ "&chma=30,30,30,90" %>
 					              <div class="panel-overlay">
                   <h2>Distribution of OpenID versions</h2>
-                  <p>Photo by <a href="http://www.sxc.hu/profile/emsago" target="_blank">emsago</a>.
-                  View full-size photo <a href="http://www.sxc.hu/photo/152865" target="_blank">here</a>.</p>
+                  <p>See all the statistics <a href="http://www.sxc.hu/profile/emsago" target="_blank">here</a>.</p>
                </div>
             </li>
             <li>
@@ -82,12 +80,11 @@
 							                         :axis_labels => [ results.keys, (0..4).map{ |n| n * 25 } ],
 							                         :max_value => 100,
 							                         :bar_width_and_spacing => { :width => 50, :spacing => 30 },
-							                         :size => '550x260')+ "&chma=30,30,30,90"
+							                         :size => '548x260')+ "&chma=30,30,30,90"
 							%>
 					              <div class="panel-overlay">
                   <h2>OpenID Discovery Technologies</h2>
-                  <p>Photo by <a href="http://www.sxc.hu/profile/emsago" target="_blank">emsago</a>.
-                  View full-size photo <a href="http://www.sxc.hu/photo/152865" target="_blank">here</a>.</p>
+                  <p>See all the statistics <a href="http://www.sxc.hu/profile/emsago" target="_blank">here</a>.</p>
                </div>
             </li>
             <li>
@@ -113,11 +110,24 @@
                          :bg_color => "ffffff,0,ffffff,1",
                          :chart_color => "fefefe",
                          :new_markers => "N,000000,0,-1,11",
-                         :size => '550x260')+ "&chma=30,30,30,90",:title=>"cuatro"
+                         :size => '548x260')+ "&chma=30,30,30,90",:title=>"cuatro"
           %>               <div class="panel-overlay">
                   <h2>Meta Technologies (%)</h2>
-                  <p>Photo by <a href="http://www.sxc.hu/profile/emsago" target="_blank">emsago</a>.
-                  View full-size photo <a href="http://www.sxc.hu/photo/152865" target="_blank">here</a>.</p>
+                  <p>See all the statistics <a href="http://www.sxc.hu/profile/emsago" target="_blank">here</a>.</p>
+               </div>
+            </li>
+						<li>
+              <% results = { "only v1, v1.1" => Uri.openid_version(:only_1).count,
+                              "only v2" => Uri.openid_version(:only_2).count,
+                              "both" => Uri.openid_version(:both).count } %>
+              
+              <%= image_tag Gchart.pie(
+                                       :data => results.values,
+                                       :legend => results.keys,
+                                       :size => '548x260')+ "&chma=30,30,30,90" %>
+                        <div class="panel-overlay">
+                  <h2>Distribution of OpenID versions</h2>
+                  <p>See all the statistics <a href="http://www.sxc.hu/profile/emsago" target="_blank">here</a>.</p>
                </div>
             </li>
 						<li>
@@ -131,8 +141,7 @@
                                        :size => '550x260')+ "&chma=30,30,30,90" %>
                         <div class="panel-overlay">
                   <h2>Distribution of OpenID versions</h2>
-                  <p>Photo by <a href="http://www.sxc.hu/profile/emsago" target="_blank">emsago</a>.
-                  View full-size photo <a href="http://www.sxc.hu/photo/152865" target="_blank">here</a>.</p>
+                  <p>See all the statistics <a href="http://www.sxc.hu/profile/emsago" target="_blank">here</a>.</p>
                </div>
             </li>
 						<li>
@@ -143,26 +152,10 @@
               <%= image_tag Gchart.pie(
                                        :data => results.values,
                                        :legend => results.keys,
-                                       :size => '550x260')+ "&chma=30,30,30,90" %>
+                                       :size => '548x260')+ "&chma=30,30,30,90" %>
                         <div class="panel-overlay">
                   <h2>Distribution of OpenID versions</h2>
-                  <p>Photo by <a href="http://www.sxc.hu/profile/emsago" target="_blank">emsago</a>.
-                  View full-size photo <a href="http://www.sxc.hu/photo/152865" target="_blank">here</a>.</p>
-               </div>
-            </li>
-						<li>
-              <% results = { "only v1, v1.1" => Uri.openid_version(:only_1).count,
-                              "only v2" => Uri.openid_version(:only_2).count,
-                              "both" => Uri.openid_version(:both).count } %>
-              
-              <%= image_tag Gchart.pie(
-                                       :data => results.values,
-                                       :legend => results.keys,
-                                       :size => '550x260')+ "&chma=30,30,30,90" %>
-                        <div class="panel-overlay">
-                  <h2>Distribution of OpenID versions</h2>
-                  <p>Photo by <a href="http://www.sxc.hu/profile/emsago" target="_blank">emsago</a>.
-                  View full-size photo <a href="http://www.sxc.hu/photo/152865" target="_blank">here</a>.</p>
+                  <p>See all the statistics <a href="http://www.sxc.hu/profile/emsago" target="_blank">here</a>.</p>
                </div>
             </li>
           </ul>

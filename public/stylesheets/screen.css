@@ -22,7 +22,7 @@ blockquote, q {quotes:"" "";}
 a img {border:none;}
 
 /* typography.css */
-body {font-size:75%;color:#222;background:#fff;font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;}
+body {font-size:75%;color:#222;background:#2c2a25;font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;}
 h1, h2, h3, h4, h5, h6 {font-weight:normal;color:#111;}
 h1 {font-size:3em;line-height:1;margin-bottom:0.5em;}
 h2 {font-size:2em;margin-bottom:0.75em;}
@@ -152,6 +152,7 @@ input.span-24, textarea.span-24, select.span-24 {width:940px!important;}
 .prepend-1 {padding-left:40px;}
 .prepend-2 {padding-left:80px;}
 .prepend-3 {padding-left:120px;}
+/*voy a poner un prepend-3dot5*/
 .prepend-4 {padding-left:160px;}
 .prepend-5 {padding-left:200px;}
 .prepend-6 {padding-left:240px;}

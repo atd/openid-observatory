@@ -3,7 +3,7 @@ h1.type{font-family:Georgia;color:#996600;}/*special class added*/
 
 
 /*Custom grid*/
-body{}
+.prepend-3dot5{padding-left:140px;}
 #header_wrapper,#content{background:#fff;}
 #header_wrapper{padding-bottom:38px;}
 #header_wrapper .black_bar{background:#2c2a25;}
@@ -19,7 +19,7 @@ body{}
 .web_title a:hover{background-position:3px -51px;}
 #content_wrapper{background:#fff;}
 #content{min-height:500px;}
-#content #left{padding-top:18px;}
+#content #left{padding-top:30px;}
 #footer_wrapper{background:#2c2a25;padding:15px 0;}
 #footer ul{color:#99cc33;margin:0;list-style-type:none;}
 #footer ul li{float:left;padding:0 3px;}

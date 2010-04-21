@@ -36,7 +36,7 @@
 #photos { visibility: hidden; }
 
 /* GALLERY CONTAINER */
-.gallery { background: #2c2a25; border: 1px solid #000;/* padding: 5px;*/}
+.gallery { background: #2c2a25; border: 1px solid #2c2a25;/* padding: 5px;*/}
 
 /* LOADING BOX */
 .loader { background: url(loader.gif) center center no-repeat #ddd; }
@@ -50,12 +50,12 @@
 .panel .overlay-background { height: 60px; padding: 0 1em; }
 
 /* PANEL OVERLAY BACKGROUND */
-.panel .overlay-background { background: #222; }
+.panel .overlay-background { background: #555; }
 
 /* PANEL OVERLAY CONTENT */
 .panel .panel-overlay { color: white; font-size: 0.7em;}
 .panel .panel-overlay a { color: white; text-decoration: underline; font-weight: bold; }
-.panel .panel-overlay h2{color:#fff;margin:5px 0;}
+.panel .panel-overlay h2{color:#fff;margin:5px 0;font-weight:bold;}
 .panel .panel-overlay p{color:#fff;font-size:13px;line-height:1.3846;}
 
 /* FILMSTRIP */
