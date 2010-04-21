@@ -20,23 +20,19 @@ h1.type{font-family:Georgia;color:#996600;}/*special class added*/
 #content_wrapper{background:#fff;}
 #content{min-height:500px;}
 #content #left{padding-top:30px;}
-#footer_wrapper{background:#2c2a25;padding:15px 0;}
-#footer ul{color:#99cc33;margin:0;list-style-type:none;}
-#footer ul li{float:left;padding:0 3px;}
-#footer ul li.share{font-size:1.5em;line-height:1;padding: 6px 10px 0 0;}
 
-/*Right box*/
 .total_checked{/*margin-left:230px;*/
   /*background:#99cc33;#f7931e;*/
   float:right;
-	margin-top:5px;
-	font-size:1.1667em;
-	color:#99cc33;
-	font-weight:bold;
-	}
+  margin-top:5px;
+  font-size:1.1667em;
+  color:#99cc33;
+  font-weight:bold;
+  }
 
 .total_checked span{font-size:25px;}
 
+/*Right box*/
 .charts_wrapper{}
 
 #down{margin-top:18px;}
@@ -52,7 +48,7 @@ h1.type{font-family:Georgia;color:#996600;}/*special class added*/
 	
 .fancy_input input.input_text{
 	/*background:transparent url("../images/input_file.png") no-repeat top center;*/
-	border:1px solid #99cc33;
+	border:1px solid #d0d0d0;
 	height:24px;
 	width:370px;
 	padding:6px 0 0 10px;
@@ -60,7 +56,7 @@ h1.type{font-family:Georgia;color:#996600;}/*special class added*/
 	font-size:16px;
   }
 	
-.fancy_input input.input_text:focus{/*background-position:bottom center;border:none;*/border-color:#F7931E;}
+.fancy_input input.input_text:focus{/*background-position:bottom center;border:none;F7931E*/border-color:#99cc33;}
 
 .fancy_input .input_text_button{
 	background:transparent url("../images/input_file_button.png") no-repeat right center;
@@ -83,3 +79,23 @@ h1.type{font-family:Georgia;color:#996600;}/*special class added*/
 	font-weight:bold;
 	margin-left:45px;
 	margin-top:15px;}
+
+	/*Footer*/
+#footer_wrapper{background:#2c2a25;padding:15px 0;}
+#footer ul{
+	color:#99cc33;
+	margin:0;
+	padding:0 10px;
+	list-style-type:none;
+	float:left;
+	height:130px;
+	border-right:1px solid #555;}
+
+#footer ul p{margin-bottom:0.75em;font-size:14px;line-height:18px;}	
+#footer ul.footer_left{width:31%;border-left:1px solid #555;}
+#footer ul.footer_center{width:31%;background:transparent url("../images/panel.png") no-repeat center center;}
+#footer ul.footer_right{width:31%;}
+#footer ul li{display:inline;padding:0 3px;}
+#footer ul li.share{font-size:1.5em;line-height:1;padding: 6px 10px 0 0;}
+#footer a{color:#99cc33;text-decoration:none;}
+#footer a:hover{color:#f0f0f0;text-decoration:underline;}

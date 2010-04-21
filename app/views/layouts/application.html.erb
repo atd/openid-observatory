@@ -43,16 +43,25 @@
 
 	  <div id="footer_wrapper"> 
 	    <div id="footer" class="container">
-	      <ul>
-	        <li class="share">Share:</li>
-                <li><%= link_to image_tag("delicious.png", :size =>"32x32"), "http://del.icio.us/post?url=#{ CGI.escape(root_url) }&title=#{ CGI.escape('OpenID Observatory') }" %></li>
-                <li><%= link_to image_tag("blogger.png", :size =>"32x32"), "http://www.blogger.com/blog_this.pyra?u=#{ CGI.escape(root_url) }&n=#{ CGI.escape('OpenID Observatory') }" %></li>
-                <li><%= link_to image_tag("twitter.png", :size =>"32x32"), "http://twitter.com/home?status=#{ CGI.escape('OpenID Observatory: http://bit.ly/9Gk8Ag') }" %></li>
-                <li><%= link_to image_tag("google.png", :size =>"32x32"), "http://www.google.com/bookmarks/mark?op=add&bkmk=#{ CGI.escape(root_url) }&title=#{ CGI.escape('OpenID Observatory') }" %></li>
-                <li><%= link_to image_tag("facebook.png", :size =>"32x32"), "http://www.facebook.com/sharer.php?u=#{ CGI.escape(root_url) }" %></li>
-                <li><%= link_to image_tag("linkedin.png", :size =>"32x32"), "http://www.linkedin.com/shareArticle?mini=true&url=#{ CGI.escape(root_url) }&title=#{ CGI.escape('OpenID Observatory') }" %></li>
-                <li><%= link_to image_tag("digg.png", :size =>"32x32"), "http://digg.com/submit?phase=2&url=#{ CGI.escape(root_url) }&title=#{ CGI.escape('OpenID Observatory') }" %></li>
-	      </ul>
+	      <ul class="footer_left">
+	        <p class="share">Share:</p>
+                <li><%= link_to image_tag("delicious.png", :size =>"32x32",:title=>"delicious"), "http://del.icio.us/post?url=#{ CGI.escape(root_url) }&title=#{ CGI.escape('OpenID Observatory') }" %></li>
+                <li><%= link_to image_tag("blogger.png", :size =>"32x32",:title=>"blogger"), "http://www.blogger.com/blog_this.pyra?u=#{ CGI.escape(root_url) }&n=#{ CGI.escape('OpenID Observatory') }" %></li>
+                <li><%= link_to image_tag("twitter.png", :size =>"32x32",:title=>"twitter"), "http://twitter.com/home?status=#{ CGI.escape('OpenID Observatory: http://bit.ly/9Gk8Ag') }" %></li>
+                <li><%= link_to image_tag("google.png", :size =>"32x32",:title=>"google"), "http://www.google.com/bookmarks/mark?op=add&bkmk=#{ CGI.escape(root_url) }&title=#{ CGI.escape('OpenID Observatory') }" %></li>
+                <li><%= link_to image_tag("facebook.png", :size =>"32x32",:title=>"facebook"), "http://www.facebook.com/sharer.php?u=#{ CGI.escape(root_url) }" %></li>
+                <li><%= link_to image_tag("linkedin.png", :size =>"32x32",:title=>"linkedin"), "http://www.linkedin.com/shareArticle?mini=true&url=#{ CGI.escape(root_url) }&title=#{ CGI.escape('OpenID Observatory') }" %></li>
+                <li><%= link_to image_tag("digg.png", :size =>"32x32",:title=>"digg"), "http://digg.com/submit?phase=2&url=#{ CGI.escape(root_url) }&title=#{ CGI.escape('OpenID Observatory') }" %></li>
+        </ul>
+        <ul class="footer_center">
+          <p class="contact"><%= link_to 'Contact with us!', "#" %></p>
+        </ul>
+				<ul class="footer_right">
+          <p class="share">Supported by:</p>
+          <li><%= link_to image_tag("Logo_dit-upm.gif",:size=>"92x92",:title=>"DIT-UPM"), "http://www.dit.upm.es" %></li>
+          <li><%= link_to image_tag("upm.png",:title=>"UPM"), "http://www.upm.es" %></li>
+        </ul>
+
 	    </div>
 	  </div>	
 		
