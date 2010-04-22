@@ -1,5 +1,5 @@
 /*Typography*/
-h1.type{font-family:Georgia;color:#996600;}/*special class added*/
+h2.type{font-family:Georgia;color:#996600;font-weight:bold;}/*special class added*/
 
 
 /*Custom grid*/
