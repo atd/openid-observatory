@@ -17,6 +17,7 @@ module ApplicationHelper
     [
       {
         :title   => t = 'Distribution of OpenID versions',
+        :description => "OpenID protocol versions currently supported",
         :results => r = {
           "v1, v1.1"     => Uri.openid_version(:only_1).count,
           "v2"           => Uri.openid_version(:only_2).count,
@@ -34,7 +35,8 @@ module ApplicationHelper
         end
       },
       {
-        :title => 'OpenID Discovery Technologies',
+        :title => 'OpenID Discovery Technologies (%)',
+        :description => 'OpenID service can be discovered by HTML link in header or using XRDS discovery',
         :results => r = {
           "HTML" => Uri.html_discovery(:any).count * 100.0 / Uri.count,
           "XRDS" => Uri.xrds_discovery(:any).count * 100.0 / Uri.count
@@ -89,6 +91,7 @@ module ApplicationHelper
       },
       {
         :title => t = 'Web Standards (%)',
+        :details => 'Main web standards found in OpenIDs',
         :results => r = {
           "FOAF" => Uri.foaf(true).count * 100.0 / Uri.count,
           "Atom" => Uri.atom(true).count * 100.0 / Uri.count,
@@ -97,11 +100,11 @@ module ApplicationHelper
           "Microformats" => Uri.microformats("_").count * 100.0 / Uri.count,
           "AtomPub" => Uri.atompub(true).count * 100.0 / Uri.count,
           "XRDS" => Uri.xrds_service_type("http").count * 100.0 / Uri.count
-        },
+        }.sort{ |a, b| b.last <=> a.last },
         :image => bar(:title => t,
-                      :data => r.values,
+                      :data => r.map(&:last),
                       :axis_with_labels => "x,y",
-                      :axis_labels => [ r.keys, (0..4).map{ |n| n * 25 } ],
+                      :axis_labels => [ r.map(&:first), (0..4).map{ |n| n * 25 } ],
                       :max_value => 100,
                       :bar_width_and_spacing => { :width => 50, :spacing => 23 } ),
         :details => { 'foaf' => 'FOAF',
@@ -135,17 +138,18 @@ module ApplicationHelper
           
       },
       {
-        :title => t = 'Microformats',
+        :title => t = 'Microformats (%)',
+        :details => 'Microformats types found in OpenIDs',
         :results => r = UriProperty.microformats.inject({}){ |hash, m| 
                           hash[m] = (Uri.microformats(m).count * 100.0 / Uri.count)
                           hash
-                        },
+                        }.sort{ |a, b| b.last <=> a.last },
         :image => bar(:title => t,
-                      :data => r.values,
+                      :data => r.map(&:last),
                       :axis_with_labels => "x,y",
-                      :axis_labels => [ r.keys, (0..4).map{ |n| n * 25 } ],
+                      :axis_labels => [ r.map(&:first), (0..4).map{ |n| n * 25 } ],
                       :max_value => 100,
-                      :bar_width_and_spacing => { :width => 50, :spacing => 20 } ),
+                      :bar_width_and_spacing => { :width => 40, :spacing => 20 } ),
         :details => r.inject("") do |d, r|
           d << "<p>"
           d << "<strong>#{ r.first }</strong>: #{ r.last }%"
@@ -210,6 +214,10 @@ module ApplicationHelper
     EOM
   end
 
+  def microformats_results
+
+  end
+
   def domain_results
     r = Uri::Domains.inject({}){ |r, p|
           c = Uri.domain(p).count
@@ -222,13 +230,15 @@ module ApplicationHelper
     [ r, r.sort{ |a, b| b.last <=> a.last } ]
   end
 
-  def provider_results
+  def provider_results(n = 5)
     r = UriProperty.openid_providers.inject({}) do |r, p|
           c = Uri.openid_provider(p).count
           r[p] = c if c > Uri.count * 0.01
           r
         end
+    r = r.sort{ |a, b| a.last <=> b.last }.last(5).inject({}){ |h, i| h[i.first] = i.last; h }
     r["other"] = Uri.count - r.values.inject(0){ |sum, value| sum + value }
+    # TODO: convert toconvert to %
     [ r, r.sort{ |a, b| b.last <=> a.last } ]
   end
 end
