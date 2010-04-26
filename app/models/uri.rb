@@ -4,6 +4,7 @@ if defined?(ActiveRecord::Resource)
   require_dependency "#{ RAILS_ROOT }/vendor/plugins/station/app/models/uri"
 
   class Uri
+    WebStandards = %w( foaf rss atom atompub rsd )
     Domains = [ "myopenid.com", "pip.verisignlabs.com", "google.com", "aol.com", "wordpress.com", "livejournal.com", "claimid.com", "yahoo.com", "blogspot.com", "myspace.com" ]
 
     has_one :uri_property, :dependent => :destroy
@@ -17,7 +18,8 @@ if defined?(ActiveRecord::Resource)
         :joins => :uri_property }
     }
 
-    %w( foaf rss atom atompub rsd ).each do |p|
+
+    WebStandards .each do |p|
       eval <<-EOS
         named_scope :#{ p }, lambda { |#{ p }|
           { :joins => :uri_property,
