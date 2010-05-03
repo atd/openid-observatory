@@ -16,8 +16,8 @@ module ApplicationHelper
   def build_graphs
     [
       {
-        :title   => t = 'Distribution of OpenID versions',
-        :description => "OpenID protocol versions currently supported",
+        :title   => t = 'OpenID Versions',
+        :description => "OpenID protocol versions currently announced by providers",
         :results => r = {
           "v1, v1.1"     => Uri.openid_version(:only_1).count,
           "v2"           => Uri.openid_version(:only_2).count,
@@ -35,14 +35,14 @@ module ApplicationHelper
         end
       },
       {
-        :title => 'OpenID Discovery Technologies (%)',
-        :description => 'OpenID service can be discovered by HTML link in header or using XRDS discovery',
+        :title => t = 'OpenID Discovery Technologies (%)',
+        :description => 'OpenID can be discovered both by a HTML header link or using XRDS discovery',
         :results => r = {
           "HTML" => Uri.html_discovery(:any).count * 100.0 / Uri.count,
           "XRDS" => Uri.xrds_discovery(:any).count * 100.0 / Uri.count
         },
 
-        :image => bar(:title => "OpenID Discovery Technologies",
+        :image => bar(:title => t,
                       :data => r.values,
                       :axis_with_labels => "x,y",
                       :axis_labels => [ r.keys, (0..4).map{ |n| n * 25 } ],
@@ -56,7 +56,8 @@ module ApplicationHelper
         end
       },
       {
-        :title => t = "Distribution of OpenID versions. HTML discovery",
+        :title => t = "OpenID versions in HTML discovery",
+        :description => 'Distribution of OpenID versions announced by HTML',
         :results => r = {
           "v1, v1.1" => Uri.html_discovery(:only_1).count,
           "v2"       => Uri.html_discovery(:only_2).count,
@@ -73,7 +74,8 @@ module ApplicationHelper
         end
       },
       {
-        :title => t = "Distribution of OpenID versions. XRDS discovery",
+        :title => t = "OpenID versions in XRDS discovery",
+        :description => 'Distribution of OpenID versions announced by XRDS',
         :results => r = {
           "v1, v1.1" => Uri.xrds_discovery(:only_1).count,
           "v2"       => Uri.xrds_discovery(:only_2).count,
@@ -91,7 +93,7 @@ module ApplicationHelper
       },
       {
         :title => t = 'Web Standards (%)',
-        :description => 'Main web standards found in OpenIDs HTML',
+        :description => 'Main web standards found in OpenID\'s HTML',
         :results => r = {
           "FOAF" => Uri.foaf(true).count * 100.0 / Uri.count,
           "Atom" => Uri.atom(true).count * 100.0 / Uri.count,
@@ -139,7 +141,7 @@ module ApplicationHelper
       },
       {
         :title => t = 'Microformats (%)',
-        :description => 'Microformat types found in OpenIDs HTML',
+        :description => 'Microformat types found in OpenID\'s HTML',
         :results => r = UriProperty.microformats.inject({}){ |hash, m| 
                           hash[m] = (Uri.microformats(m).count * 100.0 / Uri.count)
                           hash
@@ -158,7 +160,7 @@ module ApplicationHelper
         end
       },
       {
-        :title => t = "XRDS resource types",
+        :title => t = "XRDS resource types (%)",
         :description => 'Most common resource types announced in XRDS files',
         :results => r = xrds_results,
         :image => bar(:title => t,
@@ -176,7 +178,7 @@ module ApplicationHelper
 
       },
       {
-        :title => t = 'OpenID URI Domains',
+        :title => t = 'OpenID URI Domains (%)',
         :description => 'Most common domains used in OpenID URIs',
         :results => r = domain_results,
         :image => bar(:title => t,
@@ -187,12 +189,13 @@ module ApplicationHelper
                       :orientation => 'h'),
       },
 
-      { :title => t = 'OpenID Providers',
+      { :title => t = 'OpenID Providers (%)',
+        :description => "Most common providers used by OpenID URIs",
         :results => r = provider_results,
         :image => bar(:title => t,
                       :data => r.last.map(&:last).flatten,
                       :axis_with_labels => "x,y",
-                      :axis_labels => [ [0, r.first['other'] ], r.last.map(&:first).flatten.reverse ],
+                      :axis_labels => [ [0, 100 ], r.last.map(&:first).flatten.reverse ],
                       :max_value => 100,
                       :orientation => 'h'),
         :details =>  r.last.inject("") do |d, r|
