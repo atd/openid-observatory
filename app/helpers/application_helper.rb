@@ -91,7 +91,7 @@ module ApplicationHelper
       },
       {
         :title => t = 'Web Standards (%)',
-        :details => 'Main web standards found in OpenIDs',
+        :description => 'Main web standards found in OpenIDs HTML',
         :results => r = {
           "FOAF" => Uri.foaf(true).count * 100.0 / Uri.count,
           "Atom" => Uri.atom(true).count * 100.0 / Uri.count,
@@ -139,7 +139,7 @@ module ApplicationHelper
       },
       {
         :title => t = 'Microformats (%)',
-        :details => 'Microformats types found in OpenIDs',
+        :description => 'Microformat types found in OpenIDs HTML',
         :results => r = UriProperty.microformats.inject({}){ |hash, m| 
                           hash[m] = (Uri.microformats(m).count * 100.0 / Uri.count)
                           hash
@@ -158,18 +158,16 @@ module ApplicationHelper
         end
       },
       {
-        :title => t = "eXtensible Resource Descriptor Sequence (XRDS)",
-        :results => r = UriProperty::XrdsServiceTypes.inject({}){ |r, x|
-                          r[x.last] = Uri.xrds_service_type(x.first).count
-                          r
-                        },
+        :title => t = "XRDS resource types",
+        :description => 'Most common resource types announced in XRDS files',
+        :results => r = xrds_results,
         :image => bar(:title => t,
-                      :data => r.values,
+                      :data => r.last.map(&:last),
                       :axis_with_labels => "x,y",
-                      :axis_labels => [ r.keys, [0, Uri.xrds_service_type('http').count] ],
-                      :max_value => Uri.xrds_service_type('http').count,
-                      :bar_width_and_spacing => { :width => 50, :spacing => 20 }),
-        :details =>  r.inject("") do |d, r|
+                      :axis_labels => [ [0, 100], r.last.map(&:first).reverse ],
+                      :max_value => 100,
+                      :orientation => 'h'),
+        :details =>  r.first.inject("") do |d, r|
           d << "<p>"
           d << "<strong>#{ r.first }</strong>: #{ r.last }"
           d << "</p>"
@@ -179,19 +177,23 @@ module ApplicationHelper
       },
       {
         :title => t = 'OpenID URI Domains',
+        :description => 'Most common domains used in OpenID URIs',
         :results => r = domain_results,
         :image => bar(:title => t,
                       :data => r.last.map(&:last).flatten,
                       :axis_with_labels => "x,y",
-                      :axis_labels => [ r.last.map(&:first).flatten, [0, r.first['other'] ]],
-                      :bar_width_and_spacing => { :width => 50, :spacing => 30 }),
+                      :axis_labels => [ [0, 100 ], r.last.map(&:first).flatten.reverse ],
+                      :max_value => 100,
+                      :orientation => 'h'),
       },
+
       { :title => t = 'OpenID Providers',
         :results => r = provider_results,
         :image => bar(:title => t,
                       :data => r.last.map(&:last).flatten,
                       :axis_with_labels => "x,y",
                       :axis_labels => [ [0, r.first['other'] ], r.last.map(&:first).flatten.reverse ],
+                      :max_value => 100,
                       :orientation => 'h'),
         :details =>  r.last.inject("") do |d, r|
           d << "<p>"
@@ -214,31 +216,43 @@ module ApplicationHelper
     EOM
   end
 
-  def microformats_results
+  def xrds_results(n = 5)
+    total = Uri.xrds_service_type('http').count
 
-  end
-
-  def domain_results
-    r = Uri::Domains.inject({}){ |r, p|
-          c = Uri.domain(p).count
-          r[p] = c if c > Uri.count * 0.01
+    r = UriProperty::XrdsServiceTypes.inject({}){ |r, x|
+          r[x.last] = Uri.xrds_service_type(x.first).count
           r
         }
 
-    r["other"] = Uri.count - r.values.inject(0){ |sum, value| sum + value }
+    sorted_r = r.sort{ |a, b| a.last <=> b.last }.last(n).map{ |a| [ a.first, a.last * 100.0 / total ] }.reverse
+    [ r, sorted_r ]
+  end
+
+  def domain_results(n = 5)
+    total = Uri.count
+
+    r = Uri::Domains.inject({}){ |r, p|
+          c = Uri.domain(p).count
+          r[p] = c
+          r
+        }
+
+    r = r.sort{ |a, b| a.last <=> b.last }.last(n).inject({}){ |h, i| h[i.first] = i.last * 100.0 / total; h }
+    r["other"] = ( total - r.values.inject(0){ |sum, value| sum + value } ) * 100.0 / total
     
     [ r, r.sort{ |a, b| b.last <=> a.last } ]
   end
 
   def provider_results(n = 5)
+    total = Uri.count
+
     r = UriProperty.openid_providers.inject({}) do |r, p|
           c = Uri.openid_provider(p).count
-          r[p] = c if c > Uri.count * 0.01
+          r[p] = c
           r
         end
-    r = r.sort{ |a, b| a.last <=> b.last }.last(5).inject({}){ |h, i| h[i.first] = i.last; h }
-    r["other"] = Uri.count - r.values.inject(0){ |sum, value| sum + value }
-    # TODO: convert toconvert to %
+    r = r.sort{ |a, b| a.last <=> b.last }.last(n).inject({}){ |h, i| h[i.first] = i.last * 100.0 / total; h }
+    r["other"] = ( total - r.values.inject(0){ |sum, value| sum + value } ) * 100.0 / total
     [ r, r.sort{ |a, b| b.last <=> a.last } ]
   end
 end
