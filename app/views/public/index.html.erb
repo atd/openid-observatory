@@ -11,158 +11,161 @@
 
 <% end %>
 
-      <div id="left" class="span-10">
-        <h2 class="type">Explore now all</h2>
-        <h2 class="type">the information</h2>
-        <h2 class="type">associated to your</h2>
-        <h2 class="type"><%= image_tag "openid_logo.png", :alt => "OpenID" %></h2>
+      <div id="left" class="span-9">
+       <div class="slogan"> 
+        <h1 class="type">Explore now</h1>
+        <h1 class="type"> all the information</h1>
+        <h1 class="type">associated to your</h1>
+        <h1 class="type"><%= image_tag "openid_logo.png", :alt => "OpenID" %></h1>
+       </div>
+				
       </div>
   
-      <div id="right" class="span-14 last">
-        <div class="charts_wrapper">
-          <ul id="gallery">
-          	<li>
-          	  <% 
-							results = {
-							  "FoaF" => Uri.foaf(true).count * 100.0 / Uri.count,
-							  "Atom" => Uri.atom(true).count * 100.0 / Uri.count,
-							  "RSS" => Uri.rss(true).count * 100.0 / Uri.count,
-							  "RSD" => Uri.rsd(true).count * 100.0 / Uri.count,
-							  "Microformats" => Uri.microformats("_").count * 100.0 / Uri.count,
-							  "AtomPub" => Uri.atompub(true).count * 100.0 / Uri.count,
-							  "XRDS" => Uri.xrds_service_type("http").count * 100.0 / Uri.count
-							}
-							%>
-							<%= image_tag Gchart.bar(
-                         :data => results.values,
-                         :axis_with_labels => "x,y",
-                         :axis_labels => [ results.keys, (0..4).map{ |n| n * 25 } ],
-                         :max_value => 100,
-                         :bar_width_and_spacing => { :width => 50, :spacing => 23 },
-                         :bg_type => "gradient",
-                         :bg_angle => 90,
-                         :bg_color => "ffffff,0,ffffff,1",
-                         :chart_color => "fefefe",
-                         :new_markers => "N,000000,0,-1,11",
-                         :size => '548x260'
-                          )+ "&chma=30,30,30,90",:title=>"uno"%>
-							 <div class="panel-overlay">
-							    <h2>Meta Technologies (%)</h2>
-							    <p>See all the statistics <a href="http://www.sxc.hu/profile/emsago" target="_blank">here</a>.</p>
-							 </div>
-          	</li>
-            <li>
-							<% results = { "only v1, v1.1" => Uri.openid_version(:only_1).count,
-							                "only v2" => Uri.openid_version(:only_2).count,
-							                "both" => Uri.openid_version(:both).count } %>
-							
-							<%= image_tag Gchart.pie(
-							                         :data => results.values,
-							                         :legend => results.keys,
-							                         :size => '548x260')+ "&chma=30,30,30,90" %>
-					              <div class="panel-overlay">
-                  <h2>Distribution of OpenID versions</h2>
-                  <p>See all the statistics <a href="http://www.sxc.hu/profile/emsago" target="_blank">here</a>.</p>
-               </div>
-            </li>
-            <li>
-							<% 
-							results = {
-							  "HTML" => Uri.html_discovery(:any).count * 100.0 / Uri.count,
-							  "XRDS" => Uri.xrds_discovery(:any).count * 100.0 / Uri.count
-							}
-							%>
-							
-							
-							<%= image_tag Gchart.bar(
-							                         :data => results.values,
-							                         :axis_with_labels => "x,y",
-							                         :axis_labels => [ results.keys, (0..4).map{ |n| n * 25 } ],
-							                         :max_value => 100,
-							                         :bar_width_and_spacing => { :width => 50, :spacing => 30 },
-							                         :size => '548x260')+ "&chma=30,30,30,90"
-							%>
-					              <div class="panel-overlay">
-                  <h2>OpenID Discovery Technologies</h2>
-                  <p>See all the statistics <a href="http://www.sxc.hu/profile/emsago" target="_blank">here</a>.</p>
-               </div>
-            </li>
-            <li>
-            	               <% 
-              results = {
-                "FoaF" => Uri.foaf(true).count * 100.0 / Uri.count,
-                "Atom" => Uri.atom(true).count * 100.0 / Uri.count,
-                "RSS" => Uri.rss(true).count * 100.0 / Uri.count,
-                "RSD" => Uri.rsd(true).count * 100.0 / Uri.count,
-                "Microformats" => Uri.microformats("_").count * 100.0 / Uri.count,
-                "AtomPub" => Uri.atompub(true).count * 100.0 / Uri.count,
-                "XRDS" => Uri.xrds_service_type("http").count * 100.0 / Uri.count
-              }
-              %>
-							         <%= image_tag Gchart.bar(
-                         :data => results.values,
-                         :axis_with_labels => "x,y",
-                         :axis_labels => [ results.keys, (0..4).map{ |n| n * 25 } ],
-                         :max_value => 100,
-                         :bar_width_and_spacing => { :width => 50, :spacing => 23 },
-                         :bg_type => "gradient",
-                         :bg_angle => 90,
-                         :bg_color => "ffffff,0,ffffff,1",
-                         :chart_color => "fefefe",
-                         :new_markers => "N,000000,0,-1,11",
-                         :size => '548x260')+ "&chma=30,30,30,90",:title=>"cuatro"
-          %>               <div class="panel-overlay">
-                  <h2>Meta Technologies (%)</h2>
-                  <p>See all the statistics <a href="http://www.sxc.hu/profile/emsago" target="_blank">here</a>.</p>
-               </div>
-            </li>
-						<li>
-              <% results = { "only v1, v1.1" => Uri.openid_version(:only_1).count,
-                              "only v2" => Uri.openid_version(:only_2).count,
-                              "both" => Uri.openid_version(:both).count } %>
-              
-              <%= image_tag Gchart.pie(
-                                       :data => results.values,
-                                       :legend => results.keys,
-                                       :size => '548x260')+ "&chma=30,30,30,90" %>
-                        <div class="panel-overlay">
-                  <h2>Distribution of OpenID versions</h2>
-                  <p>See all the statistics <a href="http://www.sxc.hu/profile/emsago" target="_blank">here</a>.</p>
-               </div>
-            </li>
-						<li>
-              <% results = { "only v1, v1.1" => Uri.openid_version(:only_1).count,
-                              "only v2" => Uri.openid_version(:only_2).count,
-                              "both" => Uri.openid_version(:both).count } %>
-              
-              <%= image_tag Gchart.pie(
-                                       :data => results.values,
-                                       :legend => results.keys,
-                                       :size => '550x260')+ "&chma=30,30,30,90" %>
-                        <div class="panel-overlay">
-                  <h2>Distribution of OpenID versions</h2>
-                  <p>See all the statistics <a href="http://www.sxc.hu/profile/emsago" target="_blank">here</a>.</p>
-               </div>
-            </li>
-						<li>
-              <% results = { "only v1, v1.1" => Uri.openid_version(:only_1).count,
-                              "only v2" => Uri.openid_version(:only_2).count,
-                              "both" => Uri.openid_version(:both).count } %>
-              
-              <%= image_tag Gchart.pie(
-                                       :data => results.values,
-                                       :legend => results.keys,
-                                       :size => '548x260')+ "&chma=30,30,30,90" %>
-                        <div class="panel-overlay">
-                  <h2>Distribution of OpenID versions</h2>
-                  <p>See all the statistics <a href="http://www.sxc.hu/profile/emsago" target="_blank">here</a>.</p>
-               </div>
-            </li>
-          </ul>
-					
-
-          <!-- una linea para la grafica :bg_color => "729a24,0,99cc33,1",-->
-        </div>
+      <div id="right" class="span-15 last">
+				<div class="charts_wrapper">
+				          <ul id="gallery">
+				            <li>
+				              <% 
+				              results = {
+				                "FoaF" => Uri.foaf(true).count * 100.0 / Uri.count,
+				                "Atom" => Uri.atom(true).count * 100.0 / Uri.count,
+				                "RSS" => Uri.rss(true).count * 100.0 / Uri.count,
+				                "RSD" => Uri.rsd(true).count * 100.0 / Uri.count,
+				                "Microformats" => Uri.microformats("_").count * 100.0 / Uri.count,
+				                "AtomPub" => Uri.atompub(true).count * 100.0 / Uri.count,
+				                "XRDS" => Uri.xrds_service_type("http").count * 100.0 / Uri.count
+				              }
+				              %>
+				              <%= image_tag Gchart.bar(
+				                         :data => results.values,
+				                         :axis_with_labels => "x,y",
+				                         :axis_labels => [ results.keys, (0..4).map{ |n| n * 25 } ],
+				                         :max_value => 100,
+				                         :bar_width_and_spacing => { :width => 50, :spacing => 23 },
+				                         :bg_type => "gradient",
+				                         :bg_angle => 90,
+				                         :bg_color => "ffffff,0,ffffff,1",
+				                         :chart_color => "fefefe",
+				                         :new_markers => "N,000000,0,-1,11",
+				                         :size => '548x260'
+				                          )+ "&chma=30,30,30,90",:title=>"uno"%>
+				               <div class="panel-overlay">
+				                  <h2>Meta Technologies (%)</h2>
+				                  <p>See all the statistics <a href="http://www.sxc.hu/profile/emsago" target="_blank">here</a>.</p>
+				               </div>
+				            </li>
+				            <li>
+				              <% results = { "only v1, v1.1" => Uri.openid_version(:only_1).count,
+				                              "only v2" => Uri.openid_version(:only_2).count,
+				                              "both" => Uri.openid_version(:both).count } %>
+				              
+				              <%= image_tag Gchart.pie(
+				                                       :data => results.values,
+				                                       :legend => results.keys,
+				                                       :size => '548x260')+ "&chma=30,30,30,90" %>
+				                        <div class="panel-overlay">
+				                  <h2>Distribution of OpenID versions</h2>
+				                  <p>See all the statistics <a href="http://www.sxc.hu/profile/emsago" target="_blank">here</a>.</p>
+				               </div>
+				            </li>
+				            <li>
+				              <% 
+				              results = {
+				                "HTML" => Uri.html_discovery(:any).count * 100.0 / Uri.count,
+				                "XRDS" => Uri.xrds_discovery(:any).count * 100.0 / Uri.count
+				              }
+				              %>
+				              
+				              
+				              <%= image_tag Gchart.bar(
+				                                       :data => results.values,
+				                                       :axis_with_labels => "x,y",
+				                                       :axis_labels => [ results.keys, (0..4).map{ |n| n * 25 } ],
+				                                       :max_value => 100,
+				                                       :bar_width_and_spacing => { :width => 50, :spacing => 30 },
+				                                       :size => '548x260')+ "&chma=30,30,30,90"
+				              %>
+				                        <div class="panel-overlay">
+				                  <h2>OpenID Discovery Technologies</h2>
+				                  <p>See all the statistics <a href="http://www.sxc.hu/profile/emsago" target="_blank">here</a>.</p>
+				               </div>
+				            </li>
+				            <li>
+				                             <% 
+				              results = {
+				                "FoaF" => Uri.foaf(true).count * 100.0 / Uri.count,
+				                "Atom" => Uri.atom(true).count * 100.0 / Uri.count,
+				                "RSS" => Uri.rss(true).count * 100.0 / Uri.count,
+				                "RSD" => Uri.rsd(true).count * 100.0 / Uri.count,
+				                "Microformats" => Uri.microformats("_").count * 100.0 / Uri.count,
+				                "AtomPub" => Uri.atompub(true).count * 100.0 / Uri.count,
+				                "XRDS" => Uri.xrds_service_type("http").count * 100.0 / Uri.count
+				              }
+				              %>
+				                       <%= image_tag Gchart.bar(
+				                         :data => results.values,
+				                         :axis_with_labels => "x,y",
+				                         :axis_labels => [ results.keys, (0..4).map{ |n| n * 25 } ],
+				                         :max_value => 100,
+				                         :bar_width_and_spacing => { :width => 50, :spacing => 23 },
+				                         :bg_type => "gradient",
+				                         :bg_angle => 90,
+				                         :bg_color => "ffffff,0,ffffff,1",
+				                         :chart_color => "fefefe",
+				                         :new_markers => "N,000000,0,-1,11",
+				                         :size => '548x260')+ "&chma=30,30,30,90",:title=>"cuatro"
+				          %>               <div class="panel-overlay">
+				                  <h2>Meta Technologies (%)</h2>
+				                  <p>See all the statistics <a href="http://www.sxc.hu/profile/emsago" target="_blank">here</a>.</p>
+				               </div>
+				            </li>
+				            <li>
+				              <% results = { "only v1, v1.1" => Uri.openid_version(:only_1).count,
+				                              "only v2" => Uri.openid_version(:only_2).count,
+				                              "both" => Uri.openid_version(:both).count } %>
+				              
+				              <%= image_tag Gchart.pie(
+				                                       :data => results.values,
+				                                       :legend => results.keys,
+				                                       :size => '548x260')+ "&chma=30,30,30,90" %>
+				                        <div class="panel-overlay">
+				                  <h2>Distribution of OpenID versions</h2>
+				                  <p>See all the statistics <a href="http://www.sxc.hu/profile/emsago" target="_blank">here</a>.</p>
+				               </div>
+				            </li>
+				            <li>
+				              <% results = { "only v1, v1.1" => Uri.openid_version(:only_1).count,
+				                              "only v2" => Uri.openid_version(:only_2).count,
+				                              "both" => Uri.openid_version(:both).count } %>
+				              
+				              <%= image_tag Gchart.pie(
+				                                       :data => results.values,
+				                                       :legend => results.keys,
+				                                       :size => '550x260')+ "&chma=30,30,30,90" %>
+				                        <div class="panel-overlay">
+				                  <h2>Distribution of OpenID versions</h2>
+				                  <p>See all the statistics <a href="http://www.sxc.hu/profile/emsago" target="_blank">here</a>.</p>
+				               </div>
+				            </li>
+				            <li>
+				              <% results = { "only v1, v1.1" => Uri.openid_version(:only_1).count,
+				                              "only v2" => Uri.openid_version(:only_2).count,
+				                              "both" => Uri.openid_version(:both).count } %>
+				              
+				              <%= image_tag Gchart.pie(
+				                                       :data => results.values,
+				                                       :legend => results.keys,
+				                                       :size => '548x260')+ "&chma=30,30,30,90" %>
+				                        <div class="panel-overlay">
+				                  <h2>Distribution of OpenID versions</h2>
+				                  <p>See all the statistics <a href="http://www.sxc.hu/profile/emsago" target="_blank">here</a>.</p>
+				               </div>
+				            </li>
+				          </ul>
+				          
+				
+				          <!-- una linea para la grafica :bg_color => "729a24,0,99cc33,1",-->
+				        </div>
       </div>
       
       <div id="down" class="span-24 last">
