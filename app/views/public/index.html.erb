@@ -11,17 +11,17 @@
 
 <% end %>
 
-      <div id="left" class="span-9">
+      <div class="left span-9">
        <div class="slogan"> 
-        <h1 class="type">Explore now</h1>
-        <h1 class="type"> all the information</h1>
-        <h1 class="type">associated to your</h1>
-        <h1 class="type"><%= image_tag "openid_logo.png", :alt => "OpenID" %></h1>
+        <h2 class="type">Explore now</h2>
+        <h2 class="type"> all the information</h2>
+        <h2 class="type">associated to your</h2>
+        <h2 class="type"><%= image_tag "openid_logo.png", :alt => "OpenID" %></h2>
        </div>
 				
       </div>
   
-      <div id="right" class="span-14 last">
+      <div class="right span-14 last">
         <div class="charts_wrapper">
           <ul id="gallery">
             <% graphs(:title => nil ).each do |g| %>
@@ -40,7 +40,7 @@
         </div>
       </div>
       
-      <div id="down" class="span-24 last">
+      <div class="down span-24 last">
 				<%= notification_area %>
 				<div class="fancy_input">
 						<% form_for @uri || Uri.new do |f| %>

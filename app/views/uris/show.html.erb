@@ -1,19 +1,23 @@
-<p>
-<strong>OpenID</strong> <%= link_to h(uri.uri), h(uri.uri) %>
-</p>
+<div class="left span-24">
+	<p>
+	<span class="type">OpenID</span> <%= link_to h(uri.uri), h(uri.uri) %>
+	</p>
+	
+	<p>
+	<span class="type">FoaF</span> <%=h uri.uri_property.foaf? %>
+	</p>
+	
+	<p>
+	<span class="type">Atom/RSS feeds</span>
+	<%= "Atom" if uri.uri_property.atom? %>
+	<%= "RSS" if uri.uri_property.rss? %>
+	<%= "None" unless uri.uri_property.atom? || uri.uri_property.rss? %>
+	</p>
+	
+	<p>
+	<span class="type">Microformats</span> <%=h uri.uri_property.microformats %>
+	</p>
+</div>
+<div class="down span-24">
 
-<p>
-<strong>FoaF</strong> <%=h uri.uri_property.foaf? %>
-</p>
-
-<p>
-<strong>Atom/RSS feeds</strong>
-<%= "Atom" if uri.uri_property.atom? %>
-<%= "RSS" if uri.uri_property.rss? %>
-<%= "None" unless uri.uri_property.atom? || uri.uri_property.rss? %>
-</p>
-
-<p>
-<strong>Microformats</strong> <%=h uri.uri_property.microformats %>
-</p>
-
+</div>
