@@ -2,4 +2,10 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  feedback:
+    one: "Feedback"
+    other: "Feedback"
+    email: "Email"
+    subject: "Subject"
+    content: "Text"
+    send: "Send!"
