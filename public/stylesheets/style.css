@@ -33,6 +33,7 @@
   font-size:1.0833em;
   color:#99cc33;
   font-weight:bold;
+	margin-right:40px;
 }
 
 .total_checked span{font-size:2em;}
@@ -65,6 +66,7 @@
 #footer a:hover{color:#f0f0f0;text-decoration:underline;}
 
 /*Index*/
+#index{padding:0px 20px;position:relative;overflow:hidden;}
 .slogan{padding-top:40px;padding-left:10px;}
 
 .down{margin-top:18px;}
@@ -123,7 +125,12 @@
 #stats{
 	padding:20px 20px;}
 
+#stats .left{padding-bottom:18px;}
+#stats .left h2{color:#996600;}
+#stats .left img{border:2px solid #99cc33;}
 
+#stats .right{padding-top:72px;font-size:1.1667em;}
+#stats .right p{padding-left:10px;}
 
 /*Show*/
 
