@@ -161,5 +161,28 @@ if defined?(ActiveRecord::Resource)
       ( openid_discover.last.map{ |s| s.server_url } |
         html.openid_providers ).flatten.compact.uniq
     end
+
+    def html_discovery?
+      uri_property.link_openid_server? || uri_property.link_openid2_provider?
+    end
+
+    def html_discovery_versions
+      vs = Array.new
+      vs << [ "1.0", "1.1" ] if uri_property.link_openid_server?
+      vs << [ "2.0" ] if uri_property.link_openid2_provider?
+      vs
+    end
+
+    def xrds_discovery?
+      (uri_property.xrds_service_types & UriProperty::XrdsOpenIdUris.values).any?
+    end
+
+    def xrds_discovery_versions
+      (UriProperty::XrdsOpenIdUris.values & uri_property.xrds_service_types).map{ |u|
+        u =~ /(\d\.\d)/
+        $1
+      }
+
+    end
   end
 end
