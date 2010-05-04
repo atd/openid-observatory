@@ -13,6 +13,9 @@ class UrisController < ApplicationController
 
     if @uri.save
       @uri.refresh!
+
+      expire_page "/index"
+
       redirect_to @uri
     else
       if @uri.errors.count == 1 && @uri.errors.first == ["uri", t('activerecord.errors.messages.taken')]

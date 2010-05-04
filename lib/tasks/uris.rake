@@ -17,6 +17,8 @@ namespace :uris do
 
     UriProperty.reset
 
+    ApplicationController.new.expire_page "/index"
+
     puts time_ago_in_words(init)
   end
 
