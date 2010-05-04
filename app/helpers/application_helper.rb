@@ -160,8 +160,8 @@ module ApplicationHelper
         end
       },
       {
-        :title => t = "XRDS resource types (%)",
-        :description => 'Most common resource types announced in XRDS files',
+        :title => t = "XRDS service types (%)",
+        :description => 'Most common service types announced in XRDS files',
         :results => r = xrds_results,
         :image => bar(:title => t,
                       :data => r.last.map(&:last),
