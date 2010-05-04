@@ -55,11 +55,12 @@
   height:130px;
   border-right:1px solid #555;}
 
+#footer #contact{background:#fff;}
 #footer ul p{margin-bottom:0.75em;font-size:1.1667em;line-height:1.5;}  
-#footer ul.footer_left p{margin-bottom:1.75em;}
-#footer ul.footer_left{width:31%;border-left:1px solid #555;}
-#footer ul.footer_center{width:31%;background:transparent url("../images/panel.png") no-repeat center center;}
-#footer ul.footer_right{width:31%;}
+#footer ul#footer_left p{margin-bottom:1.75em;}
+#footer ul#footer_left{width:31%;border-left:1px solid #555;}
+#footer ul#footer_center{width:31%;background:transparent url("../images/panel.png") no-repeat center center;}
+#footer ul#footer_right{width:31%;}
 #footer ul li{display:inline;padding:0 3px;}
 /*#footer ul li.share{font-size:1.5em;line-height:1;padding: 6px 10px 0 0;}*/
 #footer a{color:#99cc33;text-decoration:none;}
