@@ -10,6 +10,11 @@
   });
 
 <% end %>
+
+<% content_for :item_on_header do %>
+  <div class="total_checked">Already checked: <span><%= Uri.count %></span></div>
+<% end %>
+
   <div id="index">    
       <div class="left span-9">
        <div class="slogan"> 
