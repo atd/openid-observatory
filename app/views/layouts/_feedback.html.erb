@@ -1,0 +1,5 @@
+<% form_for Feedback.new do |f| %>
+  <%= render :partial => 'feedbacks/form', :object => f %>
+
+  <%= f.submit t(:create) %>
+<% end %>

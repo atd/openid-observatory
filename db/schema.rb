@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100418214215) do
+ActiveRecord::Schema.define(:version => 20100504151338) do
 
   create_table "admissions", :force => true do |t|
     t.string   "type"
@@ -45,6 +45,14 @@ ActiveRecord::Schema.define(:version => 20100418214215) do
 
   create_table "db_files", :force => true do |t|
     t.binary "data"
+  end
+
+  create_table "feedbacks", :force => true do |t|
+    t.string   "email"
+    t.string   "subject"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "histories", :force => true do |t|
