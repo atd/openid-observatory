@@ -2,7 +2,22 @@
 	<p>
 	<span class="type">OpenID</span> <%= link_to h(uri.uri), h(uri.uri) %>
 	</p>
-	
+
+        <p>
+        <span class="type">OpenID Provider</span> <%= uri.uri_property.openid_providers.map{ |p| link_to h(p), h(p) }.join(", ") %>
+	</p>
+
+        <p>
+        <span class="type">OpenID Discovery</span>
+        <% if uri.html_discovery? %>
+        HTML: <%= uri.html_discovery_versions.join(", ") %><br />
+        <% end %>
+	<% if uri.xrds_discovery? %>
+        XRDS: <%= uri.xrds_discovery_versions.join(", ") %>
+        <% end %>
+        <p>
+
+        Web standards:
 	<p>
 	<span class="type">FoaF</span> <%=h uri.uri_property.foaf? %>
 	</p>
@@ -13,10 +28,18 @@
 	<%= "RSS" if uri.uri_property.rss? %>
 	<%= "None" unless uri.uri_property.atom? || uri.uri_property.rss? %>
 	</p>
-	
+
+	<p>
+	<span class="type">RSD</span> <%=h uri.uri_property.rsd? %>
+	</p>
+
 	<p>
 	<span class="type">Microformats</span> <%=h uri.uri_property.microformats %>
 	</p>
+
+        <p>
+	<span class="type">XRDS service types</span> <%=h uri.uri_property.xrds_service_types.join(", ") %>
+        </p>
 </div>
 <div class="down span-24">
 
