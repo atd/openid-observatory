@@ -1,6 +1,4 @@
-
-
-<div class="left span-23 last">
+<div id="stats" class="left span-23 last">
 	<% graphs(:title => nil ).each do |g| %>
 	  <%=render :partial=> "graphic_item",:locals=> {:g=>g}%>
 	<%end%>

@@ -1,9 +1,12 @@
-<div class="span-24">
-  <div class="left span-9">
-  	<h2><%= g[:title] %></h2>
+<div class="span-23 last">
+  <div class="left span-14 ">
+    <h2><%= g[:title] %></h2>
+		<%= image_tag g[:image], :title => g[:title] %>
+  </div>
+
+  <div class="right span-9 last">
+  	
     <p><%= g[:description] %></p>
   </div>
-	<div class="right span-15 last">
-		<%= image_tag g[:image], :title => g[:title] %>
-	</div>
+
 </div>
