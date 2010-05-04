@@ -85,7 +85,7 @@
   color:#777777;
   font-size:1.1667em;
   line-height:1.5;
-  padding:3px 0 3px 10px;
+  padding:0.25em 0 0.25em 0.75em;
   width:370px;
 
   /*background:transparent url("../images/input_file.png") no-repeat top center;*/
@@ -106,7 +106,7 @@
   outline-color:-moz-use-text-color;
   outline-style:none;
   outline-width:medium;
-  padding:3px 6px;
+  padding:0.25em 0.5em;
   width:60px;
 }
   
@@ -122,6 +122,9 @@
   margin-top:10px;}
 
 /*Stats*/
+.header_submit{float:right;}
+.header_submit .fancy_input{margin-top:2%;margin-right:30px;}
+.header_submit .fancy_input .input_text{width:275px;}
 #stats{
 	padding:20px 20px;}
 
@@ -130,7 +133,7 @@
 #stats .left img{border:2px solid #99cc33;}
 
 #stats .right{padding-top:72px;font-size:1.1667em;}
-#stats .right p{padding-left:10px;}
+#stats .right p{padding-left:10px;color:#777;}
 
 /*Show*/
 
