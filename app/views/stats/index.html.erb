@@ -1,30 +1,5 @@
-<% content_for :javascript do %>
-  var title = "Enter your OpenID"
-  $(".input_text").click(function(){
-    if(this.value == title){
-      this.value="";
-    }
-  });
-  
-    $(".input_text").blur(function(){
-    if(this.value == ""){
-      this.value= title;
-    }
-  });
-
-<% end %>
-
-
 <% content_for :item_on_header do %>
-  <div class="header_submit">
-        <div class="fancy_input">
-            <% form_for @uri || Uri.new do |f| %>
-              <%= f.error_messages %>
-              <%= f.text_field :uri, :class=>"input_text",:value=>"Enter your OpenID" %>
-              <%= f.submit 'Go!',:class=>"input_text_button" %>
-            <% end -%>
-        </div>
-	</div>
+  <%=render :partial=> "submit_uri"%>
 <% end %>
 
 <div id="stats" class="left span-23 last">

@@ -1,14 +1,9 @@
-<h1>Check yours</h1>
+<% content_for :item_on_header do %>
+  <%=render :partial=> "stats/submit_uri"%>
+<% end %>
+
 
 <%= notification_area %>
-
-<p>
-<% form_for @uri || Uri.new do |f| %>
-  <%= f.error_messages %>
-  <%= f.text_field :uri %>
-  <%= f.submit 'Go! >>' %>
-<% end -%>
-</p>
 
 <h1>Results</h1>
 

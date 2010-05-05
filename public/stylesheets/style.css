@@ -140,17 +140,17 @@ form#new_feedback{margin-bottom:6px;position:relative;display:block;}
 .header_submit{float:right;}
 .header_submit .fancy_input{margin-top:2%;margin-right:30px;}
 .header_submit .fancy_input .input_text{width:275px;}
-#stats{
+#stats,#results{
 	padding:20px 20px;}
 
-#stats .left{padding-bottom:18px;}
-#stats .left h2{color:#996600;}
+#stats .left,#results .left{padding-bottom:18px;}
+#stats .left h2,#results .left h2{color:#996600;}
 #stats .left img{border:2px solid #99cc33;}
 
-#stats .right{padding-top:72px;font-size:1.1667em;}
-#stats .right p{padding-left:10px;color:#777;}
+#stats .right,#results .right{padding-top:72px;font-size:1.1667em;}
+#stats .right p,#results .right p{padding-left:10px;color:#777;}
 
-/*Show*/
+/*Show results*/
 
 
 

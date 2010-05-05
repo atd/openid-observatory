@@ -1,46 +1,114 @@
-<div class="left span-24">
-	<p>
-	<span class="type">OpenID</span> <%= link_to h(uri.uri), h(uri.uri) %>
-	</p>
+<% content_for :item_on_header do %>
+  <%=render :partial=> "stats/submit_uri"%>
+<% end %>
 
-        <p>
-        <span class="type">OpenID Provider</span> <%= uri.uri_property.openid_providers.map{ |p| link_to h(p), h(p) }.join(", ") %>
-	</p>
+<div id="results" class="left span-23 last">
+  <%= notification_area %>
+  
+	<!-- OpenID -->
+	<div class="span-23 last">  
+		<div class="left span-14 ">
+	    <h2>OpenID</h2>
+			<%= link_to h(uri.uri), h(uri.uri) %>
+	  </div>
+	  <div class="right span-9 last">
+	    <p></p>
+	  </div>
+  </div>
 
-        <p>
-        <span class="type">OpenID Discovery</span>
-        <% if uri.html_discovery? %>
+  <!-- OpenID Provider -->
+  <div class="span-23 last">  
+    <div class="left span-14 ">
+      <h2>OpenID Provider</h2>
+      <%= uri.uri_property.openid_providers.map{ |p| link_to h(p), h(p) }.join(", ") %>
+    </div>
+    <div class="right span-9 last">
+      <p></p>
+    </div>
+  </div>
+
+  <!-- OpenID Discovery -->
+	<div class="span-23 last">  
+    <div class="left span-14 ">
+      <h2>OpenID Discovery</h2>
+      <% if uri.html_discovery? %>
         HTML: <%= uri.html_discovery_versions.join(", ") %><br />
-        <% end %>
-	<% if uri.xrds_discovery? %>
+      <% end %>
+      <% if uri.xrds_discovery? %>
         XRDS: <%= uri.xrds_discovery_versions.join(", ") %>
-        <% end %>
-        <p>
+      <% end %>
+    </div>
+    <div class="right span-9 last">
+      <p></p>
+    </div>
+  </div>
 
-        Web standards:
-	<p>
-	<span class="type">FoaF</span> <%=h uri.uri_property.foaf? %>
-	</p>
+  <!-- Web standards -->
+	<div class="span-23 last">  
+    <div class="left span-14 ">
+      <h2>Web standards</h2>
+    </div>
+    <div class="right span-9 last">
+      <p></p>
+    </div>
+  </div>
 	
-	<p>
-	<span class="type">Atom/RSS feeds</span>
-	<%= "Atom" if uri.uri_property.atom? %>
-	<%= "RSS" if uri.uri_property.rss? %>
-	<%= "None" unless uri.uri_property.atom? || uri.uri_property.rss? %>
-	</p>
+  <!-- FoaF Web standards -->
+  <div class="span-23 last">  
+    <div class="left span-14 ">
+      <h2>FoaF</h2>
+      <%=h uri.uri_property.foaf? %>
+    </div>
+    <div class="right span-9 last">
+      <p></p>
+    </div>
+  </div>
 
-	<p>
-	<span class="type">RSD</span> <%=h uri.uri_property.rsd? %>
-	</p>
+  <!-- Atom/RSS feeds Web standards -->
+  <div class="span-23 last">  
+    <div class="left span-14 ">
+      <h2>Atom/RSS feeds</h2>
+      <%= "Atom" if uri.uri_property.atom? %>
+      <%= "RSS" if uri.uri_property.rss? %>
+      <%= "None" unless uri.uri_property.atom? || uri.uri_property.rss? %>
+    </div>
+    <div class="right span-9 last">
+      <p></p>
+    </div>
+  </div>
 
-	<p>
-	<span class="type">Microformats</span> <%=h uri.uri_property.microformats %>
-	</p>
+  <!-- RSD Web standards -->
+  <div class="span-23 last">  
+    <div class="left span-14 ">
+      <h2>RSD</h2>
+      <%=h uri.uri_property.rsd? %>
+    </div>
+    <div class="right span-9 last">
+      <p></p>
+    </div>
+  </div>
 
-        <p>
-	<span class="type">XRDS service types</span> <%=h uri.uri_property.xrds_service_types.join(", ") %>
-        </p>
+  <!-- Microformats Web standards -->
+  <div class="span-23 last">  
+    <div class="left span-14 ">
+      <h2>Microformats</h2>
+      <%=h uri.uri_property.microformats %>
+    </div>
+    <div class="right span-9 last">
+      <p></p>
+    </div>
+  </div>
+
+  <!-- XRDS service types Web standards -->
+  <div class="span-23 last">  
+    <div class="left span-14 ">
+      <h2>XRDS service types</h2>
+      <%=h uri.uri_property.xrds_service_types.join(", ") %>
+    </div>
+    <div class="right span-9 last">
+      <p></p>
+    </div>
+  </div>
+	
 </div>
-<div class="down span-24">
 
-</div>
