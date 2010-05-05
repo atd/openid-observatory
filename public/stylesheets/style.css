@@ -56,7 +56,6 @@
   height:130px;
   border-right:1px solid #555;}
 
-#footer #contact{background:#fff;}
 #footer ul p{margin-bottom:0.75em;font-size:1.1667em;line-height:1.5;}  
 #footer ul#footer_left p{margin-bottom:1.75em;}
 #footer ul#footer_left{width:31%;border-left:1px solid #555;}
@@ -67,13 +66,17 @@
 #footer a{color:#99cc33;text-decoration:none;}
 #footer a:hover{color:#f0f0f0;text-decoration:underline;}
 
+#footer p.note{padding:6px;font-size:1em;background:#f0f0f0;border:1px solid #99cc33;color:#555;width:94%;}
+#feedback_link{cursor:pointer;}
+#feedback_link:hover{text-decoration:underline;}
 form#new_feedback{margin-bottom:6px;position:relative;display:block;}
 #footer label{font-weight:normal;}
-#feedback_email,#feedback_subject,#feedback_content{color:#999;width:96%;padding:3px;margin:0.5em 0;}
+#feedback_email,#feedback_subject,#feedback_content{color:#222;width:96%;padding:3px 3px;margin:0.5em 0;/*border:2px solid #fff;*/}
+#feedback_email:focus,#feedback_subject:focus,#feedback_content:focus{/*border:2px solid #f7931e;*/background:#99cc33;}
 #feedback_email,#feedback_subject{border:none;}
 #feedback_content{height:50px;}
-
-
+#feedback_cancel{margin-left:10px;cursor:pointer;}
+#feedback_cancel:hover{text-decoration:underline;}
 
 /*Index*/
 #index{padding:0px 20px;position:relative;overflow:hidden;}

@@ -1,15 +1,19 @@
+<% content_for :javascript do %>
+
+<%end%>
+
 <div>
-  <label><%= form.label :email, t('feedback.email')%></label><br />
+  <%= form.label :email, t('feedback.email')%><br />
   <%= form.text_field :email %>
 </div>
 
 <div>
-  <label><%= form.label :subject, t('feedback.subject')%></label><br />
+  <%= form.label :subject, t('feedback.subject')%><br />
   <%= form.text_field :subject %>
 </div>
 
 <div>
-  <label><%= form.label :content, t('feedback.content')%></label><br />
+  <%= form.label :content, t('feedback.content')%><br />
   <%= form.text_area :content %>
 </div>
 

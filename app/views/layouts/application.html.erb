@@ -13,7 +13,21 @@
   <%= javascript_include_tag 'jquery','jquery.easing','jquery.timers','jquery.galleryview' %>
 	<script type="text/javascript">
 		$(document).ready(function() {
-		<%= yield :javascript %>		
+		  $('#feedback_link').click(function(){
+        $(this).hide(),
+				$('#footer ul').css("height","281px"),
+        $('#footer_center').css("background","none"),
+        $('#feedback_form').slideDown('slow')
+      });
+			$('#feedback_cancel').click(function(){
+        $('#feedback_form').hide(),
+        $('#footer ul').css("height","130px"),
+        $('#footer_center').css("background","transparent url('../images/panel.png') no-repeat center center"),
+        $('#feedback_form input[type="text"]').val(""),
+				$('#feedback_form textarea').val(""),
+				$('#feedback_link').show()
+      });
+			<%= yield :javascript %>	
 		});
   </script>
 	
@@ -54,8 +68,7 @@
           <li><%= link_to image_tag("digg.png", :size =>"32x32",:title=>"digg"), "http://digg.com/submit?phase=2&url=#{ CGI.escape(root_url) }&title=#{ CGI.escape('OpenID Observatory') }" %></li>
         </ul>
 
-				<ul id="footer_center">
-          
+				<ul id="footer_center">  
           <%= render :partial => 'layouts/feedback' %>
         </ul>
 				<ul id="footer_right">
