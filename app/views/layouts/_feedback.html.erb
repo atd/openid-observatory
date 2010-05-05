@@ -1,5 +1,6 @@
+<p id="link">Contact with us!</p>
 <% form_for Feedback.new do |f| %>
   <%= render :partial => 'feedbacks/form', :object => f %>
 
-  <%= f.submit t('feedback.send') %>
+  <%= f.submit t('feedback.send'), :class=>"input_text_button" %>
 <% end %>
