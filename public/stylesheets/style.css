@@ -27,16 +27,18 @@
 .web_title a:hover{background-position:3px -51px;}
 
 .total_checked{/*margin-left:230px;*/
-  /*background:#99cc33;#f7931e;*/
+  background:#f7931e;/*#;99cc33*/
   float:right;
-  margin-top:5px;
-  font-size:1.0833em;
-  color:#99cc33;
-  font-weight:bold;
-	margin-right:40px;
+  /*margin-top:5px;*/
+  /*font-size:1.0833em;*/
+  /*color:#99cc33;*/
+  /*font-weight:bold;*/
+	/*margin-right:40px;*/
+	padding:0 0.8333em;
+	
 }
 
-.total_checked span{font-size:2em;}
+/*.total_checked span{font-size:2em;}*/
 
 /*BODY*/
 #content_wrapper{background:#f0f0f0;}
@@ -80,11 +82,11 @@ form#new_feedback{margin-bottom:6px;position:relative;display:block;}
 
 /*Index*/
 #index{padding:0px 20px;position:relative;overflow:hidden;}
-.slogan{padding-top:40px;padding-left:10px;}
+.slogan{padding-top:30px;padding-left:10px;}
 
 .down{margin-top:18px;}
 
-.down div.fancy_input{background:transparent url("../images/file_input_bar1.png") no-repeat center right;height:45px;}
+.down div.fancy_input{background:transparent url("../images/file_input_bar.png") no-repeat center right;height:46px;}
 
 .down div.fancy_input form{
   float:right;
@@ -102,9 +104,34 @@ form#new_feedback{margin-bottom:6px;position:relative;display:block;}
   width:370px;
 
   /*background:transparent url("../images/input_file.png") no-repeat top center;*/
-
   }
-  
+
+.charts_wrapper{float:right;}
+
+#learn_more{
+	overflow:hidden;}
+	
+#learn_more a.learn_more_button{
+	display: block;
+  float: left;
+  text-decoration: none;
+  outline:none;
+	color:#f0f0f0;
+  font-size:1.1667em;
+	line-height:1.2857;
+  font-weight:bold;
+	background:transparent url(../images/learn_more_button.png) no-repeat scroll right center;
+	cursor:pointer;
+	margin-right: 6px;
+  }
+
+#learn_more a.learn_more_button:hover{color:#fff;text-decoration:underline;}
+#learn_more .learn_more_button span{
+	text-align:center;
+	display: block;
+	width:120px;
+  padding:0.5em 0.75em;}
+
 .fancy_input input.input_text:focus{/*background-position:bottom center;border:none;F7931E*/border-color:#99cc33;}
 
 .fancy_input .input_text_button,#footer_center .input_text_button{
@@ -127,7 +154,7 @@ form#new_feedback{margin-bottom:6px;position:relative;display:block;}
 
 .fancy_input .input_text_button:hover,#footer_center .input_text_button:hover{color:#fff;}
 
-.fancy_input span{
+.fancy_input span#check_yours{
   color:#FFFFFF;
   float:left;
   font-size:1.3333em;
@@ -135,6 +162,9 @@ form#new_feedback{margin-bottom:6px;position:relative;display:block;}
   font-weight:bold;
   margin-left:45px;
   margin-top:10px;}
+
+.fancy_input .file_input_link{float:right;}
+.fancy_input .file_input_link span{width:70px;margin-right:20px;margin-top:10px;}
 
 /*Stats*/
 .header_submit{float:right;}

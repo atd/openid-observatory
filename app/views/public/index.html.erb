@@ -12,7 +12,8 @@
 <% end %>
 
 <% content_for :item_on_header do %>
-  <div class="total_checked">Already checked: <span><%= Uri.count %></span></div>
+  <!--<div class="total_checked">Already checked: <span><%= Uri.count %></span></div>-->
+	<%=render :partial=> "stats/submit_uri"%>
 <% end %>
 
   <div id="index">    
@@ -22,12 +23,14 @@
         <h2 class="type"> all the information</h2>
         <h2 class="type">associated to your</h2>
         <h2 class="type"><%= image_tag "openid_logo.png", :alt => "OpenID" %></h2>
+				<div id="learn_more"><%=link_to "<span>Learn more</span>",url_for(:controller=> 'stats'),:class=>"learn_more_button"%></div>
        </div>
 				
       </div>
   
       <div class="right span-14 last">
-        <div class="charts_wrapper">
+        <div class="total_checked">OpenIDs already checked: <span><%= Uri.count %></span></div>
+				<div class="charts_wrapper">
           <ul id="gallery">
             <% graphs(:title => nil ).each do |g| %>
             <li>
@@ -44,16 +47,17 @@
           <!-- una linea para la grafica :bg_color => "729a24,0,99cc33,1",-->
         </div>
       </div>
-      
-      <div class="down span-24 last">
+      <!--
+      <div class="down span-23 last">
 				<%= notification_area %>
 				<div class="fancy_input">
+					<%=link_to ("<span>See more</span>","",:class=>"input_text_button file_input_link")%>
 						<% form_for @uri || Uri.new do |f| %>
 						  <%= f.error_messages %>
 						  <%= f.text_field :uri, :class=>"input_text" %>
 						  <%= f.submit 'Go!',:class=>"input_text_button" %>
 						<% end -%>
-            <span>Check yours!</span>
+            <span id="check_yours">Check yours!</span>
 				</div>
-      </div>
+      </div>-->
   </div>
