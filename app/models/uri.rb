@@ -162,8 +162,17 @@ if defined?(ActiveRecord::Resource)
         html.openid_providers ).flatten.compact.uniq
     end
 
-    def html_discovery?
-      uri_property.link_openid_server? || uri_property.link_openid2_provider?
+    def html_discovery?(version = nil)
+      case version
+      when 1
+        uri_property.link_openid_server?
+      when 2
+        uri_property.link_openid2_provider?
+      when nil
+        uri_property.link_openid_server? || uri_property.link_openid2_provider?
+      else
+        raise "Unknown version #{ version }"
+      end
     end
 
     def html_discovery_versions
@@ -173,8 +182,20 @@ if defined?(ActiveRecord::Resource)
       vs
     end
 
-    def xrds_discovery?
-      (uri_property.xrds_service_types & UriProperty::XrdsOpenIdUris.values).any?
+    def xrds_discovery?(version = nil)
+      vs = case version
+           when 1
+             [ :v1_0, :v1_1 ]
+           when 2
+             [ :v2_0 ]
+           when nil
+             [ :v1_0, :v1_1, :v2_0 ]
+           else
+             raise "Unknown version #{ version }"
+           end
+      vs = vs.map{ |v| UriProperty::XrdsOpenIdUris[v] }
+
+      (uri_property.xrds_service_types & vs).any?
     end
 
     def xrds_discovery_versions
