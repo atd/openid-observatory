@@ -60,6 +60,12 @@ class Robot
       doc.css("ol.commentlist a.url").map{ |a|
         a.attributes['href'].try(:value)
       }
+
+    # StackOverflow users, probably all hCards
+    openids |=
+      doc.css(".vcard a.url").map{ |a|
+        a.attributes['href'].try(:value)
+      }
       
     # Save found OpenIDs
     openids.each do |id|
