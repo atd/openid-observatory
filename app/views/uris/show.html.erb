@@ -7,29 +7,25 @@
   
 	<!-- OpenID -->
 	<div class="span-23 last">  
-		<div class="left span-14 ">
-	    <h2>Results for OpenID:</h2>
-			<%= link_to h(uri.uri), h(uri.uri) %>
-	  </div>
-	  <div class="right span-9 last">
-	    <p></p>
+		<div class="results_title left span-14 ">
+	    <h2>Results for: <span><%= link_to h(uri.uri), h(uri.uri) %></span></h2>	
 	  </div>
   </div>
 
   <!-- OpenID Provider -->
   <div class="span-23 last">  
-    <div class="left span-14 ">
+    <div class="left span-7 ">
       <h2>OpenID Provider</h2>
       <%= uri.uri_property.openid_providers.map{ |p| link_to h(p), h(p) }.join(", ") %>
     </div>
-    <div class="right span-9 last">
+    <div class="right span-16 last">
       <p></p>
     </div>
   </div>
 
   <!-- OpenID Discovery -->
 	<div class="span-23 last">  
-    <div class="left span-14 ">
+    <div class="left span-7 ">
       <h2>OpenID Discovery</h2>
       <% if uri.html_discovery? %>
         HTML: <%= uri.html_discovery_versions.join(", ") %><br />
@@ -38,74 +34,120 @@
         XRDS: <%= uri.xrds_discovery_versions.join(", ") %>
       <% end %>
     </div>
-    <div class="right span-9 last">
-      <p></p>
+    <div class="right span-16 last">
+      <div class="version span-12 last">
+        <div class="row row_title span-12 last"><ul>
+          <li></li>
+					<li>Version 1.0, 1.1</li>
+          <li>Version 2.0</li>
+      	</ul></div>
+				<div class="row span-12 last">
+					<ul>
+	          <li>HTML</li>
+						<% if uri.html_discovery? %>
+		          <li><%=image_tag("icons/tick.png",:size=>"16x16",:alt=>"Yes")%></li>
+		          <li><%=image_tag("icons/cross.png",:size=>"16x16",:alt=>"Yes")%></li>
+	          <%else%>
+		          <li><%=image_tag("icons/cross.png",:size=>"16x16",:alt=>"No")%></li>
+		          <li><%=image_tag("icons/cross.png",:size=>"16x16",:alt=>"No")%></li>
+	          <%end%>
+	      	</ul>
+				</div>
+				<div class="row span-12 last"><ul>
+					<li>YADIS</li>
+          <% if uri.xrds_discovery? %>
+            <li><%=image_tag("icons/tick.png",:size=>"16x16",:alt=>"Yes")%></li>
+            <li><%=image_tag("icons/tick.png",:size=>"16x16",:alt=>"Yes")%></li>
+          <%else%>
+            <li><%=image_tag("icons/cross.png",:size=>"16x16",:alt=>"No")%></li>
+            <li><%=image_tag("icons/cross.png",:size=>"16x16",:alt=>"No")%></li>
+          <%end%>
+				</ul></div>
+      </div>
     </div>
   </div>
 
   <!-- Web standards -->
 	<div class="span-23 last">  
-    <div class="left span-14 ">
+    <div class="left span-7 ">
       <h2>Web standards</h2>
     </div>
-    <div class="right span-9 last">
-      <p></p>
+    <div class="right span-16 last">
+      <div class="standards span-12 last">
+				<div class="col col_title span-16 last"><ul>
+          <li><%=imgage_tag("icons/foaf.png",)%>Foaf</li>
+          <li><%=imgage_tag("icons/feed.png",)%> Feeds</li>
+					<li>RSD</li>
+					<li>Microformats</li>
+					<li>XRSD services</li>
+        </ul></div>
+				<div class="col span-16 last"><ul>
+          <li>Web standard</li>
+          <li>Version 1.0, 1.1</li>
+        </ul></div>
+			</div>
     </div>
   </div>
-	
+
+
+
+
+
+
+
   <!-- FoaF Web standards -->
   <div class="span-23 last">  
-    <div class="left span-14 ">
+    <div class="left span-7 ">
       <h2>FoaF</h2>
       <%=h uri.uri_property.foaf? %>
     </div>
-    <div class="right span-9 last">
+    <div class="right span-16 last">
       <p></p>
     </div>
   </div>
 
   <!-- Atom/RSS feeds Web standards -->
   <div class="span-23 last">  
-    <div class="left span-14 ">
+    <div class="left span-7 ">
       <h2>Atom/RSS feeds</h2>
       <%= "Atom" if uri.uri_property.atom? %>
       <%= "RSS" if uri.uri_property.rss? %>
       <%= "None" unless uri.uri_property.atom? || uri.uri_property.rss? %>
     </div>
-    <div class="right span-9 last">
+    <div class="right span-16 last">
       <p></p>
     </div>
   </div>
 
   <!-- RSD Web standards -->
   <div class="span-23 last">  
-    <div class="left span-14 ">
+    <div class="left span-7 ">
       <h2>RSD</h2>
       <%=h uri.uri_property.rsd? %>
     </div>
-    <div class="right span-9 last">
+    <div class="right span-16 last">
       <p></p>
     </div>
   </div>
 
   <!-- Microformats Web standards -->
   <div class="span-23 last">  
-    <div class="left span-14 ">
+    <div class="left span-7 ">
       <h2>Microformats</h2>
       <%=h uri.uri_property.microformats %>
     </div>
-    <div class="right span-9 last">
+    <div class="right span-16 last">
       <p></p>
     </div>
   </div>
 
   <!-- XRDS service types Web standards -->
   <div class="span-23 last">  
-    <div class="left span-14 ">
+    <div class="left span-7 ">
       <h2>XRDS service types</h2>
       <%=h uri.uri_property.xrds_service_types.join(", ") %>
     </div>
-    <div class="right span-9 last">
+    <div class="right span-16 last">
       <p></p>
     </div>
   </div>
