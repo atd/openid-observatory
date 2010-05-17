@@ -39,7 +39,7 @@ module ApplicationHelper
       {
         :title => t = 'OpenID Discovery Technologies (%)',
         :description => ( brief? ? 
-          'OpenID can be discovered both by a HTML header link or using XRDS discovery' :
+          'OpenID can be discovered both by a HTML header link or using Yadis discovery' :
           'OpenID specifications define two ways for discovering the service upon the identifier and start protocol requests. Through the specifications prioritize <a href="http://en.wikipedia.org/wiki/Yadis">Yadis</a> as the first path to be followed, it is only supported by half of the identifiers. On the other hand, <a href="http://en.wikipedia.org/wiki/HTML">HTML</a> discovery is supported by almost all the identifiers.' ),
         :results => r = {
           "HTML" => Uri.html_discovery(:any).count * 100.0 / Uri.count,
@@ -51,6 +51,7 @@ module ApplicationHelper
                       :axis_with_labels => "x,y",
                       :axis_labels => [ r.keys, (0..4).map{ |n| n * 25 } ],
                       :max_value => 100,
+                      :encoding => 'extended',
                       :bar_width_and_spacing => { :width => 50, :spacing => 30 }),
         :details => r.inject("") do |d, r|
           d << "<p>"
@@ -118,6 +119,7 @@ module ApplicationHelper
                       :axis_with_labels => "x,y",
                       :axis_labels => [ r.map(&:first), (0..4).map{ |n| n * 25 } ],
                       :max_value => 100,
+                      :encoding => 'extended',
                       :bar_width_and_spacing => { :width => 50, :spacing => 23 } ),
         :details => { 'foaf' => 'FOAF',
                       'rss'  => 'RSS',
@@ -163,6 +165,7 @@ module ApplicationHelper
                       :axis_with_labels => "x,y",
                       :axis_labels => [ r.map(&:first), (0..4).map{ |n| n * 25 } ],
                       :max_value => 100,
+                      :encoding => 'extended',
                       :bar_width_and_spacing => { :width => 40, :spacing => 20 } ),
         :details => r.inject("") do |d, r|
           d << "<p>"
@@ -175,7 +178,7 @@ module ApplicationHelper
         :title => t = "XRDS service types (%)",
         :description => ( brief? ?
           'Most common service types announced in XRDS files' :
-          'This graph shows the most common service types announced in XRDS files. OpenID protocol' ),
+          'This graph shows the most common service types announced in XRDS files. OpenID protocol uses this technology as a way to discover OpenID servers and extensions.' ),
         :results => r = xrds_results,
         :image => bar(:title => t,
                       :data => r.last.map(&:last),
@@ -183,6 +186,7 @@ module ApplicationHelper
                       :axis_labels => [ [0, 100], r.last.map(&:first).reverse ],
                       :max_value => 100,
                       :size => (brief? ? nil : "548x#{ r.last.count * 25 + 70 }"),
+                      :encoding => 'extended',
                       :orientation => 'h'),
         :details =>  r.first.inject("") do |d, r|
           d << "<p>"
@@ -202,6 +206,7 @@ module ApplicationHelper
                       :axis_labels => [ [0, 100 ], r.last.map(&:first).flatten.reverse ],
                       :max_value => 100,
                       :size => (brief? ? nil : "548x#{ r.last.count * 25 + 70 }"),
+                      :encoding => 'extended',
                       :orientation => 'h'),
       },
 
@@ -214,6 +219,7 @@ module ApplicationHelper
                       :axis_labels => [ [0, 100 ], r.last.map(&:first).flatten.reverse ],
                       :max_value => 100,
                       :size => (brief? ? nil : "548x#{ r.last.count * 25 + 70 }"),
+                      :encoding => 'extended',
                       :orientation => 'h'),
         :details =>  r.last.inject("") do |d, r|
           d << "<p>"
@@ -254,7 +260,7 @@ module ApplicationHelper
 
     sorted_r = ( brief? ?
                  sorted_r.last(n) :
-                 sorted_r.select{ |a| a.last > total * 0.02 } )
+                 sorted_r.select{ |a| a.last > total * 0.01 } )
    
     sorted_r = sorted_r.map{ |a| [ a.first, a.last * 100.0 / total ] }.reverse
 
@@ -274,7 +280,7 @@ module ApplicationHelper
 
     r_count = ( brief? ?
                 r_count.last(5) :
-                r_count.select{ |i| i.last > total * 0.02 } )
+                r_count.select{ |i| i.last > total * 0.01 } )
 
     r = r_count.inject({}){ |h, i| h[i.first] = i.last * 100.0 / total; h }
     r["other"] = ( total - r_count.inject(0){ |sum, i| sum + i.last } ) * 100.0 / total
@@ -294,7 +300,7 @@ module ApplicationHelper
 
     r_count = ( brief? ?
                 r_count.last(5) :
-                r_count.select{ |i| i.last > total * 0.02 } )
+                r_count.select{ |i| i.last > total * 0.01 } )
 
     r = r_count.inject({}){ |h, i| h[i.first] = i.last * 100.0 / total; h }
     r["other"] = ( total - r_count.inject(0){ |sum, i| sum + i.last } ) * 100.0 / total

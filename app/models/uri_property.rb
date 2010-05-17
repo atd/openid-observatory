@@ -10,7 +10,7 @@ class UriProperty < ActiveRecord::Base
     "http://openid.net/signon/1.1" => "OpenID Authentication 1.1",
     "http://openid.net/sreg/1.0"   => "OpenID Simple Registration Extension 1.0",
     "http://openid.net/srv/ax/1.0" => "OpenID Attribute Exchange 1.0",
-    "http://openid.net/extensions/sreg/1.1" => "OpenID Simple Registration Extension 1.0",
+    "http://openid.net/extensions/sreg/1.1" => "OpenID Simple Registration Extension 1.1",
     "http://specs.openid.net/auth/2.0/server" => "OpenID Authentication 2.0 OP Identifier Element",
     "http://specs.openid.net/auth/2.0/signon" => "OpenID Authentication 2.0 Claimed Identifier Element",
     "http://specs.openid.net/extensions/pape/1.0" => "OpenID Provider Authentication Policy Extension 1.0",
