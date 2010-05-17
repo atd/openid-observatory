@@ -251,8 +251,9 @@ module ApplicationHelper
   def xrds_results(n = 5)
     total = Uri.xrds_service_type('http').count
 
-    r = UriProperty::XrdsServiceTypes.inject({}){ |r, x|
-          r[x.last] = Uri.xrds_service_type(x.first).count
+    r = UriProperty.xrds_service_types.inject({}){ |r, x|
+          key = UriProperty::XrdsServiceTypes[x] || x
+          r[key] = Uri.xrds_service_type(x).count
           r
         }
 

@@ -33,13 +33,16 @@ class UriProperty < ActiveRecord::Base
 
   class << self
     def reset
-      @openid_providers = nil
-      @microformats = nil
+      @openid_providers = @microformats = @xrds_service_types = nil
     end
 
-    def openid_providers
-      @openid_providers ||=
-        all.map{ |u| Array(u.openid_providers) }.flatten.compact.uniq
+    %w( openid_providers xrds_service_types ).each do |m|
+      eval <<-EOM
+        def #{ m }
+          @#{ m } ||=
+            all.map{ |u| Array(u.#{ m }) }.flatten.compact.uniq
+        end
+      EOM
     end
 
     def microformats
