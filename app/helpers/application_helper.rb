@@ -19,7 +19,7 @@ module ApplicationHelper
         :title   => t = 'Deployed OpenID Protocol Versions',
         :description => ( brief? ?
           "OpenID protocol versions currently deployed and announced by identifiers" :
-          'OpenID protocol currently defines three versions. <a href="http://openid.net/specs/openid-authentication-1_1.html">Version 1.1</a> was published on May 2006. <a href="http://openid.net/specs/openid-authentication-2_0.html">Version 2.0</a> just a year and half later. Most of sites does not support the lastest version of the protocol. Among sites supporting it, most of them maintain compatibility with former versions.' ),
+          'OpenID protocol currently defines three versions. <a href="http://openid.net/specs/openid-authentication-1_1.html">Version 1.1</a> was published on May 2006. <a href="http://openid.net/specs/openid-authentication-2_0.html">Version 2.0</a> a year and half later. Most of OpenID identifiers do not support the lastest version of the protocol. Among the identifiers supporting it, most of them maintain compatibility with former versions.' ),
         :results => r = {
           "v1, v1.1"     => Uri.openid_version(:only_1).count,
           "v2"           => Uri.openid_version(:only_2).count,
@@ -40,7 +40,7 @@ module ApplicationHelper
         :title => t = 'OpenID Discovery Technologies (%)',
         :description => ( brief? ? 
           'OpenID can be discovered both by a HTML header link or using Yadis discovery' :
-          'OpenID specifications define two ways for discovering the service upon the identifier and start protocol requests. Through the specifications prioritize <a href="http://en.wikipedia.org/wiki/Yadis">Yadis</a> as the first path to be followed, it is only supported by half of the identifiers. On the other hand, <a href="http://en.wikipedia.org/wiki/HTML">HTML</a> discovery is supported by almost all the identifiers.' ),
+          'OpenID specifications define two ways for discovering the OpenID service upon the identifier and starting protocol requests. Through the specifications prioritize <a href="http://en.wikipedia.org/wiki/Yadis">Yadis</a> as the first option to be tried, it is only supported by half of the identifiers. On the other hand, <a href="http://en.wikipedia.org/wiki/HTML">HTML</a> discovery is supported by almost all the identifiers.' ),
         :results => r = {
           "HTML" => Uri.html_discovery(:any).count * 100.0 / Uri.count,
           "Yadis" => Uri.xrds_discovery(:any).count * 100.0 / Uri.count
@@ -64,7 +64,7 @@ module ApplicationHelper
         :title => t = "OpenID Protocol Versions in HTML discovery",
         :description => ( brief? ? 
            'Distribution of OpenID versions announced by HTML' :
-           'Former versions of OpenID protocol are far more popular in identifiers providing HTML discovery.' ),
+           'Former versions of the OpenID protocol are far more popular in HTML discovery.' ),
         :results => r = {
           "v1, v1.1" => Uri.html_discovery(:only_1).count,
           "v2"       => Uri.html_discovery(:only_2).count,
@@ -104,7 +104,7 @@ module ApplicationHelper
         :title => t = 'Web Standards (%)',
         :description => ( brief? ? 
           'Main web standards found in OpenID\'s HTML' :
-          'Among the Web standards found in the HTML of OpenID identifiers, <a href="http://microformats.org/">Microformats</a> is the most common. The second format most used is <a href="http://en.wikipedia.org/wiki/RSS">RSS</a>. Other popular standard is <a href="http://en.wikipedia.org/wiki/Really_Simple_Discovery">RSD</a>. <a href="http://en.wikipedia.org/wiki/Atom_%28standard%29">Atom Syndication</a> format is less used. Finally, <a href="http://www.foaf-project.org/">FOAF</a> is the least common of the Web standads analyzed.' ),
+          'Among the Web standards found in the HTML of OpenID identifiers, <a href="http://microformats.org/">Microformats</a> is the most popular one. The second format most used is <a href="http://en.wikipedia.org/wiki/RSS">RSS</a>. Other popular standard is <a href="http://en.wikipedia.org/wiki/Really_Simple_Discovery">RSD</a>. <a href="http://en.wikipedia.org/wiki/Atom_%28standard%29">Atom Syndication</a> format is less used but still frequent. Finally, <a href="http://www.foaf-project.org/">FOAF</a> is the least common of the Web standads analyzed.' ),
         :results => r = {
           "FOAF" => Uri.foaf(true).count * 100.0 / Uri.count,
           "Atom" => Uri.atom(true).count * 100.0 / Uri.count,
@@ -156,17 +156,38 @@ module ApplicationHelper
         :description => ( brief? ?
           'Microformat types found in OpenID\'s HTML' :
           'This graph shows the most frequent <a href="http://microformats.org/">Microformats</a> found in the HTML of OpenID identifiers. <a href="http://microformats.org/wiki/rel-tag">RelTag</a> is the most popular. <a href="http://microformats.org/wiki/hcard">hCard</a> follows, something foreseeable as it is the format for personal data. XFN and Adr are also common, related with contacts and address respectively.' ),
-        :results => r = UriProperty.microformats.inject({}){ |hash, m| 
-                          hash[m] = (Uri.microformats(m).count * 100.0 / Uri.count)
-                          hash
-                        }.sort{ |a, b| b.last <=> a.last },
+        :results => r = microformats_results,
         :image => bar(:title => t,
                       :data => r.map(&:last),
                       :axis_with_labels => "x,y",
                       :axis_labels => [ r.map(&:first), (0..4).map{ |n| n * 25 } ],
                       :max_value => 100,
                       :encoding => 'extended',
-                      :bar_width_and_spacing => { :width => 40, :spacing => 20 } ),
+                      :bar_width_and_spacing => { :width => 30, :spacing => 28 } ),
+        :details => r.inject("") do |d, r|
+          d << "<p>"
+          d << "<strong>#{ r.first }</strong>: #{ r.last }%"
+          d << "</p>"
+          d
+        end
+      },
+      {
+        :title => t = 'hCard vs FOAF (%)',
+        :description => ( brief? ?
+          'Two ways of format personal information, HTML semantic markup and Semantic Web' :
+          'OpenID identifier resources usually provide information about the personnas behind them. There are a couple of formats suitable for this. <a href="http://microformats.org/wiki/hcard">hCard</a> is the <a href="http://microformats.org/">Microformat</a> adaptation of vCard. It is the most popular. On the other hand, <a href="http://www.foaf-project.org/">FOAF</a> is the Semantic Web vocabulary for personal data.' ),
+        :results => r = {
+          "FOAF" => Uri.foaf(true).count * 100.0 / Uri.count,
+          "hCard" => Uri.microformats('HCard').count * 100.0 / Uri.count
+        },
+
+        :image => bar(:title => t,
+                      :data => r.values,
+                      :axis_with_labels => "x,y",
+                      :axis_labels => [ r.keys, (0..4).map{ |n| n * 25 } ],
+                      :max_value => 100,
+                      :encoding => 'extended',
+                      :bar_width_and_spacing => { :width => 50, :spacing => 30 }),
         :details => r.inject("") do |d, r|
           d << "<p>"
           d << "<strong>#{ r.first }</strong>: #{ r.last }%"
@@ -178,7 +199,7 @@ module ApplicationHelper
         :title => t = "XRDS service types (%)",
         :description => ( brief? ?
           'Most common service types announced in XRDS files' :
-          'This graph shows the most common service types announced in XRDS files. OpenID protocol uses this technology as a way to discover OpenID servers and extensions.' ),
+          'This graph shows the most common service types announced in XRDS files. OpenID protocol uses Yadis as a way to discover OpenID services. The information is described in <a href="http://en.wikipedia.org/wiki/XRDS">XRDS</a>, a XML format for discovering services associated with a resource.<br/>OpenID authentication and OpenID Simple Registration Extension are main services announced by OpenID identifiers supporting XRDS. Other popular services include <a href="">OpenID PAPE Phishing Resistant Authentication</a> and <a href="">OpenID Attribute Exchange</a>. The rest of services are less common ' ),
         :results => r = xrds_results,
         :image => bar(:title => t,
                       :data => r.last.map(&:last),
@@ -246,6 +267,15 @@ module ApplicationHelper
 
   def brief?
     @graph_options[:brief]
+  end
+
+  def microformats_results
+    UriProperty.microformats.inject({}){ |hash, m| 
+      key = UriProperty::Microformats[m] || m
+
+      hash[key] = (Uri.microformats(m).count * 100.0 / Uri.count)
+      hash
+    }.sort{ |a, b| b.last <=> a.last }
   end
 
   def xrds_results(n = 5)

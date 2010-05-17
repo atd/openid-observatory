@@ -1,4 +1,30 @@
 class UriProperty < ActiveRecord::Base
+  class << self
+    # Dynamic enumeration of several parameters
+    def reset
+      @openid_providers = @microformats = @xrds_service_types = nil
+    end
+
+    %w( openid_providers xrds_service_types ).each do |m|
+      eval <<-EOM
+        def #{ m }
+          @#{ m } ||=
+            all.map{ |u| Array(u.#{ m }) }.flatten.compact.uniq
+        end
+      EOM
+    end
+
+    def microformats
+      @microformats ||=
+        all.map{ |u| u.microformats.split(",") }.flatten.compact.uniq
+    end
+  end
+
+  # Microformat abbrevations
+  Microformats = {
+    'DefinitionList' => 'DefList'
+  }
+
   XrdsOpenIdUris = {
     :v1_0 => "http://openid.net/signon/1.0",
     :v1_1 => "http://openid.net/signon/1.1",
@@ -21,9 +47,10 @@ class UriProperty < ActiveRecord::Base
     "http://schemas.openid.net/pape/policies/2007/06/multi-factor" => "OpenID PAPE Multi-Factor Authentication",
     "http://schemas.openid.net/pape/policies/2007/06/multi-factor-physical" => "OpenID PAPE Physical Multi-Factor Authentication",
     "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/privatepersonalidentifier" => "OpenID GSA Profile extension",
-    "http://www.idmanagement.gov/schema/2009/05/icam/no-pii.pdf" => "OpenID GSA Profile extension",
-    "http://www.idmanagement.gov/schema/2009/05/icam/openid-trust-level1.pdf" => "OpenID GSA Profile extension",
-    "http://csrc.nist.gov/publications/nistpubs/800-63/SP800-63V1_0_2.pdf" => "OpenID extension",
+    "http://www.idmanagement.gov/schema/2009/05/icam/no-pii.pdf" => "GSA Profile OpenID extension",
+    "http://www.idmanagement.gov/schema/2009/05/icam/openid-trust-level1.pdf" => "GSA Profile OpenID extension",
+    "http://csrc.nist.gov/publications/nistpubs/800-63/SP800-63V1_0_2.pdf" => "NIST OpenID extension",
+    "http://specs.openid.net/extensions/ui/1.0/lang-pref" => "Language OpenID User Interface Extension 1.0",
   }
 
   belongs_to :uri
@@ -31,23 +58,4 @@ class UriProperty < ActiveRecord::Base
   serialize :xrds_service_types, Array
   serialize :openid_providers, Array
 
-  class << self
-    def reset
-      @openid_providers = @microformats = @xrds_service_types = nil
-    end
-
-    %w( openid_providers xrds_service_types ).each do |m|
-      eval <<-EOM
-        def #{ m }
-          @#{ m } ||=
-            all.map{ |u| Array(u.#{ m }) }.flatten.compact.uniq
-        end
-      EOM
-    end
-
-    def microformats
-      @microformats ||=
-        all.map{ |u| u.microformats.split(",") }.flatten.compact.uniq
-    end
-  end
 end
