@@ -32,7 +32,7 @@
         <div class="total_checked">OpenIDs already checked: <span><%= Uri.count %></span></div>
 				<div class="charts_wrapper">
           <ul id="gallery">
-            <% graphs(:title => nil ).each do |g| %>
+            <% graphs(:brief => true, :title => nil ).each do |g| %>
             <li>
             <%= image_tag g[:image], :title => g[:title] %>
             <div class="panel-overlay">
