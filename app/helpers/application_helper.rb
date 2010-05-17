@@ -182,7 +182,7 @@ module ApplicationHelper
                       :axis_with_labels => "x,y",
                       :axis_labels => [ [0, 100], r.last.map(&:first).reverse ],
                       :max_value => 100,
-                      :size => (brief? ? nil : '548x320'),
+                      :size => (brief? ? nil : "548x#{ r.last.count * 25 + 70 }"),
                       :orientation => 'h'),
         :details =>  r.first.inject("") do |d, r|
           d << "<p>"
@@ -201,6 +201,7 @@ module ApplicationHelper
                       :axis_with_labels => "x,y",
                       :axis_labels => [ [0, 100 ], r.last.map(&:first).flatten.reverse ],
                       :max_value => 100,
+                      :size => (brief? ? nil : "548x#{ r.last.count * 25 + 70 }"),
                       :orientation => 'h'),
       },
 
@@ -212,6 +213,7 @@ module ApplicationHelper
                       :axis_with_labels => "x,y",
                       :axis_labels => [ [0, 100 ], r.last.map(&:first).flatten.reverse ],
                       :max_value => 100,
+                      :size => (brief? ? nil : "548x#{ r.last.count * 25 + 70 }"),
                       :orientation => 'h'),
         :details =>  r.last.inject("") do |d, r|
           d << "<p>"
@@ -230,18 +232,14 @@ module ApplicationHelper
         options.delete_if{ |k, v| v.nil? }
         op = @default_graph_options.merge(options).merge(@graph_options)
         ap = op.delete(:append)
-        op.delete(:extended)
+        op.delete(:brief)
         Gchart.#{ m }(op) + ap.to_s
       end
     EOM
   end
 
-  def extended?
-    @graph_options[:extended]
-  end
-
   def brief?
-    ! extended?
+    @graph_options[:brief]
   end
 
   def xrds_results(n = 5)
