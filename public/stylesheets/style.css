@@ -2,7 +2,8 @@
 .prepend-3dot5{padding-left:140px;}
 
 /*Typography*/
-a:focus, a:hover{color:#996600;}
+a{text-decoration:none;}
+a:focus, a:hover{color:#996600;text-decoration:underline;}
 .type{
 	color:#996600;
 	/*font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;*/
@@ -187,23 +188,40 @@ form#new_feedback{margin-bottom:6px;position:relative;display:block;}
 
 /*Show results*/
 .results_title h2 span{font-size:0.65em;}
-.results_title h2 a{text-decoration:none;}
-.results_title h2 a:hover{text-decoration:underline;}
 
 #results .right{padding-top:36px;}
 
-div.row{}
+.row.middle{border-top:1px solid #99cc33;}
+.row .middle{border-left:1px solid #99cc33;border-right:1px solid #99cc33;}
+
 .row ul{list-style-type:none;margin:0;}
 .row ul li{
 	float:left;
-	width:100px;
-	height:18px;
-	text-align:center;
 	font-size:1em;
 	line-height:1.5;
 	padding:0.25em 0.5em;
-	border:1px solid #d5d5d5;
-	background:#f0f0f0;}
+}
+
+.provider,.version,.standards{ 
+  border:1px solid #99cc33;
+  background:#f0f0f0;
+  position:relative;
+  overflow:hidden;}
+
+.provider{padding:0.75em;}
+
+.version .row ul li{ 
+  width:30%;
+  height:18px;
+  text-align:center;}
+	
+.standards .row ul li{
+	text-align:left;
+	width:55%;}
+	
+.standards .row ul li.start{
+  border-right:1px solid #99cc33;
+  width:30%;}
 
 /*Right box*/
 
