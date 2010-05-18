@@ -16,7 +16,7 @@
 
   <div class="header_submit">
         <div class="fancy_input">
-            <% form_for @uri || Uri.new do |f| %>
+            <% form_for Uri.new do |f| %>
               <%= f.error_messages %>
               <%= f.text_field :uri, :class=>"input_text",:value=>"Enter your OpenID" %>
               <%= f.submit 'Go!',:class=>"input_text_button" %>
