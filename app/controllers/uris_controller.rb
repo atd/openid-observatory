@@ -23,7 +23,7 @@ class UrisController < ApplicationController
         @uri.refresh!
         redirect_to @uri
       else
-        render :action => 'index'
+        render :action => 'new'
       end
     end
   end
