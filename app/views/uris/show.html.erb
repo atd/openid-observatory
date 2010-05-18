@@ -31,14 +31,14 @@
     </div>
     <div class="right span-17 last">
       <div class="version span-12 last">
-        <div class="row span-12 last"><ul>
+        <div class="row span-12 last title"><ul>
           <li></li>
 					<li class="middle">Version 1.0, 1.1</li>
           <li>Version 2.0</li>
       	</ul></div>
 				<div class="row middle span-12 last">
 					<ul>
-	          <li>HTML</li>
+	          <li class="title">HTML</li>
 	          <li class="middle">
 	          	<% if uri.html_discovery?(1) %>
 							  <%=image_tag("icons/tick.png",:size=>"16x16",:alt=>"Yes")%>
@@ -57,7 +57,7 @@
 				</div>
 				<div class="row middle span-12 last">
 					<ul>
-					  <li>YADIS</li>
+					  <li class="title">YADIS</li>
             <li class="middle">
             	<% if uri.xrds_discovery?(1) %>
 							  <%=image_tag("icons/tick.png",:size=>"16x16",:alt=>"Yes")%>
@@ -87,8 +87,8 @@
       <div class="standards span-16 last">
         <div class="row span-16 last">
         	<ul>
-        		<li class="start"><%=image_tag("icons/foaf.png")%> Foaf</li>
-						<li>
+        		<li class="title"><%=image_tag("icons/foaf.png")%> Foaf*</li>
+						<li class="end">
               <%if h uri.uri_property.foaf?%>
                 <%=image_tag('icons/tick.png',:size=>'16x16',:alt=>'Yes')%>
               <%else%>
@@ -99,8 +99,8 @@
         </div>
 				<div class="row middle span-16 last">
           <ul>
-            <li class="start"><%=image_tag("icons/feed.png")%> Feeds</li>
-            <li>
+            <li class="title"><%=image_tag("icons/feed.png")%> Feeds</li>
+            <li class="end">
               <%if uri.uri_property.atom? || uri.uri_property.rss?%>
                 <%=image_tag('icons/tick.png',:size=>'16x16',:alt=>'Yes')%>
                 <%= "Atom" if uri.uri_property.atom? %>
@@ -113,8 +113,8 @@
 				</div>
 				<div class="row middle span-16 last">
           <ul>
-            <li class="start"><%=image_tag("icons/microformats.png")%> Microformats</li>
-            <li>
+            <li class="title"><%=image_tag("icons/microformats.png")%> Microformats</li>
+            <li class="end">
               <%if h uri.uri_property.microformats.any?%>
                 <%=image_tag('icons/tick.png',:size=>'16x16',:alt=>'Yes')%>
                 <%=h uri.uri_property.microformats%>             
@@ -126,8 +126,8 @@
 				</div>
 				<div class="row middle span-16 last">
           <ul>
-            <li class="start">Really Simple Discovery (RSD)</li>
-            <li>
+            <li class="title">RSD*</li>
+            <li class="end">
               <%if h uri.uri_property.rsd?%>
                 <%=image_tag('icons/tick.png',:size=>'16x16',:alt=>'Yes')%>
               <%else%>
@@ -138,8 +138,8 @@
 				</div>
 				<div class="row middle span-16 last">
           <ul>
-            <li class="start">eXtensible Resource Descriptor Sequence (XRSD)</li>
-            <li>
+            <li class="title">XRSD*</li>
+            <li class="end">
               <%if h uri.uri_property.xrds_service_types.any?%>
                 <%=image_tag('icons/tick.png',:size=>'16x16',:alt=>'Yes')%>
                 <%=h uri.uri_property.xrds_service_types.join(", ") %>
@@ -150,6 +150,7 @@
           </ul>					
 				</div>	
 			</div>
+			<p class="nota_al_pie">* Foaf: Friend of a friend; RSD: Really Simple Discovery; XRDS: eXtensible Resource Descriptor Sequence</p>
 			
     </div>
   </div>

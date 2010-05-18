@@ -176,7 +176,7 @@ form#new_feedback{margin-bottom:6px;position:relative;display:block;}
 .header_submit .fancy_input{margin-top:2%;margin-right:30px;}
 .header_submit .fancy_input .input_text{width:275px;}
 #stats,#results{
-	padding:20px 20px;}
+	padding:20px 20px 0 20px;}
 
 #stats .left,#results .left{padding-bottom:18px;}
 #stats .left h2,#results .left h2{color:#996600;}
@@ -207,21 +207,27 @@ form#new_feedback{margin-bottom:6px;position:relative;display:block;}
   background:#f0f0f0;
   position:relative;
   overflow:hidden;}
+	
+.standards{background:#C9E88E}
 
 .provider{padding:0.75em;}
 
 .version .row ul li{ 
   width:30%;
-  height:18px;
   text-align:center;}
 	
 .standards .row ul li{
 	text-align:left;
-	width:55%;}
+	width:175px;}
 	
-.standards .row ul li.start{
-  border-right:1px solid #99cc33;
-  width:30%;}
+.standards .row ul li.end{
+  border-left:1px solid #99cc33;
+  width:426px;
+	background:#f0f0f0;}
+	
+.title{background:#C9E88E;}/*DBEA94*/
+
+p.nota_al_pie{display:block;clear:both;font-size:0.8333em;line-height:1.8;}
 
 /*Right box*/
 
