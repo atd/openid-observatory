@@ -15,13 +15,11 @@
 		$(document).ready(function() {
 		  $('#feedback_link').click(function(){
         $(this).hide(),
-				$('#footer ul').css("height","281px"),
         $('#footer_center').css("background","none"),
         $('#feedback_form').slideDown('slow')
       });
 			$('#feedback_cancel').click(function(){
         $('#feedback_form').hide(),
-        $('#footer ul').css("height","130px"),
         $('#footer_center').css("background","transparent url('../images/panel.png') no-repeat center center"),
         $('#feedback_form input[type="text"]').val(""),
 				$('#feedback_form textarea').val(""),
@@ -76,7 +74,7 @@
           <li><%= link_to image_tag("Logo_dit-upm.gif",:size=>"92x92",:title=>"DIT-UPM"), "http://www.dit.upm.es" %></li>
           <li><%= link_to image_tag("upm.png",:title=>"UPM"), "http://www.upm.es" %></li>
         </ul>
-
+        <div id="copyright" class="span-24 last"><p>Copyright (c) - 2010 - <%=link_to "Antonio Tapiador","http://irss.dit.upm.es/users/atd"%> - <span>Antonio Mendo</span></p></div>
 	    </div>
 	  </div>	
 		
