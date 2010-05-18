@@ -1,9 +1,15 @@
-<div>
-  <% form_for @uri || Uri.new do |f| %>
-    <%= f.error_messages %>
+<div class="aux_new">
+	
 
-    <%= f.text_field :uri, :class=>"input_text" %>
+	 <h2>Check your OpenID</h2>
 
-    <%= f.submit 'Go!',:class=>"input_text_button" %>
-  <% end -%>
+	<div class="fancy_input">	
+	  <% form_for @uri || Uri.new do |f| %>
+	    <%= f.error_messages %>
+	
+	    <%= f.text_field :uri, :class=>"input_text" %>
+	
+	    <%= f.submit 'Go!',:class=>"input_text_button" %>
+	  <% end -%>
+	</div>
 </div>
