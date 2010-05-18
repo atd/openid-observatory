@@ -199,7 +199,7 @@ module ApplicationHelper
         :title => t = "XRDS service types (%)",
         :description => ( brief? ?
           'Most common service types announced in XRDS files' :
-          'This graph shows the most common service types announced in XRDS files. OpenID protocol uses Yadis as a way to discover OpenID services. The information is described in <a href="http://en.wikipedia.org/wiki/XRDS">XRDS</a>, a XML format for discovering services associated with a resource.<br/>OpenID authentication and OpenID Simple Registration Extension are main services announced by OpenID identifiers supporting XRDS. Other popular services include <a href="">OpenID PAPE Phishing Resistant Authentication</a> and <a href="">OpenID Attribute Exchange</a>. The rest of services are less common ' ),
+          'This graph shows the most common service types announced in XRDS files. OpenID protocol uses Yadis as a way to discover OpenID services. The information is described in <a href="http://en.wikipedia.org/wiki/XRDS">XRDS</a>, a XML format for discovering services associated with a resource.<br/>OpenID authentication (1.0, <a href="http://openid.net/specs/openid-authentication-1_1.html">1.1</a>, <a href="http://openid.net/specs/openid-authentication-2_0.html">2.0</a>) and OpenID Simple Registration Extension (<a href="http://openid.net/specs/openid-simple-registration-extension-1_0.html">1.0</a>, <a href="http://openid.net/specs/openid-simple-registration-extension-1_1-01.html">1.1</a>) are main services announced by OpenID identifiers supporting XRDS. Other popular services include <a href="http://openid.net/specs/openid-provider-authentication-policy-extension-1_0.html">OpenID PAPE Phishing Resistant Authentication</a> and <a href="http://openid.net/specs/openid-attribute-exchange-1_0.html">OpenID Attribute Exchange</a>. The rest of services are less common, but are all related to OpenID.' ),
         :results => r = xrds_results,
         :image => bar(:title => t,
                       :data => r.last.map(&:last),
@@ -219,7 +219,9 @@ module ApplicationHelper
       },
       {
         :title => t = 'OpenID URI Domains (%)',
-        :description => 'Most common domains used in OpenID URIs',
+        :description => ( brief? ?
+          'Most common domains used in OpenID URIs' :
+          'This graph analyzes the domains most used as OpenID identifiers. There is a strong tendency to use own customized domains, usually personal blogs and homepages. <a href="http://blogspot.com/">Blogger</a> and <a href="http://myopenid.com/">myOpenID</a> are the most popular providers. Other blogging platforms follow, including <a href="http://wordpress.com/">Wordpress</a> and <a href="http://livejournal.com/">LiveJournal</a>.' ),
         :results => r = domain_results,
         :image => bar(:title => t,
                       :data => r.last.map(&:last).flatten,
@@ -232,7 +234,9 @@ module ApplicationHelper
       },
 
       { :title => t = 'OpenID Providers (%)',
-        :description => "Most common providers used by OpenID URIs",
+        :description => ( brief? ?
+          "Most common providers used by OpenID URIs" :
+          'The list of OpenID providers is wider, as many people choose to relay in an external OpenID provider, instead of hosting their own. <a href="http://myopenid.com/">myOpenID</a> is by far the most popular OpenID provider. Other providers include <a href="http://livejournal.com/">LiveJournal</a>, <a href="http://blogspot.com/">Blogger</a>, <a href="http://verisignlabs.com/">Verisign</a> and <a href="http://claimid.com/">ClaimID</a>' ),
         :results => r = provider_results,
         :image => bar(:title => t,
                       :data => r.last.map(&:last).flatten,
