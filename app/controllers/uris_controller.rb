@@ -15,6 +15,7 @@ class UrisController < ApplicationController
       @uri.refresh!
 
       expire_page "/index"
+      expire_page "/stats"
 
       redirect_to @uri
     else
