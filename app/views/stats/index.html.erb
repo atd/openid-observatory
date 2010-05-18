@@ -5,10 +5,10 @@
 <div id="stats" class="left span-23 last">
 	<%= notification_area %>
 
-	<p class="intro">OpenID Observatory is part of a research study supported by the Telematic Engineering Department (DIT) at the Universidad Politécnica de Madrid (UPM), 
- meant to make a survey of the usage of OpenID. Here you can find statistics
-	 covering from the most used OpenID's versions to the web standars that can be associated to your OpenID.
-	  Please help us in our survey by entering your OpenID.</p>
+        <p class="intro"><%= link_to 'OpenID Observatory', root_path %> is part of a research study supported by the <%= link_to 'Telematic Engineering Department (DIT)', 'http://www.dit.upm.es/' %> at the <%= link_to 'Universidad Politécnica de Madrid (UPM)', 'http://www.upm.es/' %>, 
+        meant to make a survey of the usage of <%= link_to 'OpenID', 'http://openid.net/' %>. Here you can find statistics
+        covering from the most used OpenID's providers to the web standards that can be used along with your <%= link_to 'OpenID', 'http://openid.net/' %>.
+         You can partipate in our study by entering your <%= link_to 'OpenID', 'http://openid.net' %>.</p>
 
     <% graphs(:title => nil,:append=>"&chma=30,30,30,30",:bg_color=>"f0f0f0",:chart_color => "f0f0f0" ).each do |g| %>
 
