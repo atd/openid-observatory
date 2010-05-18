@@ -171,7 +171,7 @@ form#new_feedback{margin-bottom:6px;position:relative;display:block;}
 .fancy_input .file_input_link span{width:70px;margin-right:20px;margin-top:10px;}
 
 /*Stats*/
-.intro{font-size:1.1667em;line-height:1.2857;color:#777;padding:0.75em 0.75em;border:1px solid #d5d5d5;}
+.intro{font-size:1.1667em;line-height:1.2857;color:#777;padding:0.75em 0.75em;border:1px solid #99cc33;}
 .header_submit{float:right;}
 .header_submit .fancy_input{margin-top:2%;margin-right:30px;}
 .header_submit .fancy_input .input_text{width:275px;}
