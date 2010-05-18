@@ -18,7 +18,6 @@ if defined?(ActiveRecord::Resource)
         :joins => :uri_property }
     }
 
-
     WebStandards .each do |p|
       eval <<-EOS
         named_scope :#{ p }, lambda { |#{ p }|
