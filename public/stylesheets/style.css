@@ -89,7 +89,8 @@ form#new_feedback{margin-bottom:6px;position:relative;display:block;}
 	margin-bottom:0.75em;
 	margin-top:0.5em;
 	border-top:1px solid #555;
-	color:#f0f0f0;}
+	color:#f0f0f0;
+	text-align:center;}
 
 #footer #copyright span{color:#99cc33;}
 
@@ -186,8 +187,17 @@ form#new_feedback{margin-bottom:6px;position:relative;display:block;}
 	padding:20px 20px 0 20px;}
 
 #stats .left,#results .left{padding-bottom:18px;}
-#stats .left h2,#results .left h2{color:#996600;}
+#stats .left h2,#results .left h2,h2#stats_registered{color:#996600;}
 #stats .left img{border:2px solid #99cc33;}
+h2#stats_registered{float:left;}
+h2#stats_registered span{
+	font-size:1.25em;
+	line-height:1.2;
+	letter-spacing:0.1em;
+	color:#99cc33;
+	background:#f0f0f0;
+	border:1px solid #99cc33;
+	padding:3px 6px;}
 
 #stats .right{padding-top:72px;font-size:1.1667em;}
 #results .right{font-size:1.1667em;}
@@ -249,5 +259,5 @@ p.nota_al_pie{display:block;clear:both;font-size:0.8333em;line-height:1.8;}
 .aux_new #feedback_email,.aux_new #feedback_subject{border:1px solid #bbb;}
 .aux_new #feedback_email,.aux_new #feedback_subject,.aux_new #feedback_content{width:50%;}
 
-
+.fancy_input .fieldWithErrors{float:left;}
 
