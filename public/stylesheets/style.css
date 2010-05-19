@@ -260,4 +260,5 @@ p.nota_al_pie{display:block;clear:both;font-size:0.8333em;line-height:1.8;}
 .aux_new #feedback_email,.aux_new #feedback_subject,.aux_new #feedback_content{width:50%;}
 
 .fancy_input .fieldWithErrors{float:left;}
+.errorExplanation h2{color:#8a1f11;}
 

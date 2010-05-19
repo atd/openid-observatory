@@ -1,3 +1,20 @@
+<% content_for :javascript do %>
+  var title = "Enter your OpenID"
+  $(".input_text").click(function(){
+    if(this.value == title){
+      this.value="";
+    }
+  });
+  
+    $(".input_text").blur(function(){
+    if(this.value == ""){
+      this.value= title;
+    }
+  });
+
+<% end %>
+
+
 <div class="aux_new">
 
 	 <h2>Check your OpenID</h2>
@@ -6,7 +23,7 @@
 	  <% form_for @uri || Uri.new do |f| %>
 	    <%= f.error_messages %>
 	
-	    <%= f.text_field :uri, :class=>"input_text" %>
+	    <%= f.text_field :uri, :class=>"input_text",:value=>"Enter your OpenID" %>
 	    <%= f.submit 'Go!',:class=>"input_text_button" %>
 			
 	  <% end -%>
