@@ -1,37 +1,40 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-  "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 
 <html>
   <head>
-  <%= stylesheet_link_tag "screen", :media => "screen, projection" %>
-	<%= stylesheet_link_tag "style", :media => "screen, projection" %>
-	<%= stylesheet_link_tag "galleryview", :media => "screen, projection" %>
-  <%= stylesheet_link_tag "print", :media => "print" %>
-  <!--[if IE]>
-    <%= stylesheet_link_tag "ie", :media => "screen, projection" %>
-  <![endif]-->
-  <%= javascript_include_tag 'jquery','jquery.easing','jquery.timers','jquery.galleryview' %>
-	<script type="text/javascript">
-		$(document).ready(function() {
-		  $('#feedback_link').click(function(){
-        $(this).hide(),
-        $('#footer_center').css("background","none"),
-        $('#feedback_form').slideDown('slow')
-      });
-			$('#feedback_cancel').click(function(){
-        $('#feedback_form').hide(),
-        $('#footer_center').css("background","transparent url('../images/panel.png') no-repeat center center"),
-        $('#feedback_form input[type="text"]').val(""),
-				$('#feedback_form textarea').val(""),
-				$('#feedback_link').show()
-      });
-			<%= yield :javascript %>	
-		});
-  </script>
-	
-  <title>OpenID Observatory</title>
+	  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		
+		<%= stylesheet_link_tag "screen", :media => "screen, projection" %>
+		<%= stylesheet_link_tag "style", :media => "screen, projection" %>
+		<%= stylesheet_link_tag "galleryview", :media => "screen, projection" %>
+	  <%= stylesheet_link_tag "print", :media => "print" %>
+	  <!--[if IE]>
+	    <%= stylesheet_link_tag "ie", :media => "screen, projection" %>
+	  <![endif]-->
+		
+	  <%= javascript_include_tag 'jquery','jquery.easing','jquery.timers','jquery.galleryview' %>
+		<script type="text/javascript">
+			$(document).ready(function() {
+			  $('#feedback_link').click(function(){
+	        $(this).hide(),
+	        $('#footer_center').css("background","none"),
+	        $('#feedback_form').slideDown('slow')
+	      });
+				$('#feedback_cancel').click(function(){
+	        $('#feedback_form').hide(),
+	        $('#footer_center').css("background","transparent url('../images/panel.png') no-repeat center center"),
+	        $('#feedback_form input[type="text"]').val(""),
+					$('#feedback_form textarea').val(""),
+					$('#feedback_link').show()
+	      });
+				<%= yield :javascript %>	
+			});
+	  </script>
+		
+	  <title>OpenID Observatory</title>
 
   </head>
+	
   <body>
   	
 		<div id="header_wrapper" class="clear clearfix">
@@ -40,7 +43,7 @@
 	        <span id="header_logo"></span>
 	        <div class="web_title prepend-3dot5">
 	        	<%= yield :item_on_header %>
-                        <%= link_to "OpenID Observatory", root_path %>
+            <%= link_to "OpenID Observatory", root_path %>
 	        </div>
 	      </div>    
 	    </div>
@@ -74,7 +77,7 @@
           <li><%= link_to image_tag("Logo_dit-upm.gif",:size=>"92x92",:title=>"DIT-UPM"), "http://www.dit.upm.es" %></li>
           <li><%= link_to image_tag("upm.png",:title=>"UPM"), "http://www.upm.es" %></li>
         </ul>
-        <div id="copyright" class="span-24 last"><p>Copyright &copy; 2010 <%=link_to "Antonio Tapiador","http://irss.dit.upm.es/users/atd"%> and <span>Antonio Mendo</span></p></div>
+        <div id="copyright" class="span-24 last"><p> 2010 - Authors - <%=link_to "Antonio Tapiador","http://irss.dit.upm.es/users/atd"%> and <span>Antonio Mendo</span> - Icons created by : <%=link_to "ahmad-hania","http://ahmad-hania.wateentech.com/"%> and <%=link_to "TheG-Force","http://theg-force.deviantart.com/art/Social-Icons-hand-drawned-109467069"%></p></div>
 	    </div>
 	  </div>	
 		
