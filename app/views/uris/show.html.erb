@@ -89,7 +89,7 @@
         	<ul>
         		<li class="title"><%=image_tag("icons/foaf.png")%> Foaf*</li>
 						<li class="end">
-              <%if h uri.uri_property.foaf?%>
+              <%if uri.uri_property.foaf?%>
                 <%=image_tag('icons/tick.png',:size=>'16x16',:alt=>'Yes')%>
               <%else%>
                 <%=image_tag("icons/cross.png",:size=>"16x16",:alt=>"No")%>
@@ -115,7 +115,7 @@
           <ul>
             <li class="title"><%=image_tag("icons/microformats.png")%> Microformats</li>
             <li class="end">
-              <%if h uri.uri_property.microformats.any?%>
+              <%if uri.uri_property.microformats.any?%>
                 <%=image_tag('icons/tick.png',:size=>'16x16',:alt=>'Yes')%>
                 <%=h uri.uri_property.microformats%>             
               <%else%>
@@ -128,7 +128,8 @@
           <ul>
             <li class="title">RSD*</li>
             <li class="end">
-              <%if h uri.uri_property.rsd?%>
+            <% debugger %>
+              <%if uri.uri_property.rsd?%>
                 <%=image_tag('icons/tick.png',:size=>'16x16',:alt=>'Yes')%>
               <%else%>
                 <%=image_tag("icons/cross.png",:size=>"16x16",:alt=>"No")%>
@@ -140,7 +141,7 @@
           <ul>
             <li class="title">XRSD*</li>
             <li class="end">
-              <%if h uri.uri_property.xrds_service_types.any?%>
+              <%if uri.uri_property.xrds_service_types.any? %>
                 <%=image_tag('icons/tick.png',:size=>'16x16',:alt=>'Yes')%>
                 <%=h uri.uri_property.xrds_service_types.join(", ") %>
               <%else%>
