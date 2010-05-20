@@ -38,7 +38,7 @@
       	</ul></div>
 				<div class="row middle span-12 last">
 					<ul>
-	          <li class="title">HTML</li>
+                                          <li class="title"><%= link_to 'HTML', 'http://en.wikipedia.org/wiki/HTML', :title => 'HyperText Markup Language' %></li>
 	          <li class="middle">
 	          	<% if uri.html_discovery?(1) %>
 							  <%=image_tag("icons/tick.png",:size=>"16x16",:alt=>"Yes")%>
@@ -57,7 +57,7 @@
 				</div>
 				<div class="row middle span-12 last">
 					<ul>
-					  <li class="title">YADIS</li>
+                                          <li class="title"><%= link_to 'YADIS', 'http://en.wikipedia.org/wiki/Yadis', :title => 'Yadis' %></li>
             <li class="middle">
             	<% if uri.xrds_discovery?(1) %>
 							  <%=image_tag("icons/tick.png",:size=>"16x16",:alt=>"Yes")%>
@@ -87,7 +87,7 @@
       <div class="standards span-16 last">
         <div class="row span-16 last">
         	<ul>
-        		<li class="title"><%=image_tag("icons/foaf.png")%> Foaf*</li>
+                  <li class="title"><%=image_tag("icons/foaf.png")%> <%= link_to 'FOAF', 'http://www.foaf-project.org/', :title => 'Friend of a friend' %></li>
 						<li class="end">
               <%if uri.uri_property.foaf?%>
                 <%=image_tag('icons/tick.png',:size=>'16x16',:alt=>'Yes')%>
@@ -113,7 +113,7 @@
 				</div>
 				<div class="row middle span-16 last">
           <ul>
-            <li class="title"><%=image_tag("icons/microformats.png")%> Microformats</li>
+            <li class="title"><%=image_tag("icons/microformats.png")%> <%= link_to 'Microformats', 'http://microformats.org/', :title => 'Microformats' %></li>
             <li class="end">
               <%if uri.uri_property.microformats.any?%>
                 <%=image_tag('icons/tick.png',:size=>'16x16',:alt=>'Yes')%>
@@ -126,9 +126,8 @@
 				</div>
 				<div class="row middle span-16 last">
           <ul>
-            <li class="title">RSD*</li>
+            <li class="title"><%= link_to 'RSD', 'http://en.wikipedia.org/wiki/Really_Simple_Discovery', :title => 'Really Simple Discovery' %></li>
             <li class="end">
-            <% debugger %>
               <%if uri.uri_property.rsd?%>
                 <%=image_tag('icons/tick.png',:size=>'16x16',:alt=>'Yes')%>
               <%else%>
@@ -139,7 +138,7 @@
 				</div>
 				<div class="row middle span-16 last">
           <ul>
-            <li class="title">XRSD*</li>
+            <li class="title"><%= link_to 'XRSD', 'http://en.wikipedia.org/wiki/XRDS', :title => 'eXtensible Resource Descriptor Sequence' %></li>
             <li class="end">
               <%if uri.uri_property.xrds_service_types.any? %>
                 <%=image_tag('icons/tick.png',:size=>'16x16',:alt=>'Yes')%>
@@ -151,7 +150,6 @@
           </ul>					
 				</div>	
 			</div>
-			<p class="nota_al_pie">* Foaf: Friend of a friend; RSD: Really Simple Discovery; XRDS: eXtensible Resource Descriptor Sequence</p>
 			
     </div>
   </div>
