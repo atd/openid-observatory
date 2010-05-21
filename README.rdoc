@@ -1,0 +1,3 @@
+= OpenID Observatory
+
+{OpenID Observatory}[http://openid-observatory.dit.upm.es] is part of a research study supported by the {Telematic Engineering Department (DIT)}[http://www.dit.upm.es/] at the {Universidad Politécnica de Madrid (UPM)}[http://www.upm.es/], meant to make a survey of OpenID's implementation status. It provides statistics covering from the most used OpenID's providers to the web standards that can be used along with your OpenID.

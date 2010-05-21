@@ -16,7 +16,7 @@ module ApplicationHelper
   def build_graphs
     [
       {
-        :title => t = 'OpenID URI Domains',
+        :title => t = 'OpenID Identifiers Domains',
         :description => ( brief? ?
           'Most common domains used in OpenID identifiers' :
           'This graph analyzes the domains most used as OpenID identifiers. There is a strong tendency to use own customized domains, usually personal blogs and homepages. <a href="http://blogspot.com/">Blogger</a> and <a href="http://myopenid.com/">myOpenID</a> are the most popular domains. Other blogging platforms follow, including <a href="http://wordpress.com/">Wordpress</a> and <a href="http://livejournal.com/">LiveJournal</a>.' ),
@@ -30,7 +30,7 @@ module ApplicationHelper
 
       { :title => t = 'OpenID Providers (%)',
         :description => ( brief? ?
-          "Most common providers used by OpenID URIs" :
+          "Most common providers used by OpenID identifiers" :
           'The list of OpenID providers is smaller. Many people choose to relay in an external OpenID provider, instead of hosting their own. <a href="http://myopenid.com/">myOpenID</a> is the most popular OpenID provider, followed by <a href="http://blogspot.com/">Blogger</a>. Other providers include <a href="http://livejournal.com/">LiveJournal</a>, <a href="http://verisignlabs.com/">Verisign</a> and <a href="http://claimid.com/">ClaimID</a>.' ),
         :results => r = provider_results,
         :image => bar(:title => t,
@@ -193,7 +193,7 @@ module ApplicationHelper
       {
         :title => t = "OpenID Protocol Versions in HTML discovery",
         :description => ( brief? ? 
-           'Distribution of OpenID versions announced by HTML' :
+           'Distribution of OpenID versions announced in HTML' :
            'Former versions of the OpenID protocol are far more popular in HTML discovery.' ),
         :results => r = {
           "v1, v1.1" => Uri.html_discovery(:only_1).count,
@@ -213,7 +213,7 @@ module ApplicationHelper
       {
         :title => t = "OpenID Protocol Versions in Yadis discovery",
         :description => ( brief? ?
-          'Distribution of OpenID versions announced by Yadis' :
+          'Distribution of OpenID versions announced in Yadis' :
           'Support for OpenID 2.0 is much more frequent in <a href="http://en.wikipedia.org/wiki/Yadis">Yadis</a> discovery. More than 75% of the identifiers supports it besides former protocol versions.' ),
         :results => r = {
           "v1, v1.1" => Uri.xrds_discovery(:only_1).count,
