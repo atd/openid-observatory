@@ -24,3 +24,16 @@ hr {margin:-8px auto 11px;}
 .clearfix, .container {display:inline-block;}
 * html .clearfix, * html .container {height:1%;}
 fieldset {padding-top:0;}
+
+
+/* Ajustes especiales para IE*/
+.fancy_input .input_text{height:19px;float:left}
+
+.input_text_button, .aux_new #feedback_submit{
+	height:28px;
+  float:left;
+	margin-left:1px;
+}
+#content_wrapper{overflow:auto;clear:both;display:block;}
+#content_wrapper .container{display:block;}
+#footer_wrapper{clear:both;display:block;}
