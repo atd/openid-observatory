@@ -7,4 +7,10 @@ class FeedbacksController < ApplicationController
 
   authorization_filter :forbid, :feedback, :except => [ :new, :create ]
 
+  private
+
+  def after_create_with_success
+    flash[:success] = "Thank you for your feedback!"
+    redirect_to root_path
+  end
 end
