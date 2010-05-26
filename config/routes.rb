@@ -1,6 +1,12 @@
 ActionController::Routing::Routes.draw do |map|
   map.root :controller => 'public', :action => 'index'
 
+  map.openid_uri_complete 'uris/openid_complete',
+                          { :controller => 'uris',
+                            :action => 'create',
+                            :conditions => { :method => :get },
+                            :open_id_complete => true }
+
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:

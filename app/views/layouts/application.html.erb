@@ -13,6 +13,9 @@
 	  <![endif]-->
 		
 	  <%= javascript_include_tag 'jquery','jquery.easing','jquery.timers','jquery.galleryview' %>
+
+          <%= yield :head %>
+
 		<script type="text/javascript">
 			$(document).ready(function() {
 			  $('#feedback_link').click(function(){
