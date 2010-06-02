@@ -1,19 +1,34 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag("openid", :media => "screen, projection") %>
+  <%= javascript_include_tag("jquery.openid") %>
+<% end %>
+
 <% content_for :javascript do %>
+  
+	$("form.openid:eq(0)").openid();
+
   $('#gallery').galleryView({
-  panel_width: 546,
+	panel_width: 546,
   panel_height: 260,
-	frame_width: 80,          //INT - width of filmstrip frames (in pixels)
-  frame_height: 60,         //INT - width of filmstrip frames (in pixels)
+  frame_width: 90,
+  frame_height: 60,
 	transition_interval: 30000,
-	overlay_position: 'bottom',
   nav_theme: 'light'
   });
 
-<% end %>
+  var title = "Enter your OpenID"
+  $(".input_text").click(function(){
+    if(this.value == title){
+      this.value="";
+    }
+  });
+  
+    $(".input_text").blur(function(){
+    if(this.value == ""){
+      this.value= title;
+    }
+  });
 
-<% content_for :item_on_header do %>
-  <!--<div class="total_checked">Already checked: <span><%= Uri.count %></span></div>-->
-	<%=render :partial=> "uris/new"%>
 <% end %>
 
   <div id="index">    
@@ -30,8 +45,9 @@
   
       <div class="right span-14 last">
         <div class="total_checked">OpenIDs already checked: <span><%= Uri.count %></span></div>
-				<div class="charts_wrapper">
-          <ul id="gallery">
+				<div class="charts_wrapper">				
+					
+					<ul id="gallery">
             <% graphs(:brief => true, :title => nil ).each do |g| %>
             <li>
             <%= image_tag g[:image], :title => g[:title] %>
@@ -47,4 +63,21 @@
           <!-- una linea para la grafica :bg_color => "729a24,0,99cc33,1",-->
         </div>
       </div>
+			<div class="down span-23 last">
+        <div class="fancy_input">
+            <% form_for Uri.new do |f| %>
+              <%= f.error_messages %>
+              <%= text_field_tag 'openid_identifier', 'Enter your OpenID', :class => "input_text" %>
+              <%= f.submit 'Go!',:class=>"input_text_button" %>
+            <% end -%>
+						<span class="fancy_text">Do you have an OpenID?</span>
+        </div>
+				<div id="about">
+					<p class="about_title">You can partipate in our study by entering your <%= link_to 'OpenID', 'http://openid.net' %></p>
+					<!--<p class="about_text"><%= link_to 'OpenID Observatory', root_path %> is part of a research study supported by the <%= link_to 'Telematic Engineering Department (DIT)', 'http://www.dit.upm.es/' %> at the <%= link_to 'Universidad Politécnica de Madrid (UPM)', 'http://www.upm.es/' %>, 
+        meant to make a survey of <%= link_to 'OpenID', 'http://openid.net/' %>'s implementation status. Here you can find statistics
+        covering from the most used OpenID's providers to the web standards that can be used along with your <%= link_to 'OpenID', 'http://openid.net/' %>.
+         You can partipate in our study by entering your <%= link_to 'OpenID', 'http://openid.net' %> above.</p>-->
+				</div>
+			</div>
   </div>

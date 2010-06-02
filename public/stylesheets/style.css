@@ -2,7 +2,7 @@
 .prepend-3dot5{padding-left:140px;}
 
 /*Typography*/
-a{text-decoration:none;}
+a{text-decoration:none;color:#996600;}
 a:focus, a:hover{color:#996600;text-decoration:underline;}
 .type{
 	color:#996600;
@@ -41,6 +41,8 @@ a:focus, a:hover{color:#996600;text-decoration:underline;}
 	
 }
 
+.total_checked span{font-size:1.1667em;line-height:1.2857;}
+
 /*BODY*/
 #content_wrapper{background:#f0f0f0;}
 #content{padding:38px 0px;background:#fff;}
@@ -62,8 +64,8 @@ a:focus, a:hover{color:#996600;text-decoration:underline;}
 #footer ul p{margin-bottom:0.75em;font-size:1.1667em;line-height:1.5;}  
 #footer ul#footer_left p{margin-bottom:1.75em;}
 #footer ul#footer_left{width:31%;}
-#footer_left a img{opacity:0.7;}
-#footer_left a img:hover{opacity:1;}
+#footer_left a img,#footer_right a img{opacity:0.7;}
+#footer_left a img:hover,#footer_right a img:hover{opacity:1;}
 #footer ul#footer_center{width:31%;border-right:1px solid #555;border-left:1px solid #555;background:transparent url("../images/panel.png") no-repeat center center;}
 #footer ul#footer_right{width:31%;}
 #footer ul li{display:inline;padding:0 3px;}
@@ -100,12 +102,12 @@ form#new_feedback{margin-bottom:6px;position:relative;display:block;}
 
 .down{margin-top:18px;}
 
-.down div.fancy_input{background:transparent url("../images/file_input_bar.png") no-repeat center right;height:46px;}
+.down div.fancy_input{background:transparent url("../images/file_input_bar1.png") no-repeat center right;height:46px;}
 
 .down div.fancy_input form{
   float:right;
   margin-right:20px;
-  margin-top:10px;
+  margin-top:0.75em;
   line-height:18px;
   }
   
@@ -132,7 +134,7 @@ form#new_feedback{margin-bottom:6px;position:relative;display:block;}
   font-size:1.1667em;
 	line-height:1.2857;
   font-weight:bold;
-	background:transparent url(../images/learn_more_button.png) no-repeat scroll right center;
+	background:transparent url(../images/learn_more_button.png) no-repeat scroll center center;
 	cursor:pointer;
 	margin-right: 6px;
   }
@@ -162,6 +164,17 @@ form#new_feedback{margin-bottom:6px;position:relative;display:block;}
   width:60px;
 }
 
+.fancy_text{
+	color:#FFF;
+	font-size:1.1667em;
+	line-height:1.5;
+	font-weight:bold;
+	margin-top:0.9em;
+	margin-left:20px;
+	float:left;
+}
+
+
 #footer_center .input_text_button,.aux_new #feedback_submit{font-size:1em;line-height:1.5;margin-left:0;-moz-border-radius:2px;}
 
 .fancy_input .input_text_button:hover,#footer_center .input_text_button:hover,.aux_new #feedback_submit:hover{color:#fff;}
@@ -179,7 +192,25 @@ form#new_feedback{margin-bottom:6px;position:relative;display:block;}
 .fancy_input .file_input_link span{width:70px;margin-right:20px;margin-top:10px;}
 
 /*Stats*/
-.intro{font-size:1.1667em;line-height:1.2857;color:#777;padding:0.75em 0.75em;border:1px solid #99cc33;}
+#about{
+	border:1px solid #c4c4c4;
+	background:transparent url('../images/grey_box_small.png') repeat-x left top;
+	/*margin-top:0.75em;*/}
+.about_text,.about_title{margin:0;}
+.intro,.about_text,.about_title{
+	font-size:1.1667em;
+	line-height:1.2857;
+	color:#777;
+	padding:0.75em 0.75em;}
+
+.intro{border:1px solid #99cc33;}
+.about_title{
+	/*border-bottom:1px solid #d0d0d0;*/
+	padding:0.5em 0.75em;
+	font-weight:bold;
+	text-align:center;}
+.about_title a{color:#996600;}
+
 .header_submit{float:right;}
 .header_submit .fancy_input{margin-top:2%;margin-right:30px;}
 .header_submit .fancy_input .input_text{width:275px;}
@@ -262,3 +293,4 @@ p.nota_al_pie{display:block;clear:both;font-size:0.8333em;line-height:1.8;}
 .fancy_input .fieldWithErrors{float:left;}
 .errorExplanation h2{color:#8a1f11;}
 
+.right{background:#fff;}
