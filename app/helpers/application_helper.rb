@@ -16,6 +16,19 @@ module ApplicationHelper
   def build_graphs
     [
       {
+        :title => t = 'OpenID Identifiers Protocol',
+        :description => ( brief? ?
+          'OpenID identifiers currently support http, https and xri protocols' :
+          'Through OpenID identifiers support <a href="http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">http</a>, <a href="http://en.wikipedia.org/wiki/HTTP_Secure">https</a> and <a href="http://en.wikipedia.org/wiki/Extensible_Resource_Identifier">xri</a> protocols, the great majority uses http. https is infrequent, while virtually nobody uses xri'),
+        :results => r = protocol_results,
+        :image => pie(:title => t,
+                      :data => r.last.map(&:last).flatten,
+                      :legend => r.last.map(&:first).flatten,
+                      :encoding => 'extended',
+                      :orientation => 'h'),
+      },
+
+      {
         :title => t = 'OpenID Identifiers Domains',
         :description => ( brief? ?
           'Most common domains used in OpenID identifiers' :
@@ -298,6 +311,16 @@ module ApplicationHelper
     sorted_r = sorted_r.map{ |a| [ a.first, a.last * 100.0 / total ] }.reverse
 
     [ r, sorted_r ]
+  end
+
+  def protocol_results
+    total = Uri.count
+
+    r = %w(http https xri).inject({}){ |r, p|
+      r[p] = Uri.count(:conditions => [ "uri LIKE ?", "#{ p }:%" ])
+      r
+    }
+    [ r, r.sort{ |a, b| b.last <=> a.last } ]
   end
 
   def domain_results
