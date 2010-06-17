@@ -62,6 +62,19 @@ module ApplicationHelper
         end
       },
 
+      { :title => t = 'OpenID Identifiers vs Providers',
+        :description => ( brief? ?
+          "Most common providers used by OpenID identifiers" :
+          '' ),
+        :results => r = provider_identifiers,
+        :image => line(:title => t,
+                       :data => r,
+                       :axis_with_labels => "x,y",
+                       :axis_labels => [ [0, r.size ], [ 0, r[1] ] ],
+                       :new_markers => "",
+                       :encoding => 'extended')
+      },
+
       {
         :title => t = 'Web Standards (%)',
         :description => ( brief? ? 
@@ -268,7 +281,7 @@ module ApplicationHelper
     ]
   end
 
-  %w( pie bar).each do |m|
+  %w( pie bar line ).each do |m|
     eval <<-EOM
       def #{ m }(options)
         options.delete_if{ |k, v| v.nil? }
@@ -344,13 +357,26 @@ module ApplicationHelper
     [ r, r.sort{ |a, b| b.last <=> a.last } ]
   end
 
+  def provider_count
+    UriProperty.openid_providers.inject({}) do |r, p|
+      r[p] = Uri.openid_provider(p).count
+      r
+    end
+  end
+
+  def provider_identifiers
+    pu = provider_count.inject([]) do |r, p|
+           r[p.last] ||= 0
+           r[p.last] += 1
+           r
+         end
+    pu.map{ |i| i.nil? ? 0 : i }
+  end
+
   def provider_results
     total = Uri.count
 
-    r = UriProperty.openid_providers.inject({}) do |r, p|
-          r[p] = Uri.openid_provider(p).count
-          r
-        end
+    r = provider_count
 
     r_count = r.sort{ |a, b| a.last <=> b.last }
 
