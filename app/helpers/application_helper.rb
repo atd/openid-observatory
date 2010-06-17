@@ -355,7 +355,7 @@ module ApplicationHelper
       subdomain = u.to_uri.host.split('.').last(2).join('.')
       r[subdomain] += 1
       r
-    }.inject([]){ |r, h|
+    }.inject(uri_count_array){ |r, h|
       r[h.last] ||= 0
       r[h.last] += 1
       r
@@ -391,12 +391,11 @@ module ApplicationHelper
   end
 
   def provider_identifiers
-    pu = provider_count.inject([]) do |r, p|
-           r[p.last] ||= 0
-           r[p.last] += 1
-           r
-         end
-    pu = pu.map{ |i| i.nil? ? 0 : i }
+    provider_count.inject(uri_count_array) { |r, p|
+      r[p.last] ||= 0
+      r[p.last] += 1
+      r
+    }.map{ |i| i.nil? ? 0 : i }
   end
 
   def provider_results
@@ -424,5 +423,11 @@ module ApplicationHelper
     r["other"] = other_uris.size * 100.0 / total
 
     [ r, r.sort{ |a, b| b.last <=> a.last } ]
+  end
+
+  def uri_count_array
+    a = Array.new
+    a[Uri.count] = 0
+    a
   end
 end
