@@ -41,6 +41,20 @@ module ApplicationHelper
                       :orientation => 'h'),
       },
 
+      { :title => t = 'OpenID Identifiers vs Domains',
+        :description => ( brief? ?
+          "Most common domains used by OpenID identifiers" :
+          '' ),
+        :results => r = domain_identifiers,
+        :image => line(:title => t,
+                       :data => r,
+                       :axis_with_labels => "x,y",
+                       :axis_range => [ [0, r.size ], [ 0, r[1] ] ],
+                       :new_markers => "",
+                       :encoding => 'extended')
+      },
+
+
       { :title => t = 'OpenID Providers (%)',
         :description => ( brief? ?
           "Most common providers used by OpenID identifiers" :
@@ -70,7 +84,7 @@ module ApplicationHelper
         :image => line(:title => t,
                        :data => r,
                        :axis_with_labels => "x,y",
-                       :axis_labels => [ [0, r.size ], [ 0, r[1] ] ],
+                       :axis_range => [ [0, r.size ], [ 0, r[1] ] ],
                        :new_markers => "",
                        :encoding => 'extended')
       },
@@ -336,6 +350,18 @@ module ApplicationHelper
     [ r, r.sort{ |a, b| b.last <=> a.last } ]
   end
 
+  def domain_identifiers
+    Uri.all.inject(Hash.new(0)){ |r, u|
+      subdomain = u.to_uri.host.split('.').last(2).join('.')
+      r[subdomain] += 1
+      r
+    }.inject([]){ |r, h|
+      r[h.last] ||= 0
+      r[h.last] += 1
+      r
+    }.map{ |i| i.nil? ? 0 : i }
+  end
+
   def domain_results
     n = (brief? ? 5 : 7 )
     total = Uri.count
@@ -370,7 +396,7 @@ module ApplicationHelper
            r[p.last] += 1
            r
          end
-    pu.map{ |i| i.nil? ? 0 : i }
+    pu = pu.map{ |i| i.nil? ? 0 : i }
   end
 
   def provider_results

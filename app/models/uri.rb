@@ -148,9 +148,9 @@ if defined?(ActiveRecord::Resource)
     def validate_on_create
       if ! openid?
         errors.add(:uri, "OpenID discovery failed")
-      elsif uri =~ /^=/
-        # If you know how to manage them, feel free to send a patch!
-        errors.add(:uri, "Sorry, only http uris are supported")
+#      elsif uri =~ /^=/
+#        # If you know how to manage them, feel free to send a patch!
+#        errors.add(:uri, "Sorry, only http uris are supported")
       end
     end
 

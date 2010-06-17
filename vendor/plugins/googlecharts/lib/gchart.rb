@@ -463,7 +463,8 @@ class Gchart
       set = axis_range || datasets
     end
     # in the case of a line graph, the first axis range should 1
-    index_increase = type.to_s == 'line' ? 1 : 0
+    # really?? index_increase = type.to_s == 'line' ? 1 : 0
+    index_increase = 0
     if set && set.respond_to?(:each) && set.first.respond_to?(:each)
       'chxr=' + set.enum_for(:each_with_index).map do |range, index|
         [(index + index_increase), (min_value || range.first), (max_value || range.last)].compact.join(',')
