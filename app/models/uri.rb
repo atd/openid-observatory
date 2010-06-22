@@ -5,7 +5,18 @@ if defined?(ActiveRecord::Resource)
 
   class Uri
     WebStandards = %w( foaf rss atom atompub rsd )
-    Domains = [ "myopenid.com", "pip.verisignlabs.com", "google.com", "aol.com", "wordpress.com", "livejournal.com", "claimid.com", "yahoo.com", "blogspot.com", "myspace.com" ]
+    Domains = { 
+      "myopenid.com" => { :name => 'myOpenID', :uri => 'http://myopenid.com/' },
+      "blogspot.com" => { :name => 'Blogger',  :uri => 'http://blogspot.com/' },
+      "wordpress.com" => { :name => 'Wordpress', :uri => 'http://wordpress.com/' },
+      "livejournal.com" => { :name => 'LiveJournal', :uri => 'http://livejournal.com/' },
+      "verisignlabs.com" => { :name => 'VeriSign', :uri => 'http://www.verisign.com/' },
+      "google.com" => { :name => 'Google', :uri => 'http://google.com/' },
+      "aol.com" => { :name => 'AOL', :uri => 'http://www.aol.com/' }, 
+      "claimid.com" => { :name => 'claimID', :uri => 'http://claimid.com/' },
+      "yahoo.com" => { :name => 'Yahoo', :uri => 'http://yahoo.com/' }, 
+      "myspace.com" => { :name => 'MySpace', :uri => 'http://www.myspace.com/' }
+    }
 
     has_one :uri_property, :dependent => :destroy
 

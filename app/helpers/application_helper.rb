@@ -18,8 +18,8 @@ module ApplicationHelper
       {
         :title => t = 'OpenID Identifiers Protocol',
         :description => ( brief? ?
-          'OpenID identifiers currently support http, https and xri protocols' :
-          'Through OpenID identifiers support <a href="http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">http</a>, <a href="http://en.wikipedia.org/wiki/HTTP_Secure">https</a> and <a href="http://en.wikipedia.org/wiki/Extensible_Resource_Identifier">xri</a> protocols, the great majority uses http. https is infrequent, while virtually nobody uses xri'),
+          'Distribution of the protocol used in OpenID identifiers.' :
+          'OpenID identifiers currently support <a href="http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">HTTP</a>, <a href="http://en.wikipedia.org/wiki/HTTP_Secure">HTTPS</a> and <a href="http://en.wikipedia.org/wiki/Extensible_Resource_Identifier">XRI</a>. The great majority of identifiers use <a href="http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">HTTP</a>, while <a href="http://en.wikipedia.org/wiki/HTTP_Secure">HTTPS</a> is infrequent. We don\'t support <a href="http://en.wikipedia.org/wiki/Extensible_Resource_Identifier">XRI</a> at the <a href="/">OpenID Observatory</a>, since very few people use it, there is not support for it in current browsers and there is no standard way to attach a profile web page to it.'),
         :results => r = protocol_results,
         :image => pie(:title => t,
                       :data => r.last.map(&:last).flatten,
@@ -30,10 +30,10 @@ module ApplicationHelper
 
       {
         :title => t = 'OpenID Identifiers Domains',
+        :results => r = domain_results,
         :description => ( brief? ?
           'Most common domains used in OpenID identifiers' :
-          'This graph analyzes the domains most used as OpenID identifiers. There is a strong tendency to use own customized domains, usually personal blogs and homepages. <a href="http://blogspot.com/">Blogger</a> and <a href="http://myopenid.com/">myOpenID</a> are the most popular domains. Other blogging platforms follow, including <a href="http://wordpress.com/">Wordpress</a> and <a href="http://livejournal.com/">LiveJournal</a>.' ),
-        :results => r = domain_results,
+          "This graph analyzes most used domains in OpenID identifiers. There is a strong tendency to use own customized domains, usually personal blogs and homepages. Currently there is a <strong>#{ domain_percentage.to_i }% of unique domains</strong>. #{ link_domain(0) } and #{ link_domain(1) } are the most popular domains. Other blogging platforms follow, including #{ link_domain(2) } and #{ link_domain(3) }." ),
         :image => pie(:title => t,
                       :data => r.last.map(&:last).flatten,
                       :legend => r.last.map(&:first).flatten,
@@ -41,24 +41,11 @@ module ApplicationHelper
                       :orientation => 'h'),
       },
 
-      { :title => t = 'OpenID Identifiers vs Domains',
-        :description => ( brief? ?
-          "Most common domains used by OpenID identifiers" :
-          '' ),
-        :results => r = domain_identifiers,
-        :image => line(:title => t,
-                       :data => r,
-                       :axis_with_labels => "x,y",
-                       :axis_range => [ [0, r.size ], [ 0, r[1] ] ],
-                       :new_markers => "",
-                       :encoding => 'extended')
-      },
-
 
       { :title => t = 'OpenID Providers (%)',
         :description => ( brief? ?
           "Most common providers used by OpenID identifiers" :
-          'The list of OpenID providers is smaller. Many people choose to relay in an external OpenID provider, instead of hosting their own. <a href="http://myopenid.com/">myOpenID</a> is the most popular OpenID provider, followed by <a href="http://blogspot.com/">Blogger</a>. Other providers include <a href="http://livejournal.com/">LiveJournal</a>, <a href="http://verisignlabs.com/">Verisign</a> and <a href="http://claimid.com/">ClaimID</a>.' ),
+          "The list of OpenID providers is smaller, currently <strong>#{ provider_percentage.to_i }% of the analyzed identifiers</strong>. Many people choose to relay in an external OpenID provider, instead of hosting their own. <a href=\"http://myopenid.com/\">myOpenID</a> is the most popular OpenID provider, followed by <a href=\"http://blogspot.com/\">Blogger</a>. Other providers include <a href=\"http://livejournal.com/\">LiveJournal</a>, <a href=\"http://verisignlabs.com/\">Verisign</a> and <a href=\"http://claimid.com/\">ClaimID</a>." ),
         :results => r = provider_results,
         :image => bar(:title => t,
                       :data => r.last.map(&:last).flatten,
@@ -74,19 +61,6 @@ module ApplicationHelper
           d << "</p>"
           d
         end
-      },
-
-      { :title => t = 'OpenID Identifiers vs Providers',
-        :description => ( brief? ?
-          "Most common providers used by OpenID identifiers" :
-          '' ),
-        :results => r = provider_identifiers,
-        :image => line(:title => t,
-                       :data => r,
-                       :axis_with_labels => "x,y",
-                       :axis_range => [ [0, r.size ], [ 0, r[1] ] ],
-                       :new_markers => "",
-                       :encoding => 'extended')
       },
 
       {
@@ -343,33 +317,30 @@ module ApplicationHelper
   def protocol_results
     total = Uri.count
 
-    r = %w(http https xri).inject({}){ |r, p|
+    r = %w(http https).inject({}){ |r, p|
       r[p] = Uri.count(:conditions => [ "uri LIKE ?", "#{ p }:%" ])
       r
     }
     [ r, r.sort{ |a, b| b.last <=> a.last } ]
   end
 
-  def domain_identifiers
-    Uri.all.inject(Hash.new(0)){ |r, u|
-      subdomain = u.to_uri.host.split('.').last(2).join('.')
-      r[subdomain] += 1
-      r
-    }.inject(uri_count_array){ |r, h|
-      r[h.last] ||= 0
-      r[h.last] += 1
-      r
-    }.map{ |i| i.nil? ? 0 : i }
+  def domain_count
+    @domain_count ||=
+      Uri.all.inject(Hash.new(0)){ |r, u|
+        subdomain = u.to_uri.host.split('.').last(2).join('.')
+        r[subdomain] += 1
+        r
+      }
+  end
+
+  def domain_percentage
+    domain_count.size * 100.0 / UriProperty.count
   end
 
   def domain_results
-    n = (brief? ? 5 : 7 )
     total = Uri.count
 
-    r = Uri::Domains.inject({}){ |r, p|
-          r[p] = Uri.domain(p).count
-          r
-        }
+    r = domain_count
 
     r_count = r.sort{ |a, b| a.last <=> b.last }
 
@@ -383,19 +354,17 @@ module ApplicationHelper
     [ r, r.sort{ |a, b| b.last <=> a.last } ]
   end
 
-  def provider_count
-    UriProperty.openid_providers.inject({}) do |r, p|
-      r[p] = Uri.openid_provider(p).count
-      r
-    end
+  def link_domain(i)
+    @domain_list ||= domain_results.last.map(&:first)
+    @domain_list.delete("other")
+    link_to Uri::Domains[@domain_list[i]][:name], Uri::Domains[@domain_list[i]][:uri]
   end
 
-  def provider_identifiers
-    provider_count.inject(uri_count_array) { |r, p|
-      r[p.last] ||= 0
-      r[p.last] += 1
+  def provider_count
+    UriProperty.openid_providers.inject({}) { |r, p|
+      r[p] = Uri.openid_provider(p).count
       r
-    }.map{ |i| i.nil? ? 0 : i }
+    }
   end
 
   def provider_results
@@ -425,9 +394,7 @@ module ApplicationHelper
     [ r, r.sort{ |a, b| b.last <=> a.last } ]
   end
 
-  def uri_count_array
-    a = Array.new
-    a[Uri.count] = 0
-    a
+  def provider_percentage
+    provider_count.size * 100.0 / UriProperty.count
   end
 end
