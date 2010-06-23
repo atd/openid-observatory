@@ -327,7 +327,7 @@ module ApplicationHelper
   def domain_count
     @domain_count ||=
       Uri.all.inject(Hash.new(0)){ |r, u|
-        subdomain = u.to_uri.host.split('.').last(2).join('.')
+        subdomain = extract_subdomain(u.to_uri.host)
         r[subdomain] += 1
         r
       }
@@ -358,6 +358,26 @@ module ApplicationHelper
     @domain_list ||= domain_results.last.map(&:first)
     @domain_list.delete("other")
     link_to Uri::Domains[@domain_list[i]][:name], Uri::Domains[@domain_list[i]][:uri]
+  end
+
+  def extract_subdomain(domain)
+    deep = 2
+
+    while deep < domain.count('.') + 2 do
+      subdomain = split_subdomain(domain, deep)
+
+      if %w( co.uk ).include?(subdomain)
+        deep += 1
+      else
+        return subdomain
+      end
+    end
+
+    raise "Invalid domain: #{ domain }"
+  end
+
+  def split_subdomain(domain, deep)
+    domain.split('.').last(deep).join('.')
   end
 
   def provider_count
